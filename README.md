@@ -7,11 +7,9 @@
 ## 變數
 - 位置代號: N(桌主) = 0, E = 1, S = 2, W = 3
 - Class Player
-  - variable
   - card[13]: Card
   - posistion: int
   - socket: String
-  - member function
   - showTable()
   - bid()
   - playCard()
