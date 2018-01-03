@@ -9,7 +9,6 @@
 - Class Player
   - card[13]: Card
   - posistion: int
-  - socket: String
   - showTable()
   - bid()
   - playCard()
