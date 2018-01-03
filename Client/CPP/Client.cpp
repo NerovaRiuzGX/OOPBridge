@@ -1,35 +1,41 @@
 //Client.cpp
 //by NerovaRiuzGX 2018.01.03
 
-#include <iostream>
-
 #include "TCPClient.h"
 
-int main (int argc, char *argv[]) {
+TCPClient tcp;
 
-	TCPClient tcp;
+int main () {
+
 	string ip;
-	cout << "Enter IP: ";
-	cin >> ip;
+	cout << "Enter destination IP: ";
+	getline(cin, ip);
+	tcp.setup(ip, 10555);
+	cout << "===============" << endl;
+	cout << "Type \"@\" to close the client." << endl << endl;
 	while (true) {
-		tcp.setup(ip, 10555);
+		
 		string data;
 		cout << "Send data: ";
 		getline(cin, data);
-		if (data[0]=='\'') {
+		if (data[0]=='@') {
+			cout << "Client closed by user." << endl;
 			break;
 		}
-		tcp.sendMessage(data);
-		string rec = tcp.receive();
 
-		if (rec != "") {
-			cout << rec << endl;
+		if (!tcp.sendMessage(data)) {
+			cout << "Client terminated by server." << endl;
+			break;
 		}
-	}
 
+		if (!tcp.receive()) {
+			cout << "Client terminated by server." << endl;
+			break;
+		}
+		
+	}
 	closesocket(tcp.sock);
 	WSACleanup();
-	exit(0);
+	system("pause");
 	return 0;
-	
 }

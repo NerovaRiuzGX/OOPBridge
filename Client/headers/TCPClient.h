@@ -9,7 +9,6 @@
 #include <string>
 #include <vector>
 #include <WS2tcpip.h>
-#include <WinSock.h> //for tcp socket
 #include <winsock2.h> //for tcp socket
 #include <windows.h> //for tcp socket
 
@@ -23,12 +22,10 @@ class TCPClient {
 		TCPClient();
 		bool setup (string, int);
 		bool sendMessage (string);
-		string receive (int = 4096);
+		bool receive (int = 4096);
 		int sock;
 
 	private:
-		string address;
-		int port;
 		struct sockaddr_in server;
 };
 

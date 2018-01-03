@@ -1,83 +1,32 @@
-//TCPServer.cpp
+//TCPServer.h
 //by NerovaRiuzGX 2017.12.30
+#ifndef TCPSERVER_H
+#define TCPSERVER_H
 
-#include "TCPServer.h"
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <WS2tcpip.h>
+#include <winsock2.h> //for tcp socket
+#include <windows.h> //for tcp socket
 
-string TCPServer::Message;
+#include "pthread.h"
 
-void * TCPServer::Task (void *arg) {
-	
-	int n;
-	int clientSocket = (long)arg;
-	char data[4096];
-	pthread_detach(pthread_self());
-	
-	while (true) {
-		n = recv(clientSocket, data, 4096, 0);
-		if (n==0) {
-			closesocket(clientSocket);
-			break;
-		}
-		data[n]=0;
-		Message = string(data);
-	}
-	return 0;
-}
+#pragma comment(lib, "Ws2_32.lib") //for tcp socket
+#pragma comment(lib, "pthreadVC2.lib")
 
-void TCPServer::setup (int port) {
-	WORD wVersion;
-	WSADATA wsaData;
-	wVersion = MAKEWORD(2,2);
-	WSAStartup(wVersion, &wsaData);
-	
-	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-	
-	if (serverSocket == -1) {
-		cout << "Failed to create socket." << endl;	//err
-	}
-	
-	//server socket settings
-	memset(&serverInfo, 0, sizeof(serverInfo));
-	serverInfo.sin_family = PF_INET;
-	serverInfo.sin_addr.s_addr = INADDR_ANY;
-	serverInfo.sin_port = htons(port);
-	
-	bind(serverSocket, (struct sockaddr *)&serverInfo, sizeof(serverInfo));
-	listen(serverSocket, 5);
-	cout << "Server started." << endl;	//start msg
-}
+using namespace std;
 
-string TCPServer::receive() {
-	
-	char str[20];
-	while (true) {
-		int addrlen = sizeof(clientInfo);
-		clientSocket = accept(serverSocket, (struct sockaddr *)&clientInfo, &addrlen);
-		inet_ntop(AF_INET, &(clientInfo.sin_addr), str, INET_ADDRSTRLEN);
-		pthread_create(&serverThread, NULL, &Task, (void *)clientSocket);
-	}
-	return string(str);
-}
+class TCPServer {
+	public:
+		void setup (int port);
+		void sendMessage (string, int);
+		void detach();
+		int acceptConn();
 
-string TCPServer::getMessage() {
-	
-	return Message;
-}
+		int serverSocket;
+		struct sockaddr_in serverInfo;
+		struct sockaddr_in clientInfo;
+};
 
-void TCPServer::sendMessage (string dat) {
-	
-	send(clientSocket, dat.c_str(), dat.length(), 0);
-}
-
-void TCPServer::clean() {
-	
-	Message = "";
-	memset(data, 0, sizeof(data));
-}
-
-void TCPServer::detach() {
-	
-	closesocket(serverSocket);
-	closesocket(clientSocket);
-	WSACleanup();
-}
+#endif /* TCPSERVER_H */

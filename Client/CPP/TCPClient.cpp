@@ -5,8 +5,6 @@
 
 TCPClient::TCPClient () {
 	sock = -1;
-	port = 0;
-	address = "";
 }
 
 bool TCPClient::setup (string address, int port) {
@@ -27,7 +25,7 @@ bool TCPClient::setup (string address, int port) {
 		struct hostent *he;
 		struct in_addr **addr_list;
 		if ((he = gethostbyname(address.c_str())) == NULL) {
-			cout<<"Failed to resolve hostname\n";
+			cout << "Failed to resolve hostname." << endl;
 			return false;
 		}
 		addr_list = (struct in_addr **) he->h_addr_list;
@@ -42,30 +40,39 @@ bool TCPClient::setup (string address, int port) {
 
 	server.sin_family = AF_INET;
 	server.sin_port = htons(port);
-	
-	connect(sock, (struct sockaddr *)&server, sizeof(server));
 
-	return true;
-}
-
-bool TCPClient::sendMessage (string data) {
-	
-	if (send(sock, data.c_str(), strlen(data.c_str()), 0) < 0) {
-		cout << "Send failed: " << data << endl;
+	if ( connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0 ) {
+		cout << "Connection failed." << endl;
 		return false;
 	}
 
 	return true;
 }
 
-string TCPClient::receive (int size) {
+bool TCPClient::sendMessage (string data) {
 	
-	char buffer[4096];
-
-	if (recv(sock, buffer, size, 0) < 0) {
-		cout << "Receive failed." << endl;
+	int length = send(sock, data.c_str(), strlen(data.c_str()), 0);
+	if (length==0 || length==SOCKET_ERROR) {
+		cout << "Send failed." << endl;
+		return false;
 	}
 
-	buffer[size] = '\0';
-	return string(buffer);
+	return true;
+}
+
+bool TCPClient::receive (int size) {
+	
+	char buffer[4096];
+	int length = recv(sock, buffer, size, 0); 
+
+	if (length==0 || length==SOCKET_ERROR) {
+		cout << "Receive failed." << endl;
+		return false;
+	}
+	else {
+		buffer[length] = '\0';
+		cout << "Server response: " << string(buffer) << endl << endl;
+	}
+
+	return true;
 }

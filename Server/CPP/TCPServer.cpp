@@ -3,27 +3,6 @@
 
 #include "TCPServer.h"
 
-string TCPServer::Message;
-
-void * TCPServer::Task (void *arg) {
-	
-	int n;
-	int clientSocket = (long)arg;
-	char data[4096];
-	pthread_detach(pthread_self());
-	
-	while (true) {
-		n = recv(clientSocket, data, 4096, 0);
-		if (n==0) {
-			closesocket(clientSocket);
-			break;
-		}
-		data[n]=0;
-		Message = string(data);
-	}
-	return 0;
-}
-
 void TCPServer::setup (int port) {
 	WORD wVersion;
 	WSADATA wsaData;
@@ -47,37 +26,21 @@ void TCPServer::setup (int port) {
 	cout << "Server started." << endl;	//start msg
 }
 
-string TCPServer::receive() {
-	
+int TCPServer::acceptConn () {
 	char str[20];
-	while (true) {
-		int addrlen = sizeof(clientInfo);
-		clientSocket = accept(serverSocket, (struct sockaddr *)&clientInfo, &addrlen);
-		inet_ntop(AF_INET, &(clientInfo.sin_addr), str, INET_ADDRSTRLEN);
-		pthread_create(&serverThread, NULL, &Task, (void *)clientSocket);
-	}
-	return string(str);
+	int addrlen = sizeof(clientInfo);
+	int conn = accept(serverSocket, (struct sockaddr *)&clientInfo, &addrlen);
+	inet_ntop(AF_INET, &(clientInfo.sin_addr), str, INET_ADDRSTRLEN);
+	return conn;
 }
 
-string TCPServer::getMessage() {
+void TCPServer::sendMessage (string dat, int sock) {
 	
-	return Message;
-}
-
-void TCPServer::sendMessage (string dat) {
-	
-	send(clientSocket, dat.c_str(), dat.length(), 0);
-}
-
-void TCPServer::clean() {
-	
-	Message = "";
-	memset(data, 0, sizeof(data));
+	send(sock, dat.c_str(), dat.length(), 0);
 }
 
 void TCPServer::detach() {
 	
 	closesocket(serverSocket);
-	closesocket(clientSocket);
 	WSACleanup();
 }
