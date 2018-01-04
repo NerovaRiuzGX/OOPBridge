@@ -9,6 +9,8 @@ int connectCount = 0;
 
 TCPServer server;
 
+
+
 void * loop (void * new_sock) {
 
 	char data[4096]; //receive data buffer
@@ -41,6 +43,7 @@ void * loop (void * new_sock) {
 int main () {
 	
 	pthread_t thread;
+	
 	server.setup(10555);
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {

@@ -24,6 +24,7 @@ void TCPServer::setup (int port) {
 	bind(serverSocket, (struct sockaddr *)&serverInfo, sizeof(serverInfo));
 	listen(serverSocket, 5);
 	cout << "Server started." << endl;	//start msg
+	getIP();
 }
 
 int TCPServer::acceptConn () {
@@ -43,4 +44,27 @@ void TCPServer::detach() {
 	
 	closesocket(serverSocket);
 	WSACleanup();
+}
+
+void TCPServer::getIP () {
+    char hostname[80];
+    if (gethostname(hostname, sizeof(hostname)) == SOCKET_ERROR) {
+        cerr << "Error " << WSAGetLastError() <<
+                " when getting local host name." << endl;
+        return;
+    }
+    cout << "Host name is " << hostname << "." << endl;
+
+    struct hostent *hostip = gethostbyname(hostname);
+    if (hostip == 0) {
+        cerr << "Bad host lookup." << endl;
+        return;
+    }
+
+    for (int i = 0; hostip->h_addr_list[i] != 0; ++i) {
+        struct in_addr addr;
+        memcpy(&addr, hostip->h_addr_list[i], sizeof(struct in_addr));
+        cout << "Server IP address: " << inet_ntoa(addr) << endl;
+    }
+	return;
 }

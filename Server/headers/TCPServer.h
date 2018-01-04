@@ -22,6 +22,7 @@ class TCPServer {
 		void setup (int port);
 		void sendMessage (string, int);
 		void detach();
+		void getIP();
 		int acceptConn();
 
 		int serverSocket;
