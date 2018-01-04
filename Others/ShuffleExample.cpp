@@ -39,20 +39,22 @@ int main () {
 		}
 	}
 
-	vector<string> Deck_Shuffled;
+	vector<string> Card[4];
 
-	for (int i=52; i>0; i--) {
-		int number = rand()%i;
-		Deck_Shuffled.push_back(Deck[number]);
+	for (int i=0; i<52; i++) {
+		int number = rand()%(Deck.size());
+		Card[i%4].push_back(Deck[number]);
 		Deck.erase(Deck.begin()+number); 
 	}
 
-
-	cout << endl << endl << "shuffled deck:" << endl;
-	for (int i=0; i<Deck_Shuffled.size(); i++) {
-		cout << Deck_Shuffled[i] << " ";
-		if (i%13==12) {
-			cout << endl;
+	cout << endl << endl << "Card:" << endl;
+	for (int i=0; i<4; i++) {
+		cout << "Player Card: " << endl;
+		for(int j=0; j<13; j++){
+			cout << Card[i][j] << " ";
+			if (j%13==12) {
+				cout << endl;
+			}
 		}
 	}
 	
@@ -61,15 +63,3 @@ int main () {
 	
 	
 }
-
-//Make a Mirror Deck
-
-
-//Random function
-
-
-//Shuffle
-
-
-//console.log(Deck_Shuffled.toString());
-
