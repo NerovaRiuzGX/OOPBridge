@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -11,7 +12,8 @@ class FileControl {
 	public:
 		FileControl (string);
 		void read ();
-		void write (string);
+		void write (string, string);
+		void split (string, vector<string> &);
 
 	private:
 		ifstream FILE_INPUT;
