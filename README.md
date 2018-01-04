@@ -1,10 +1,18 @@
 # OOPBridge
 
 ## 小組成員
-+ A1055508 李孟叡: Nerova
-+ A1055516 賴冠穎: jeffreylai0130
-+ A1055536 廖敏翔: Ridost
-+ A1055538 吳凱倫: kkrun
++ A1055508 李孟叡 (Nerova)
+  * Server、Client class
+  * TCP連線，檔案讀寫與傳輸
++ A1055516 賴冠穎 (jeffreylai0130)
+  * Interface class
+  * 單人遊戲AI
++ A1055536 廖敏翔 (Ridost)
+  * Player class
+  * 玩家資料輸入輸出
++ A1055538 吳凱倫 (kkrun)
+  * Host class
+  * 牌桌資訊整理與訊息交換
 
 ## 注意事項
 + 程式編譯運行平台使用 Visual Studio 2010
