@@ -2,12 +2,12 @@
 
 ## 小組成員
 + A1055508 李孟叡: Nerova
-+ A1055516 賴冠穎
++ A1055516 賴冠穎: jeffreylai0130
 + A1055536 廖敏翔: Ridost
 + A1055538 吳凱倫: kkrun
 
 ## 注意事項
-+ visual studio 2010 only
++ 程式編譯運行平台使用 Visual Studio 2010
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
 
 ## 架構
@@ -24,37 +24,37 @@
   - round: int
   - ns_vulnerable: bool
   - ew_vulnerable: bool
-  - nCard[13]: vector string
-  - eCard[13]: vector string
-  - sCard[13]: vector string
-  - wCard[13]: vector string
+  - nCard[13]: vector<string>
+  - eCard[13]: vector<string>
+  - sCard[13]: vector<string>
+  - wCard[13]: vector<string>
   - turn: int
-  - auction_log: vector string
+  - auction_log: vector<string>
   - contract_suit: int
   - contract_trick: int
   - declarer_position: int
-  - trick_log: vector string
+  - trick_log: vector<string>
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
   - ew_point: int
-  - vulner()//設定本局身價
-  - shuffle()//洗牌發牌階段
-  - auction()//喊牌階段
-  - play()//出牌階段
-  - score()//計算分數階段
-  - pkgrcv()//接收封包解析
-  - pkgsnd()//打包送出封包
+  - vulner()    //設定本局身價
+  - shuffle()   //洗牌發牌階段
+  - auction()   //喊牌階段
+  - play()    //出牌階段
+  - score( )    //計算分數階段
+  - pkgrcv()    //接收封包解析
+  - pkgsnd()    //打包送出封包
 + class Player: inherit from class Host
-  - myCard[13]: vector string
-  - dummyCard[13]: vector string
+  - myCard[13]: vector<string>
+  - dummyCard[13]: vector<string>
   - position: int
   - vulnerable: bool
-  - printTable()//印出牌桌資訊
-  - bid()//喊牌
-  - playCard()//出牌
-  - claim()//放入playcard()
-  - undo()//待加入
+  - printTable()    //印出牌桌資訊
+  - bid()   //喊牌
+  - playCard()    //出牌
+  - claim()   //放入playcard()
+  - undo()    //待加入
 + class TCPServer
   - serverSocket: int
   - serverInfo: struct sockaddr_in
@@ -71,3 +71,7 @@
   - setup(ip, port): bool
   - sendMessage(data): bool
   - receive(size): bool
++ class FileControl
+  - FileControl(name)
+  - read()
+  - write()
