@@ -43,7 +43,7 @@
   - position: int
   - vulnerable: bool
   - printTable()//印出牌桌資訊
-  - bid()//喊牌
+  - bid()//喊牌
   - playCard()//出牌
   - claim()//放入playcard()
   - undo()//待加入
