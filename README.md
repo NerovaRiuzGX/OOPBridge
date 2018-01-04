@@ -22,14 +22,15 @@
 
 + class Host
   - round: int
-  - nCard[13]: vector <string>
-  - eCard[13]: vector <string>
-  - sCard[13]: vector <string>
-  - wCard[13]: vector <string>
-  - auction_log: vector <string>
+  - nCard[13]: vector string
+  - eCard[13]: vector string
+  - sCard[13]: vector string
+  - wCard[13]: vector string
+  - auction_log: vector string
   - contract_suit: int
   - contract_trick: int
   - declarer_position: int
+  - trick_log: vector string
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
@@ -42,8 +43,8 @@
   - pkgrcv()//接收封包解析
   - pkgsnd()//打包送出封包
 + class Player: inherit from class Host
-  - myCard[13]: vector <string>
-  - dummyCard[13]: vector <string>
+  - myCard[13]: vector string
+  - dummyCard[13]: vector string
   - position: int
   - vulnerable: bool
   - printTable()//印出牌桌資訊
