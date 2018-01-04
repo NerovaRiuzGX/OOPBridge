@@ -22,7 +22,7 @@
 
 + class Host
   - round: int
-  - ns_vulnerable: bool
+  - ns_vulnerable: bool
   - ew_vulnerable: bool
   - nCard[13]: vector string
   - eCard[13]: vector string
