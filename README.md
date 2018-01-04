@@ -45,6 +45,7 @@
   - score( )    //計算分數階段
   - pkgrcv()    //接收封包解析
   - pkgsnd()    //打包送出封包
+  - friend class Interface
 + class Player: inherit from class Host
   - myCard[13]: vector string
   - dummyCard[13]: vector string 
@@ -55,6 +56,7 @@
   - playCard()    //出牌
   - claim()   //放入playcard()
   - undo()    //待加入
+  - friend class Interface
 + class TCPServer
   - serverSocket: int
   - serverInfo: struct sockaddr_in
