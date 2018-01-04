@@ -1,6 +1,8 @@
-# OOPBridge
+# OOPBridge # 
+   **從C++、OOP與TCP出發設計的橋牌遊戲**
+  
 
-## 小組成員
+## 小組成員與分工
 + A1055508 李孟叡 (Nerova)
   * Server、Client class
   * TCP連線，檔案讀寫與傳輸
@@ -19,6 +21,7 @@
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
 
 ## 架構
+![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
 
 ## 使用者介面
 - bridge_player-table.txt
