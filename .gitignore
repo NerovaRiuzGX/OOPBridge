@@ -39,3 +39,6 @@
 *.lastbuildstate
 *.rc
 *.idb
+*.log
+*.sdf
+*.suo
