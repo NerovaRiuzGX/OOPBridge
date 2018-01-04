@@ -69,6 +69,7 @@
   - serverSocket: int
   - serverInfo: struct sockaddr_in
   - clientInfo: struct sockaddr_in
+  - serverIP: string
   - setup(port)
   - sendMessage(data, sock)
   - detach()
