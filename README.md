@@ -24,7 +24,7 @@
   - round: int
   - ns_vulnerable: bool
   - ew_vulnerable: bool
-  - nCard[13]: vector string
+  - nCard[13]: vector string
   - eCard[13]: vector string
   - sCard[13]: vector string
   - wCard[13]: vector string
