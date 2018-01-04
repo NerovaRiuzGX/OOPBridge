@@ -13,13 +13,16 @@ public:
 	void PlayCard();
 	bool  MySuits(char);
 	void Shuffle();
+	void Bid();
 protected:
-	int Position();
+	int Position;
 	int Win_Trick;
 	vector<string> TotalCard;
 	string playCard;
 	char MasterSuits;
 	char Suits;
+	bool Vulnerable;
 	vector <string> MyCard;
+	vector <string> DummyCard;
 };
 #endif

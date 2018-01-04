@@ -1,13 +1,13 @@
-﻿已經開始建置於 2018/1/4 下午 02:51:12。
+﻿已經開始建置於 2018/1/4 下午 11:35:08。
      1>節點 2 (build 目標) 上的專案 "C:\Users\Jeff\documents\visual studio 2010\Projects\BridgePlayer\BridgePlayer\BridgePlayer.vcxproj"。
      1>InitializeBuildStatus:
          由於指定了 "AlwaysCreate"，因此正在建立 "Debug\BridgePlayer.unsuccessfulbuild"。
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt BridgePlayer.cpp
          BridgePlayer.cpp
-     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(28): warning C4018: '<' : signed/unsigned 不相符
-     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(66): warning C4018: '<' : signed/unsigned 不相符
-     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(79): warning C4715: 'BridgePlayer::MySuits' : 不是所有控制路徑都傳回值
+     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(79): warning C4018: '<' : signed/unsigned 不相符
+     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(117): warning C4018: '<' : signed/unsigned 不相符
+     1>c:\users\jeff\documents\visual studio 2010\projects\bridgeplayer\bridgeplayer\bridgeplayer.cpp(130): warning C4715: 'BridgePlayer::MySuits' : 不是所有控制路徑都傳回值
        ManifestResourceCompile:
          所有輸出都是最新的。
        Link:
@@ -27,4 +27,4 @@
 
 建置成功。
 
-經過時間 00:00:01.69
+經過時間 00:00:01.81

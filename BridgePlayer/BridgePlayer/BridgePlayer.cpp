@@ -9,19 +9,70 @@ BridgePlayer::BridgePlayer(vector<string> mycard)
 {
 	MyCard=mycard;
 }
+void BridgePlayer::Bid()
+{
+	string bid;
+	string auction_log="2S";		//假設喊牌資訊
+	while(true)
+	{
+		cout<<"Please Enter your Bid( Pass(ps) , Dbl(dbl) , Rdbl(rdbl) )"<<endl
+			<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C)"<<endl;
+		getline(cin,bid);
+		if( bid=="ps" || bid=="dbl" || bid=="rdbl")	//判斷喊牌是否符合規則 
+		{
+				cout<<bid<<endl;
+				break;
+		}
+		else if(bid[0]<'8' && bid[0]>auction_log[0])
+		{
+			cout<<bid<<endl;
+			break;
+		}
+		else if(bid[0]<'8' && bid[0]==auction_log[0] && auction_log[1]=='C' &&( bid[1]=='S' || bid[1]=='H' || bid[1]=='D' ||(bid[1]=='N' && bid[2]=='T')) )
+		{
+			cout<<bid<<endl;
+			break;
+		}
+		else if(bid[0]<'8' && bid[0]==auction_log[0] && auction_log[1]=='D' &&(bid[1]=='H' || bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T')) )
+		{
+			cout<<bid<<endl;
+			break;
+		}
+		else if(bid[0]<'8' && bid[0]==auction_log[0] && auction_log[1]=='H' && ( bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T') ))
+		{
+			cout<<bid<<endl;
+			break;
+		}
+		else if(bid[0]<'8' && bid[0]==auction_log[0] && auction_log[1]=='S' && bid[1]=='N' && bid[2]=='T')
+		{
+			cout<<bid<<endl;
+			break;
+		}
+		else
+		{
+			cout<<bid<<endl<<"You have an error bid  !!!"<<endl;
+		}
+	}
+}
 void BridgePlayer::Shuffle()
 {
-	char totalCard[52][3]={"S1","S2","S3","S4","S5","S6","S7","S8","S9","ST","SJ","SQ","SK",
-				"H1","H2","H3","H4","H5","H6","H7","H8","H9","HT","HJ","HQ","HK",																	
-				 "D1","D2","D3","D4","D5","D6","D7","D8","D9","DT","DJ","DQ","DK",																	
-				  "C1","C2","C3","C4","C5","C6","C7","C8","C9","CT","CJ","CQ","CK"
+	char totalCard[52][3]={"SA","S2","S3","S4","S5","S6","S7","S8","S9","ST","SJ","SQ","SK",
+				"HA","H2","H3","H4","H5","H6","H7","H8","H9","HT","HJ","HQ","HK",																	
+				 "DA","D2","D3","D4","D5","D6","D7","D8","D9","DT","DJ","DQ","DK",																	
+				  "CA","C2","C3","C4","C5","C6","C7","C8","C9","CT","CJ","CQ","CK"
 					};
 	vector<string>TotalCard(totalCard+0,totalCard+52);
 	MyCard.resize(13);
+	vector<string>::iterator it;	
 		for(int i=0;i<13;i++)
 		{
-			int R=rand()%51;
-			if( MyCard[i] != TotalCard[R] ) MyCard[i]=TotalCard[R];
+			int R=rand()%TotalCard.size();
+
+			it=find(MyCard.begin(),MyCard.end(),TotalCard[R]);	
+			if( it==MyCard.end() )
+			{
+				MyCard[i]=TotalCard[R];				
+			}
 			else i--;
 		}
 		sort(MyCard.begin(),MyCard.end());
