@@ -42,3 +42,4 @@
 *.log
 *.sdf
 *.suo
+*.cache
