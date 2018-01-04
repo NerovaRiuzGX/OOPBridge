@@ -64,7 +64,8 @@ void TCPServer::getIP () {
     for (int i = 0; hostip->h_addr_list[i] != 0; ++i) {
         struct in_addr addr;
         memcpy(&addr, hostip->h_addr_list[i], sizeof(struct in_addr));
-        cout << "Server IP address: " << inet_ntoa(addr) << endl;
+		serverIP = inet_ntoa(addr);
+        cout << "Server IP address: " << serverIP << endl;
     }
 	return;
 }

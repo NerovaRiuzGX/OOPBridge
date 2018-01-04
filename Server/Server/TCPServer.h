@@ -28,6 +28,8 @@ class TCPServer {
 		int serverSocket;
 		struct sockaddr_in serverInfo;
 		struct sockaddr_in clientInfo;
+
+		string serverIP;
 };
 
 #endif /* TCPSERVER_H */
