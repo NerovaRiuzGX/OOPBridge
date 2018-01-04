@@ -13,6 +13,8 @@ EW point: -300
 5  ps  ps  ps
 6  
 7  
+NS win trick: 13
+EW win trick: 13
                  c  d               h  s
                  C  D 23456789TJQKA H  S
                 ------------N-------------
