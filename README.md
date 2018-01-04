@@ -7,6 +7,7 @@
 + A1055538 吳凱倫: kkrun
 
 ## 注意事項
++ visual studio 2010 only
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
 
 ## 架構
@@ -16,7 +17,8 @@
 
 ## 變數
 + define position: N(桌主) = 0, E = 1, S = 2, W = 3
-+ define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3
++ define card: 
++ define bid: ps
 
 + class Host
   - round: int
@@ -24,21 +26,27 @@
   - contract_suit: int
   - contract_trick: int
   - declarer_position: int
-  - vulner()
-  - shuffle()
-  - auction()
-  - p...
+  - ns_trick: int
+  - ew_trick: int
+  - ns_point: int
+  - ew_point: int
+  - vulner()//設定本局身價
+  - shuffle()//洗牌發牌階段
+  - auction()//喊牌階段
+  - play()//出牌階段
+  - score()//計算分數階段
+  - pkgrcv()//接收封包解析
+  - pkgsnd()//打包送出封包
 + class Player: inherit from class Host
-  - card[13]: Card
+  - myCard[13]: 
+  - dummyCard[13]:
   - position: int
   - vulnerable: bool
-  - win_trick: int
-  - point: int
-  - printTable()
-  - bid()
-  - playCard()
-  - claim()
-  - undo()
+  - printTable()//印出牌桌資訊
+  - bid()//喊牌
+  - playCard()//出牌
+  - claim()//放入playcard()
+  - undo()//待加入
 + class TCPServer
   - serverSocket: int
   - serverInfo: struct sockaddr_in
