@@ -26,6 +26,7 @@
   - eCard[13]: vector string
   - sCard[13]: vector string
   - wCard[13]: vector string
+  - turn: int
   - auction_log: vector string
   - contract_suit: int
   - contract_trick: int
