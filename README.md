@@ -30,8 +30,8 @@
   - ns_point: int
   - ew_point: int
   - vulner()//設定本局身價
-  - shuffle()//洗牌&發牌 階段
-  - auction()//喊牌 階段
+  - shuffle()//洗牌&發牌階段
+  - auction()//喊牌階段
   - play()//出牌階段
   - score()//計算分數階段
   - pkgrcv()//接收封包解析
