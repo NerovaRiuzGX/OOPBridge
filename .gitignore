@@ -30,7 +30,6 @@
 
 # others
 *.ipch
-*.vcxproj
 *.user
 *.ilk
 *.pdb
