@@ -35,10 +35,7 @@
   - round: int
   - ns_vulnerable: bool
   - ew_vulnerable: bool
-  - nCard[13]: vector string
-  - eCard[13]: vector string
-  - sCard[13]: vector string
-  - wCard[13]: vector string
+  - Card[4]: vector string
   - turn: int
   - auction_log: vector string
   - contract_suit: int
@@ -58,8 +55,8 @@
   - pkgsnd()    //打包送出封包
   - friend class Interface
 + class Player: inherit from class Host
-  - myCard[13]: vector string
-  - dummyCard[13]: vector string 
+  - myCard: vector string
+  - dummyCard: vector string 
   - position: int
   - vulnerable: bool
   - printTable()    //印出牌桌資訊
