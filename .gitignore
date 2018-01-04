@@ -43,3 +43,5 @@
 *.sdf
 *.suo
 *.cache
+*.opensdf
+*.bridge
