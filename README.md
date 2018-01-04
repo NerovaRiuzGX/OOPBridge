@@ -16,7 +16,8 @@
 
 ## 變數
 + define position: N(桌主) = 0, E = 1, S = 2, W = 3
-+ define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3
++ define card: 
++ define bid: ps
 
 + class Host
   - round: int
@@ -25,11 +26,21 @@
   - contract_trick: int
   - declarer_position: int
   - vulner()
+    - 設定本局身價
   - shuffle()
-  - auction()
-  - p...
+    - 洗牌&發牌 階段
+  - auction()
+    - 喊牌 階段
+  - play()
+    - 出牌階段
+  - score()
+    - 計算分數階段
+  - pkgrcv()
+    - 接收封包解析
+  - pkgsnd()
+    - 打包送出封包
 + class Player: inherit from class Host
-  - card[13]: Card
+  - card[13]: int
   - position: int
   - vulnerable: bool
   - win_trick: int
