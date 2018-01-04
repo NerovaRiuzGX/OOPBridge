@@ -28,8 +28,8 @@
 
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
-+ define card: 
-+ define bid: ps
++ define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3
++ define bid:
 
 + class Host
   - round: int
