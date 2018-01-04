@@ -46,6 +46,7 @@
   - setup(port)
   - sendMessage(data, sock)
   - detach()
+  - getIP()
   - acceptConn(): int
 + class TCPClient
   - sock: int
