@@ -26,19 +26,19 @@
   - contract_trick: int
   - declarer_position: int
   - vulner()
-    - 設定本局身價
+    * 設定本局身價
   - shuffle()
-    - 洗牌&發牌 階段
+    * 洗牌&發牌 階段
   - auction()
-    - 喊牌 階段
+    * 喊牌 階段
   - play()
-    - 出牌階段
+    * 出牌階段
   - score()
-    - 計算分數階段
+    * 計算分數階段
   - pkgrcv()
-    - 接收封包解析
+    * 接收封包解析
   - pkgsnd()
-    - 打包送出封包
+    * 打包送出封包
 + class Player: inherit from class Host
   - card[13]: int
   - position: int
