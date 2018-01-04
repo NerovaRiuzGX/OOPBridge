@@ -13,7 +13,7 @@ class FileControl {
 		FileControl (string);
 		void read ();
 		void write (string, string);
-		void split (string, vector<string> &);
+		void split (string, string, vector<string> &);
 
 	private:
 		ifstream FILE_INPUT;

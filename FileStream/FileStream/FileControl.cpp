@@ -10,7 +10,7 @@ void FileControl::read () {
 		string buffer;
 		while (getline(FILE_INPUT, buffer)) {
 			vector<string> buff;
-			split(buffer, buff);
+			split(buffer, "=", buff);
 			cout << buff[0] << ": " << buff[1] << endl;
 			//cout << buffer << '\n';
 		}
@@ -19,21 +19,21 @@ void FileControl::read () {
 }
 
 void FileControl::write (string variable, string data) {
-	FILE_OUTPUT.open (FILE_NAME);
+	FILE_OUTPUT.open (FILE_NAME, ios::app);
 	if (FILE_OUTPUT.is_open()) {
 		FILE_OUTPUT << variable << "=" << data << '\n';
 	}
 	FILE_OUTPUT.close();
 }
 
-void FileControl::split(string phrase, vector<string> &data) {
+void FileControl::split(string phrase, string delim, vector<string> &data) {
 	char* str = &phrase[0];
 	char * pch;
-	pch = strtok (str,"=");
+	pch = strtok (str, delim.c_str());
 	while (pch != NULL) {
 		//printf ("%s\n",pch);
 		data.push_back(string(pch));
-		pch = strtok (NULL, "=");
+		pch = strtok (NULL, delim.c_str());
 	}
 	return;
 }
