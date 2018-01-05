@@ -31,7 +31,7 @@
   >?>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
   >?>play>-1  //Host發送 喊牌結束&打牌開始、打牌成功
   >?>play>0  //Player發送 打牌內容(define CardToInt() )
-  ```
+  ```
 ## 架構
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
 
