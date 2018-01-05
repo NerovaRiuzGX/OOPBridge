@@ -27,7 +27,11 @@
   15>position>1\n //玩家座位方向
   16>bid>7N\n //玩家喊牌
   19>pkgnum>23\n //封包編號
-  ```
+  **>auction>1  //Host發送 喊牌開始
+  **>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
+  **>auction>-1  //Host發送 喊牌結束
+  **>
+  ```
 
 ## 架構
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
@@ -38,7 +42,7 @@
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
-+ define bid: Club = c, Diamond = d, Heart = h, Spade = s, NT = n
++ define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, S = 51
 + define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
@@ -51,13 +55,15 @@
   - contract_suit: int
   - contract_trick: int
   - contract_dbl: int 
-  - declarer_position: int
-  - trick_log: vector string
+  - declarer_position: int  //莊家位置
+  - trick_log: vector string
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
   - ew_point: int
-  - vulner()    //設定本局身價
+  - statement_name: string
+  - statement_data: string
+  - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
   - sortCard(string, string): static bool  //洗牌後排序
   - auction()   //喊牌階段
