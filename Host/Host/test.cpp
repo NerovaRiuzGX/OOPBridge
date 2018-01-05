@@ -1,4 +1,4 @@
-#include "Host.h"
+/*#include "Host.h"
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -16,3 +16,4 @@ int main () {
 	system("pause");
 	return 0;
 }
+*/

@@ -1,6 +1,6 @@
 #ifndef HOST_H
 #define HOST_H
-#include"FileControl.h"
+//#include"FileControl.h"
 #include<vector>
 #include<string>
 using namespace std;
@@ -9,7 +9,6 @@ class Host
 {
 public:
 	friend class FileControl;
-	FileControl DATA;
 	Host();
 	void vulner();
 	void shuffle();
