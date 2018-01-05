@@ -41,7 +41,7 @@
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
-+ define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N
++ define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N, Dbl = X, Rdb = XX, pass = PS
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, SA = 51
 + define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
