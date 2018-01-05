@@ -27,10 +27,10 @@
   15>position>1\n //玩家座位方向
   16>bid>7N\n //玩家喊牌
   19>pkgnum>23\n //封包編號
-  **>auction>1  //Host發送 喊牌開始
-  **>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
-  **>auction>-1  //Host發送 喊牌結束
-  **>
+  >auction>1  //Host發送 喊牌開始
+  >bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
+  >auction>-1  //Host發送 喊牌結束
+  >
   ```
 
 ## 架構
@@ -55,8 +55,8 @@
   - contract_suit: int
   - contract_trick: int
   - contract_dbl: int 
-  - declarer_position: int  //莊家位置
-  - trick_log: vector string
+  - declarer_position: int  //莊家位置
+  - trick_log: vector string
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
