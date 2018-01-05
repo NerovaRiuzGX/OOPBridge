@@ -55,8 +55,8 @@
   - contract_trick: int
   - contract_dbl: int 
   - declarer_position: int  //莊家位置
-  - trick_log[13][4]: vector string
-  - ns_trick: int
+  - trick_log[13][4]: vector string
+  - ns_trick: int
   - ew_trick: int
   - ns_point: int
   - ew_point: int
