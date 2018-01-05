@@ -40,7 +40,7 @@
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
 + define bid: Club = c, Diamond = d, Heart = h, Spade = s, NT = n
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, S = 51
-+ define Dbl: X= 0 ,Dbl= 1  Rdbl= 2
++ define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
   - round: int
   - ns_vulnerable: bool
