@@ -74,9 +74,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FileControl.h" />
     <ClInclude Include="Host.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileControl.cpp" />
+    <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Host.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>

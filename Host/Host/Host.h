@@ -1,5 +1,6 @@
 #ifndef HOST_H
 #define HOST_H
+#include"FileControl.h"
 #include<vector>
 #include<string>
 using namespace std;
@@ -7,14 +8,17 @@ using namespace std;
 class Host
 {
 public:
+	friend class FileControl;
+	FileControl DATA;
 	Host();
-	void vunler();
+	void vulner();
 	void shuffle();
+	static bool sortCard(const string &, const string &);
 	void auction();
 	void play();
 	void score();
-	void pkgrcv();
-	void pkgsnd();
+	static int CardToInt (string);
+	static string IntToCard (int);
 protected:
 	int round; //round of table
 	bool ns_vulnerable;

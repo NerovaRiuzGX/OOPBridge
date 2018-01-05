@@ -11,9 +11,9 @@ Host::Host()
 	:round(1),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
 {
 }
-void Host::vunler()
+void Host::vulner()
 {
-	switch(round%4)
+	switch(round%16)
 	{
 	  case 0:
 		  ns_vulnerable = false;
@@ -113,5 +113,69 @@ void Host::shuffle()
 		Card[i%4].push_back(Deck[number]);
 		Deck.erase(Deck.begin()+number);
 	}
+	//四個玩家的牌排序
+	sort(Card[0].begin(),Card[0].end(),sortCard);
+	sort(Card[1].begin(),Card[1].end(),sortCard);
+	sort(Card[2].begin(),Card[2].end(),sortCard);
+	sort(Card[3].begin(),Card[3].end(),sortCard);
 
+	//印牌測試
+	cout << endl << endl << "Card:" << endl;
+	for (int i=0; i<4; i++) {
+		cout << "Player Card: " << endl;
+		for(int j=0; j<13; j++){
+			cout << Card[i][j] << " ";
+			if (j%13==12) {
+				cout << endl;
+			}
+		}
+	}
+}
+bool Host::sortCard(const string &a, const string &b)
+{
+	return CardToInt(a) < CardToInt(b);
+}
+void Host::auction()
+{
+
+}
+int Host::CardToInt (string card) {
+	int convert = 0;
+	switch (card[0]) {
+		case 'C': break;
+		case 'D': convert += 13; break;
+		case 'H': convert += 26; break;
+		case 'S': convert += 39; break;
+	}
+	
+	switch (card[1]) {
+		case 'T': convert += 8; break;
+		case 'J': convert += 9; break;
+		case 'Q': convert += 10; break;
+		case 'K': convert += 11; break;
+		case 'A': convert += 12; break;
+		default: convert += card[1]-50; break;
+	}
+
+	return convert;
+}
+string Host::IntToCard (int input) {
+	char suit, num;
+	switch (input/13) {
+		case 0: suit = 'C'; break;
+		case 1: suit = 'D'; break;
+		case 2: suit = 'H'; break;
+		case 3: suit = 'S'; break;
+	}
+	switch (input%13) {
+		case 8: num = 'T'; break;
+		case 9: num = 'J'; break;
+		case 10: num = 'Q'; break;
+		case 11: num = 'K'; break;
+		case 12: num = 'A'; break;
+		default: num = (input%13) + 50; break;
+		
+	}
+	char convert[3] = {suit, num, '\0'};
+	return string(convert);
 }
