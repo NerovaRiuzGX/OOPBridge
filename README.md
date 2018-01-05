@@ -58,8 +58,9 @@
   - shuffle()   //洗牌發牌階段
   - auction()   //喊牌階段
   - play()    //出牌階段
-  - score( )    //計算分數階段
-  - class FileControl
+  - score()    //計算分數階段
+  - CardToInt()  //撲克牌字串轉整數0~51
+  - class FileControl
   - friend class Interface
   - friend class FileControl
 + class Player: inherit from class Host
