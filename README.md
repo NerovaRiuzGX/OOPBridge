@@ -32,7 +32,7 @@
   >?>play>-1  //Host發送 喊牌結束&打牌開始、打牌成功
   >?>play>0  //Player發送 打牌內容(define CardToInt() )
   ```
-## 架構
+## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
 ## 使用者介面
