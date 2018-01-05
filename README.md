@@ -32,7 +32,7 @@
   >?>play>-1  //Host發送 喊牌結束&打牌開始、打牌成功
   >?>play>0  //Player發送 打牌內容(define CardToInt() )
   ```
-## 架構
+## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
 ## 使用者介面
@@ -41,7 +41,7 @@
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
-+ define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N
++ define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N, Dbl = X, Rdb = XX, pass = PS
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, SA = 51
 + define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
@@ -55,13 +55,12 @@
   - contract_trick: int
   - contract_dbl: int 
   - declarer_position: int  //莊家位置
-  - trick_log[13][4]: vector string
+  - trick_log[13][4]: string
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
   - ew_point: int
-  - statement_name: string
-  - statement_data: string
+  - statement: int
   - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
   - sortCard(string, string): static bool  //洗牌後排序
@@ -83,6 +82,7 @@
   - playCard()    //出牌
   - claim()   //放入playcard()
   - undo()    //待加入
+  - MySuits() //判斷花色
   - friend class Interface
   - friend class FileControl
 + class TCPServer
