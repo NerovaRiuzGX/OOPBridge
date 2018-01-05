@@ -29,12 +29,11 @@ protected:
 	int contract_trick;
 	int contract_dbl;
 	int declarer_position;
-	vector<string> trick_log;
+	vector<string> trick_log[13][4];
 	int ns_trick;
 	int ew_trick;
 	int ns_point;
 	int ew_point;
-	string statement_name;
-	string statement_data;
+	int statement;
 };
 #endif
