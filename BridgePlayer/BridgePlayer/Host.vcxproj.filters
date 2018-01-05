@@ -21,11 +21,11 @@
     <ClInclude Include="Host.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>標頭檔</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Host.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
@@ -33,12 +33,6 @@
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="FileStream.cpp">
-      <Filter>原始程式檔</Filter>
-    </ClCompile>
-    <ClCompile Include="Host.cpp">
-      <Filter>原始程式檔</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
   </ItemGroup>

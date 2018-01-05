@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{64FBDB52-68E1-46AC-A434-5D6268CAA969}</ProjectGuid>
+    <ProjectGuid>{404460F2-8913-4FBE-86B2-D53B77E49D91}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>BridgePlayer</RootNamespace>
+    <RootNamespace>Host</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -74,12 +74,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="FileControl.h" />
     <ClInclude Include="Host.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="FileControl.cpp" />
     <ClCompile Include="FileStream.cpp" />
     <ClCompile Include="Host.cpp" />
