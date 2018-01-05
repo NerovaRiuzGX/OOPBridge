@@ -30,7 +30,6 @@
   >?>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
   >?>auction>-1  //Host發送 喊牌結束
   >
-
 ## 架構
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
 
