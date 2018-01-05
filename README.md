@@ -22,14 +22,14 @@
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
 + TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
   - 範例：
-   >0>EMPTY_PACKAGE>0\n //是否為空封包
-   >15>position>1\n //玩家座位方向
-   >16>bid>7N\n //玩家喊牌
-   >19>pkgnum>23\n //封包編號
-   >?>auction>1  //Host發送 喊牌開始
-   >?>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
-   >?>auction>-1  //Host發送 喊牌結束
-   >
+  >0>EMPTY_PACKAGE>0\n //是否為空封包
+  >15>position>1\n //玩家座位方向
+  >16>bid>7N\n //玩家喊牌
+  >19>pkgnum>23\n //封包編號
+  >?>auction>1  //Host發送 喊牌開始
+  >?>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
+  >?>auction>-1  //Host發送 喊牌結束
+  >
 ## 架構
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
 
