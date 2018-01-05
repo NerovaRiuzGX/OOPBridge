@@ -27,11 +27,14 @@ protected:
 	vector<string> auction_log;
 	int contract_suit;
 	int contract_trick;
+	int contract_dbl;
 	int declarer_position;
 	vector<string> trick_log;
 	int ns_trick;
 	int ew_trick;
 	int ns_point;
 	int ew_point;
+	string statement_name;
+	string statement_data;
 };
 #endif
