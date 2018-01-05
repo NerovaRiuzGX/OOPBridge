@@ -107,6 +107,10 @@ bool Host::sortCard(const string &a, const string &b)
 }
 void Host::auction()
 {
+	
+}
+void Host::play()
+{
 
 }
 void Host::score()

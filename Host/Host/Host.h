@@ -29,7 +29,7 @@ protected:
 	int contract_trick;
 	int contract_dbl;
 	int declarer_position;
-	vector<string> trick_log[13][4];
+	string trick_log[13][4];
 	int ns_trick;
 	int ew_trick;
 	int ns_point;
