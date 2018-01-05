@@ -4,7 +4,7 @@
 
 ## 小組成員與分工
 + A1055508 李孟叡 (Nerova)
-  * Server、Client class
+  * Server、Client、FileControl class
   * TCP連線，檔案讀寫與傳輸
 + A1055516 賴冠穎 (jeffreylai0130)
   * Interface class
@@ -19,6 +19,14 @@
 ## 注意事項
 + 程式編譯運行平台使用 Visual Studio 2010
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
++ TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
+  - 範例：
+  ```C++
+  0>EMPTY_PACKAGE>0\n //是否為空封包
+  15>position>1\n //玩家座位方向
+  16>bid>7N\n //玩家喊牌
+  19>pkgnum>23\n //封包編號
+  ```
 
 ## 架構
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
@@ -51,9 +59,9 @@
   - auction()   //喊牌階段
   - play()    //出牌階段
   - score( )    //計算分數階段
-  - pkgrcv()    //接收封包解析
-  - pkgsnd()    //打包送出封包
+  - class FileControl
   - friend class Interface
+  - friend class FileControl
 + class Player: inherit from class Host
   - myCard: vector string
   - dummyCard: vector string 
@@ -65,6 +73,7 @@
   - claim()   //放入playcard()
   - undo()    //待加入
   - friend class Interface
+  - friend class FileControl
 + class TCPServer
   - serverSocket: int
   - serverInfo: struct sockaddr_in
@@ -86,3 +95,5 @@
   - FileControl(name)
   - read()
   - write()
+  - pkgrcv()    //接收封包解析
+  - pkgsnd()    //打包送出封包
