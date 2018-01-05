@@ -57,12 +57,12 @@
   - ew_point: int
   - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
-  - sortCard(string, string): bool  //洗牌後排序
+  - sortCard(string, string): static bool  //洗牌後排序
   - auction()   //喊牌階段
   - play()    //出牌階段
   - score()    //計算分數階段
-  - CardToInt(string)  //撲克牌字串轉整數0~51
-  - IntToCard(int)  //整數轉撲克牌字串
+  - CardToInt(string): static int //撲克牌字串轉整數0~51
+  - IntToCard(int): static string  //整數轉撲克牌字串
   - class FileControl
   - friend class Interface
   - friend class FileControl
