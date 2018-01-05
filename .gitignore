@@ -45,3 +45,4 @@
 *.cache
 *.opensdf
 *.bridge
+*.unsuccessfulbuild

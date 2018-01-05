@@ -85,6 +85,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 		switch(atoi(list[i][0].c_str())){
 			//From Host
 			case 1: //round: int
+				atoi(list[i][2].c_str());
 				break;
 			case 2: //ns_vulnerable: bool
 				break;
@@ -125,7 +126,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 	}
 }
 
-string FileControl::pkgsnd (Host& host) {
+string FileControl::pkgsnd (Host & host) {
 	string pkg = "";
 	char buffer[11];
 	//To Player
@@ -184,6 +185,13 @@ string FileControl::pkgsnd (Host& host) {
 	pkg += ("19>pkgnum>" + string(itoa(PACKAGE_NUMBER, buffer, 10)) + '\n');
 		
 	//case 20: statement
+	
+	return pkg;
+}
+
+string FileControl::pkgsnd (Player & player) {
+	string pkg = "";
+	
 	
 	return pkg;
 }
