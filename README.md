@@ -35,8 +35,7 @@
 ## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
-## 使用者介面
-- bridge_player-table.txt
+## 使用者介面- bridge_player-table.txt
 
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
@@ -83,7 +82,7 @@
   - claim()   //放入playcard()
   - undo()    //待加入
   - MySuits() //判斷花色
-  - friend class Interface
+  - friend class Interface
   - friend class FileControl
 + class TCPServer
   - serverSocket: int
