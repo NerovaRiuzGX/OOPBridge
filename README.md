@@ -12,12 +12,12 @@
 + A1055536 廖敏翔 (Ridost)
   * Player class
   * 玩家資料輸入輸出
-
 + A1055538 吳凱倫 (kkrun)
   * Host class
   * 牌桌資訊整理與訊息交換
 
 ## 注意事項
++ 養成好習慣，先 Pull Request，再做 Commit
 + 程式編譯運行平台使用 Visual Studio 2010
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
 + TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
@@ -33,7 +33,7 @@
   >?>play>0  //Player發送 打牌內容(define CardToInt() )
   ```
 ## 架構
-![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
+![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
 ## 使用者介面
 - bridge_player-table.txt
@@ -42,7 +42,7 @@
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
 + define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N
-+ define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, S = 51
++ define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, SA = 51
 + define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
   - round: int
@@ -55,7 +55,7 @@
   - contract_trick: int
   - contract_dbl: int 
   - declarer_position: int  //莊家位置
-  - trick_log: vector string
+  - trick_log[13][4]: vector string
   - ns_trick: int
   - ew_trick: int
   - ns_point: int
