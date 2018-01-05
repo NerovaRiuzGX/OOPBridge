@@ -60,9 +60,9 @@
   - ew_trick: int
   - ns_point: int
   - ew_point: int
-  - statement_name: string
+  - statement_name: string
   - statement_data: string
-  - vulner()    //設定本局身價
+  - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
   - sortCard(string, string): static bool  //洗牌後排序
   - auction()   //喊牌階段
