@@ -33,7 +33,7 @@
   >?>play>0  //Player發送 打牌內容(define CardToInt() )
   ```
 ## 架構
-![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Bridge_0104.PNG)
+![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
 ## 使用者介面
 - bridge_player-table.txt
