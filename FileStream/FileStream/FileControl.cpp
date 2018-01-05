@@ -2,6 +2,7 @@
 
 FileControl::FileControl (string name) {
 	FILE_NAME = name;
+	PACKAGE_NUMBER = 0;
 }
 
 void FileControl::read () {
@@ -19,10 +20,10 @@ void FileControl::read () {
 	return;
 }
 
-void FileControl::write (string variable, string data) {
+void FileControl::write (string data) {
 	FILE_OUTPUT.open (FILE_NAME, ios::app);
 	if (FILE_OUTPUT.is_open()) {
-		FILE_OUTPUT << "0" << "=" << variable << "=" << data << '\n';
+		FILE_OUTPUT << data;
 	}
 	FILE_OUTPUT.close();
 	return;
@@ -40,13 +41,13 @@ void FileControl::split(string phrase, string delim, vector<string> &data) {
 	return;
 }
 
-void FileControl::pkgrcv (string pkg, Host &) {
+void FileControl::pkgrcv (string pkg, Host & host) {
 	vector<string> variable;
 	vector<vector<string>> list;
 	split(pkg, "\n", variable);
 
 	for (int i=0; i<variable.size(); i++) {
-		split(variable[i], "=", list[i]);
+		split(variable[i], ">", list[i]);
 	}
 
 	for (int i=0; i<list.size(); i++) {
@@ -63,20 +64,21 @@ void FileControl::pkgrcv (string pkg, Host &) {
 
 			//Data information
 			case 19: //pkgnum: int
+				PACKAGE_NUMBER = atoi(list[i][3].c_str());
 				break;
-			case 20: //
+			case 20: //statement
 			default: break;
 		}
 	}
 }
 
-void FileControl::pkgrcv (string pkg, Player &) {
+void FileControl::pkgrcv (string pkg, Player & player) {
 	vector<string> variable;
 	vector<vector<string>> list;
 	split(pkg, "\n", variable);
 
 	for (int i=0; i<variable.size(); i++) {
-		split(variable[i], "=", list[i]);
+		split(variable[i], ">", list[i]);
 	}
 
 	for (int i=0; i<list.size(); i++) {
@@ -110,21 +112,79 @@ void FileControl::pkgrcv (string pkg, Player &) {
 				break;
 			case 14: //ew_point: int
 				break;
+			case 31: //contract_dbl: int
+				break;
 
 			//Data information
 			case 19: //pkgnum: int
+
 				break;
-			case 20: //
+			case 20: //statement
 			default: break;
 		}
 	}
 }
 
-string FileControl::pkgsnd () {
+string FileControl::pkgsnd (Host& host) {
 	string pkg = "";
+	char buffer[11];
+	//To Player
+	//case 1: round: int
+	pkg += ("1>round>" + string(itoa(host.round, buffer, 10)) + '\n');
+	//case 2: ns_vulnerable: bool
+	pkg += ("2>ns_vulnerable>");
+	if (host.ns_vulnerable) {pkg += ("1\n");}
+	else {pkg += ("0\n");}
+	//case 3: ew_vulnerable: bool
+	pkg += ("3>ew_vulnerable>");
+	if (host.ew_vulnerable) {pkg += ("1\n");}
+	else {pkg += ("0\n");}
+	//case 4: Card[4]: vector<string>
+	pkg += ("4>Card>");
+	for (int i=0; i<4; i++) {
+		for (int j=0; j<host.Card[i].size(); j++) {
+			pkg += (host.Card[i][j] + ' ');
+		}
+		pkg += '-';
+	}
+	pkg += '\n';
+	//case 5: turn: int
+	pkg += ("5>turn>" + string(itoa(host.turn, buffer, 10)) + '\n');
+	//case 6: auction_log: vector<string>
+	pkg += ("6>auction_log>");
+	for (int i=0; i<host.auction_log.size(); i++) {
+		pkg += (host.auction_log[i] + ' ');
+	}
+	pkg += '\n';
+	//case 7: contract_suit: int
+	pkg += ("7>contract_suit>" + string(itoa(host.contract_suit, buffer, 10)) + '\n');
+	//case 8: contract_trick: int
+	pkg += ("8>contract_trick>" + string(itoa(host.contract_trick, buffer, 10)) + '\n');
+	//case 9: declarer_positon: int
+	pkg += ("9>declarer_position>" + string(itoa(host.declarer_position, buffer, 10)) + '\n');
+	//case 10: trick_log: vector<string>
+	pkg += ("10>trick_log>");
+	for (int i=0; i<host.trick_log.size(); i++) {
+		pkg += (host.trick_log[i] + ' ');
+	}
+	pkg += '\n';
+	//case 11: ns_trick: int
+	pkg += ("11>ns_trick>" + string(itoa(host.ns_trick, buffer, 10)) + '\n');
+	//case 12: ew_trick: int
+	pkg += ("12>ew_trick>" + string(itoa(host.ew_trick, buffer, 10)) + '\n');
+	//case 13: ns_point: int
+	pkg += ("13>ns_point>" + string(itoa(host.ns_point, buffer, 10)) + '\n');
+	//case 14: ew_point: int
+	pkg += ("14>ew_point>" + string(itoa(host.ew_point, buffer, 10)) + '\n');
+	//case 31: contract_dbl: int
+		
 
-
-
+	//Data information
+	//case 19: pkgnum: int
+	pkg += ("19>pkgnum>" + string(itoa(PACKAGE_NUMBER, buffer, 10)) + '\n');
+		
+	//case 20: statement
+	
 	return pkg;
 }
 

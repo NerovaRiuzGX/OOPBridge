@@ -21,9 +21,15 @@
     <ClCompile Include="FileControl.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
+    <ClCompile Include="Host.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileControl.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="Host.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
   </ItemGroup>
