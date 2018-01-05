@@ -12,6 +12,7 @@
 + A1055536 廖敏翔 (Ridost)
   * Player class
   * 玩家資料輸入輸出
+
 + A1055538 吳凱倫 (kkrun)
   * Host class
   * 牌桌資訊整理與訊息交換
@@ -39,7 +40,7 @@
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
 + define bid: Club = c, Diamond = d, Heart = h, Spade = s, NT = n
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, S = 51
-
++ define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
 + class Host
   - round: int
   - ns_vulnerable: bool
@@ -49,6 +50,7 @@
   - auction_log: vector string
   - contract_suit: int
   - contract_trick: int
+  - contract_dbl: int 
   - declarer_position: int
   - trick_log: vector string
   - ns_trick: int
