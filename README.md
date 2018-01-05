@@ -50,8 +50,8 @@
   - auction_log: vector string
   - contract_suit: int
   - contract_trick: int
-  - contract_dbl: int 
-  - declarer_position: int
+  - contract_dbl: int 
+  - declarer_position: int
   - trick_log: vector string
   - ns_trick: int
   - ew_trick: int
