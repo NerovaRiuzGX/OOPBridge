@@ -19,8 +19,7 @@
 ## 注意事項
 + 養成好習慣，先 Pull Request，再做 Commit
 + 程式編譯運行平台使用 Visual Studio 2010
-+ 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
-+ TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
++ 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);+ TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
   - 範例：
   ```
   >0>EMPTY_PACKAGE>0\n //是否為空封包
@@ -81,7 +80,7 @@
   - playCard()    //出牌
   - claim()   //放入playcard()
   - undo()    //待加入
-  - MySuits() //判斷花色
+  - MySuits() //判斷花色
   - friend class Interface
   - friend class FileControl
 + class TCPServer
