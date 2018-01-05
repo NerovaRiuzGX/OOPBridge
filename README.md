@@ -19,7 +19,8 @@
 ## 注意事項
 + 養成好習慣，先 Pull Request，再做 Commit
 + 程式編譯運行平台使用 Visual Studio 2010
-+ 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);+ TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
++ 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
++ TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
   - 範例：
   ```
   >0>EMPTY_PACKAGE>0\n //是否為空封包
@@ -34,7 +35,8 @@
 ## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
-## 使用者介面- bridge_player-table.txt
+## 使用者介面
+- bridge_player-table.txt
 
 ## 變數
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
