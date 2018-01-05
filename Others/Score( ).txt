@@ -1,4 +1,4 @@
-void Host::score()
+ï»¿void Host::score()
 {
 	int BasicScore,RewardScore,DblScore,ExceedScore,Mytrick,PunishScore;
 	bool Vulner;
@@ -16,7 +16,7 @@ void Host::score()
 	{
 		if(contract_suit==0 ||contract_suit==1)				//Clubs=0 , Diamonds=1 , Hearts=2 , Spades=3 , NT=4;
 		{
-			BasicScore=    contract_dbl*( (contract_trick-6)*20 );		//BasicScore ­pºâµPí«¤À¼Æ
+			BasicScore=    contract_dbl*( (contract_trick-6)*20 );		//BasicScore è¨ˆç®—ç‰Œç¤…åˆ†æ•¸
 		}
 		else if(contract_suit==2 || contract_suit==3)
 		{
@@ -29,7 +29,7 @@ void Host::score()
 		cout<<"BasicScore : "<<BasicScore<<endl;
 		if(Vulner==false)
 		{	
-			if(BasicScore>100) RewardScore=300;		//RewardScore ­pºâ½u¦ì¼ú¤À
+			if(BasicScore>100) RewardScore=300;		//RewardScore è¨ˆç®—ç·šä½çåˆ†
 			else RewardScore=50;
 			if(Mytrick==13 && contract_trick==13)	RewardScore=RewardScore+1000;
 			else if(Mytrick==12 && contract_trick==12) RewardScore=RewardScore+500;	
@@ -42,7 +42,7 @@ void Host::score()
 			else if(Mytrick==12 && contract_trick==12) RewardScore=RewardScore+750;
 		}
 		cout<<"RewardScore : "<<RewardScore<<endl;
-		if( Mytrick>=contract_trick && contract_dbl==2 )		DblScore=50;		// DblScore­pºâ Dbl¼ú¤À
+		if( Mytrick>=contract_trick && contract_dbl==2 )		DblScore=50;		// DblScoreè¨ˆç®— Dblçåˆ†
 		else if( Mytrick>=contract_trick && contract_dbl==4 )	DblScore=100;
 		else DblScore=0;
 		cout<<"DblScore : "<<DblScore<<endl;
@@ -60,7 +60,7 @@ void Host::score()
 						ExceedScore = 20*(Mytrick-contract_trick);
 					}
 			}
-			else if(Vulner==false)							// ExceedScore ­pºâ ¶Wí«¤À¼Æ
+			else if(Vulner==false)							// ExceedScore è¨ˆç®— è¶…ç¤…åˆ†æ•¸
 			{
 				ExceedScore = (Mytrick-contract_trick)*50*contract_dbl;
 			}
@@ -71,7 +71,7 @@ void Host::score()
 		}
 		else ExceedScore=0;
 		cout<<"ExceedScore : "<<ExceedScore<<endl;
-		if(declarer_position%2==0)	//³Ì«á¤À¼Æ­pºâ
+		if(declarer_position%2==0)	//æœ€å¾Œåˆ†æ•¸è¨ˆç®—
 		{
 			ns_point += BasicScore + RewardScore + DblScore + ExceedScore; 
 			ew_point = ns_point*-1;
@@ -84,7 +84,7 @@ void Host::score()
 	}
 	else
 	{
-		if(contract_dbl==1)				//PunishScore ­pºâ »@¤À
+		if(contract_dbl==1)				//PunishScore è¨ˆç®— ç½°åˆ†
 		{
 			if(Vulner==true)	PunishScore=(contract_trick-Mytrick)*100;
 			else PunishScore=(contract_trick-Mytrick)*50;
@@ -128,7 +128,7 @@ void Host::score()
 		}
 		if(declarer_position%2==0) 
 			{
-				ns_point += PunishScore*-1;			//³Ì«á¤À¼Æ­pºâ
+				ns_point += PunishScore*-1;			//æœ€å¾Œåˆ†æ•¸è¨ˆç®—
 				ew_point = ns_point*-1;			
 			}
 		else 
