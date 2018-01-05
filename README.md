@@ -60,9 +60,9 @@
   - auction()   //喊牌階段
   - play()    //出牌階段
   - score()    //計算分數階段
-  - CardToInt(string)  //撲克牌字串轉整數0~51
-  - IntToCard(int)  //整數轉撲克牌字串
-  - class FileControl
+  - CardToInt(string)  //撲克牌字串轉整數0~51
+  - IntToCard(int)  //整數轉撲克牌字串
+  - class FileControl
   - friend class Interface
   - friend class FileControl
 + class Player: inherit from class Host
