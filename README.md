@@ -82,7 +82,8 @@
   - playCard()    //出牌
   - claim()   //放入playcard()
   - undo()    //待加入
-  - friend class Interface
+  - MySuits() //判斷花色
+  - friend class Interface
   - friend class FileControl
 + class TCPServer
   - serverSocket: int
