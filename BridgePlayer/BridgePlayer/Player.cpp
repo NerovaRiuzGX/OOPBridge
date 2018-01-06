@@ -101,20 +101,14 @@ void Player::playCard()
 		}
 	}
 	ns_trick=1;
-	ew_trick=3;
-	trick_log[5][0]="C8";
-	int check=0;
-	for(int i=3;i>=0;i--)
+	ew_trick=11;
+	trick_log[12][0]="00";
+	if(trick_log[ns_trick+ew_trick][0]!="00")
 	{
-		if(trick_log[ns_trick+ew_trick+1][i]!="00")
-		{
-			cout<<"Front Play :"<<trick_log[ns_trick+ew_trick+1][i]<<endl;
-			check=1;
-			Suits=trick_log[ns_trick+ew_trick+1][i][0];
-			break;
-		}
+		cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;
+		Suits=trick_log[ns_trick+ew_trick][0][0];
 	}
-	if(check=0) cout<<"You is the first"<<endl;
+	else cout<<"You are the first"<<endl;
 	vector<string>::iterator it;	
 	while (true)
 	{
@@ -122,9 +116,24 @@ void Player::playCard()
 		getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
 		it=find(myCard.begin(),myCard.end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=myCard.end() &&( trick_log[ns_trick+ew_trick+1][0]=="00" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		if( it!=myCard.end() &&( trick_log[ns_trick+ew_trick][0]=="00" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		else if(playcard=="CLAIM")
+		{
+			cout<<"How many tricks : ";
+			int i=1;
+			for(i=1;i<=( 13-ns_trick-ew_trick ) ;i++)	cout<<i<<" ";
+			cout<<endl;
+			cin>>decideClaim;
+			claim();
+			break;
+		}
+
 		cout<<"Error!!!  You can't play this card."<<endl;
 	}
+}
+void Player::claim()
+{
+	
 }
 bool Player::MySuits(char suits)	//判斷自己有沒有這個花色 有則回傳 true ，否則回傳 false
 {
