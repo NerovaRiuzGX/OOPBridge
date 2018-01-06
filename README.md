@@ -65,7 +65,8 @@
   - ns_point: int
   - ew_point: int
   - statement: int
-  - vulner()    //設定本局身價
+  - reset()  //下一局
+  - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
   - sortCard(string, string): static bool  //洗牌後排序
   - auction()   //喊牌階段
@@ -81,7 +82,8 @@
   - dummyCard: vector string 
   - position: int
   - vulnerable: bool
-  - printTable()    //印出牌桌資訊
+  - reset()  //下一局
+  - printTable()    //印出牌桌資訊
   - bid()   //喊牌
   - playCard()    //出牌
   - claim()   //放入playcard()
