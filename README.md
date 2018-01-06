@@ -24,14 +24,24 @@
 + TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
   - 範例：
   ```
-  >0>EMPTY_PACKAGE>0\n //是否為空封包
-  >15>position>1\n //玩家座位方向
-  >16>bid>7N\n //玩家喊牌
-  >19>pkgnum>23\n //封包編號
-  >?>auction>-1  //Host發送 喊牌開始、喊牌成功
-  >?>bid>10  //Player發送 喊牌內容(1C = 10, 1N = 14, 7C = 70, 7N = 74)
-  >?>play>-1  //Host發送 喊牌結束&打牌開始、打牌成功
-  >?>play>0  //Player發送 打牌內容(define CardToInt() )
+  0>EMPTY_PACKAGE>0 //是否為空封包
+  1>round>1 //目前回合
+  2>ns_vulnerable>1 //南北身價
+  3>ew_vulnerable>1 //東西身價
+  4>Card>C2 C4 C6 C8 C9 CT CJ D4 D8 H5 HA SJ SK-C5 D2 D3 D6 D9 DQ DA H4 HT HJ HK S7 ST-C3 CK H2 H8 H9 HQ S3 S4 S5 S6 S8 S9 SA-C7 CQ CA D5 D7 DT DJ DK H3 H6 H7 S2 SQ //四家手牌
+  5>turn>0 //目前輪次
+  6>auction_log> //喊牌紀錄
+  7>contract_suit>-1 //合約花色
+  8>contract_trick>-1 //合約礅數
+  9>declarer_position>-1 //莊家方向
+  10>trick_log>   -   -   -   -   -   -   -   -   -   -   -   -   //單局遊戲紀錄
+  11>ns_trick>0 //南北已吃礅數
+  12>ew_trick>0 //東西已吃礅數
+  13>ns_point>0 //南北累積點數
+  14>ew_point>0 //東西累積點數
+  31>contract_dbl>-1 //合約賭倍
+  19>pkgnum>0 //封包編號
+  20>statement>00 //狀態代碼
   ```
 ## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
