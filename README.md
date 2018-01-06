@@ -48,7 +48,7 @@
 + define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N, Dbl = X, Rdb = XX, pass = PS
 + define CardToInt(): C2 = 0, C3 = 1, CA = 12, ..., SK = 50, SA = 51
 + define Dbl: X= 1 ,Dbl= 2  Rdbl= 4
-+ class Host
++ **class Host**
   - round: int
   - ns_vulnerable: bool
   - ew_vulnerable: bool
@@ -76,7 +76,7 @@
   - class FileControl
   - friend class Interface
   - friend class FileControl
-+ class Player: inherit from class Host
++ **class Player**: 繼承 class Host
   - myCard: vector string
   - dummyCard: vector string 
   - position: int
@@ -89,7 +89,7 @@
   - MySuits() //判斷花色
   - friend class Interface
   - friend class FileControl
-+ class TCPServer
++ **class TCPServer**
   - serverSocket: int
   - serverInfo: struct sockaddr_in
   - clientInfo: struct sockaddr_in
@@ -99,14 +99,14 @@
   - detach()
   - getIP()
   - acceptConn(): int
-+ class TCPClient
++ **class TCPClient**: 繼承 class TCPServer
   - sock: int
   - server: struct sockaddr_in
   - TCPClient()
   - setup(ip, port): bool
   - sendMessage(data): bool
   - receive(size): bool
-+ class FileControl
++ **class FileControl**
   - FileControl(name)
   - read()
   - write()
