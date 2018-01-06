@@ -17,6 +17,8 @@ public:
 	bool MySuits(char);
 	void bid();
 //protected:
+	string decideCard;		//傳給server
+	string decideBid;				//的資訊	
 	int position;
 	string playcard;
 	char Suits;

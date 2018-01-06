@@ -6,12 +6,14 @@
 #include <string>
 #include <vector>
 #include "Host.h"
+#include "Player.h"
+
 
 using namespace std;
 
 //temporary class definition
 //class Host {};
-class Player {};
+//class Player {};
 
 class FileControl {
 	public:
@@ -22,14 +24,10 @@ class FileControl {
 		void split (string, string, vector<string> &); 
 		// ([string source], [delimiter], [output vector])
 
-		void pkgrcv (string, Host&);
+		void pkgrcv (string, Host &);
 		void pkgrcv (string, Player &);
 		string pkgsnd (Host &);
-
-		void decode (vector<vector<string>> &, Host&);
-		void decode (vector<vector<string>> &, Player &);
-
-		void encode ();
+		string pkgsnd (Player &);
 
 	private:
 		ifstream FILE_INPUT;

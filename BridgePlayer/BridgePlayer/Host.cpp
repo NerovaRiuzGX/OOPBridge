@@ -10,74 +10,44 @@ using namespace std;
 Host::Host()
 	:round(1),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
 {
+	ns_vulnerable=-1;
+	ew_vulnerable=-1;
+	contract_suit=-1;
+	contract_trick=-1;
+	contract_dbl=-1;
+	declarer_position=-1;
 }
 void Host::vulner()
 {
 	switch(round%16)
 	{
 	  case 0:
-		  ns_vulnerable = false;
-		  ew_vulnerable = true;
-		  break;
-	  case 1:
-		  ns_vulnerable = false;
-		  ew_vulnerable = false;
-		  break;
-	  case 2:
-		  ns_vulnerable = true;
-		  ew_vulnerable = false;
-		  break;
 	  case 3:
-		  ns_vulnerable = false;
-		  ew_vulnerable = true;
-		  break;
-	  case 4:
-		  ns_vulnerable = true;
-		  ew_vulnerable = true;
-		  break;
-	  case 5:
-		  ns_vulnerable = true;
-		  ew_vulnerable = false;
-		  break;
 	  case 6:
-		  ns_vulnerable = false;
-		  ew_vulnerable = true;
-		  break;
-	  case 7:
-		  ns_vulnerable = true;
-		  ew_vulnerable = true;
-		  break;
-	  case 8:
-		  ns_vulnerable = false;
-		  ew_vulnerable = false;
-		  break;
 	  case 9:
 		  ns_vulnerable = false;
 		  ew_vulnerable = true;
 		  break;
-	  case 10:
-		  ns_vulnerable = true;
-		  ew_vulnerable = true;
-		  break;
+	  case 1:
+	  case 8:
 	  case 11:
-		  ns_vulnerable = false;
-		  ew_vulnerable = false;
-		  break;
-	  case 12:
-		  ns_vulnerable = true;
-		  ew_vulnerable = false;
-		  break;
-	  case 13:
-		  ns_vulnerable = true;
-		  ew_vulnerable = true;
-		  break;
 	  case 14:
 		  ns_vulnerable = false;
 		  ew_vulnerable = false;
 		  break;
+	  case 2:
+	  case 5:
+	  case 12:
 	  case 15:
 		  ns_vulnerable = true;
 		  ew_vulnerable = false;
+		  break;
+	  case 4:
+	  case 7:
+	  case 10:
+	  case 13:
+		  ns_vulnerable = true;
+		  ew_vulnerable = true;
 		  break;
 	}
 }
@@ -136,6 +106,10 @@ bool Host::sortCard(const string &a, const string &b)
 	return CardToInt(a) < CardToInt(b);
 }
 void Host::auction()
+{
+	
+}
+void Host::play()
 {
 
 }
