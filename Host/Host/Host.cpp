@@ -8,7 +8,7 @@
 using namespace std;
 
 Host::Host()
-	:round(1),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
+	:round(0),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
 {
 	ns_vulnerable=-1;
 	ew_vulnerable=-1;
@@ -16,6 +16,15 @@ Host::Host()
 	contract_trick=-1;
 	contract_dbl=-1;
 	declarer_position=-1;
+	reset();
+}
+void Host::reset()
+{
+	round++;
+	turn = (round-1)%4;
+	ns_trick = ew_trick = 0;
+	vulner();
+	shuffle();
 }
 void Host::vulner()
 {
