@@ -10,6 +10,7 @@ class Host
 public:
 	friend class FileControl;
 	Host();
+	void reset();
 	void vulner();
 	void shuffle();
 	static bool sortCard(const string &, const string &);
