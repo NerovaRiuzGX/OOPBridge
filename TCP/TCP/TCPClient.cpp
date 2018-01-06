@@ -67,7 +67,7 @@ string TCPClient::receiveMessage (int tmp) {
 
 	if (length==0 || length==SOCKET_ERROR) {
 		cout << "Receive failed." << endl;
-		return false;
+		return "";
 	}
 	else {
 		buffer[length] = '\0';
