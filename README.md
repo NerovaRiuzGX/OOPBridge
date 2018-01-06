@@ -4,16 +4,16 @@
 
 ## 小組成員與分工
 + A1055508 李孟叡 (Nerova)
-  * Server、Client、FileControl class
+  * class `TCPServer`, `TCPClient`, `FileControl`
   * TCP連線，檔案讀寫與傳輸
 + A1055516 賴冠穎 (jeffreylai0130)
-  * Interface class
+  * class `Interface`
   * 單人遊戲AI
 + A1055536 廖敏翔 (Ridost)
-  * Player class
+  * class `Player`
   * 玩家資料輸入輸出
 + A1055538 吳凱倫 (kkrun)
-  * Host class
+  * class `Host`
   * 牌桌資訊整理與訊息交換
 
 ## 注意事項
@@ -35,10 +35,13 @@
 ## 系統架構流程圖
 ![Bridge](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/FlowChart.png)
 
-## 使用者介面
-- bridge_player-table.txt
+## 使用者介面 (文字版)
++ [bridge_player-table.txt](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/bridge_player-table.txt)
 
-## 變數
+## 系統狀態碼一覽表
++ [Statement code.md](https://github.com/NerovaRiuzGX/OOPBridge/blob/master/Statement%20code.md)
+
+## Class 變數與函式
 + define position: (Host)N = 0, E = 1, S = 2, W = 3
 + define suit: Club = 0, Diamond = 1, Heart = 2, Spade = 3, NT = 4
 + define bid: Club = C, Diamond = D, Heart = H, Spade = S, NT = N, Dbl = X, Rdb = XX, pass = PS
