@@ -6,12 +6,14 @@
 #include <string>
 #include <vector>
 #include "Host.h"
+#include "Player.h"
+
 
 using namespace std;
 
 //temporary class definition
 //class Host {};
-class Player {};
+//class Player {};
 
 class FileControl {
 	public:

@@ -10,9 +10,9 @@ void FileControl::read () {
 	if (FILE_INPUT.is_open()) {
 		string buffer;
 		while (getline(FILE_INPUT, buffer)) {
-			vector<string> buff;
+			/*vector<string> buff;
 			split(buffer, "=", buff);
-			cout << buff[0] << ". " << buff[1] << ": " << buff[2] << endl;
+			cout << buff[0] << ". " << buff[1] << ": " << buff[2] << endl;*/
 			//cout << buffer << '\n';
 		}
 	}
@@ -21,7 +21,7 @@ void FileControl::read () {
 }
 
 void FileControl::write (string data) {
-	FILE_OUTPUT.open (FILE_NAME, ios::app);
+	FILE_OUTPUT.open (FILE_NAME/*, ios::app*/);
 	if (FILE_OUTPUT.is_open()) {
 		FILE_OUTPUT << data;
 	}
@@ -67,6 +67,8 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 				PACKAGE_NUMBER = atoi(list[i][3].c_str());
 				break;
 			case 20: //statement
+				break;
+
 			default: break;
 		}
 	}
@@ -127,7 +129,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 }
 
 string FileControl::pkgsnd (Host & host) {
-	string pkg = "";
+	string pkg = "0>EMPTY_PACKAGE>0\n";
 	char buffer[11];
 	//To Player
 	//case 1: round: int
@@ -144,7 +146,7 @@ string FileControl::pkgsnd (Host & host) {
 	pkg += ("4>Card>");
 	for (int i=0; i<4; i++) {
 		for (int j=0; j<host.Card[i].size(); j++) {
-			pkg += (host.Card[i][j] + ' ');
+			pkg += (host.Card[i][j] + ((j==host.Card[i].size()-1)?"":" "));
 		}
 		pkg += '-';
 	}
@@ -154,7 +156,7 @@ string FileControl::pkgsnd (Host & host) {
 	//case 6: auction_log: vector<string>
 	pkg += ("6>auction_log>");
 	for (int i=0; i<host.auction_log.size(); i++) {
-		pkg += (host.auction_log[i] + ' ');
+		pkg += (host.auction_log[i] + ((i==host.auction_log.size()-1)?"":" "));
 	}
 	pkg += '\n';
 	//case 7: contract_suit: int
@@ -164,11 +166,14 @@ string FileControl::pkgsnd (Host & host) {
 	//case 9: declarer_positon: int
 	pkg += ("9>declarer_position>" + string(itoa(host.declarer_position, buffer, 10)) + '\n');
 	//case 10: trick_log: vector<string>
-	pkg += ("10>trick_log>");
-	for (int i=0; i<host.trick_log.size(); i++) {
-		pkg += (host.trick_log[i] + ' ');
+	/*pkg += ("10>trick_log>");
+	for (int i=0; i<13; i++) {
+		for (int j=0; j<4; j++) {
+			pkg += (host.trick_log[i][j] + ((j==3)?"":" "));
+		}
+		pkg += '-';
 	}
-	pkg += '\n';
+	pkg += '\n';*/
 	//case 11: ns_trick: int
 	pkg += ("11>ns_trick>" + string(itoa(host.ns_trick, buffer, 10)) + '\n');
 	//case 12: ew_trick: int
@@ -178,20 +183,36 @@ string FileControl::pkgsnd (Host & host) {
 	//case 14: ew_point: int
 	pkg += ("14>ew_point>" + string(itoa(host.ew_point, buffer, 10)) + '\n');
 	//case 31: contract_dbl: int
-		
+	pkg += ("31>contract_dbl>" + string(itoa(host.contract_dbl, buffer, 10)) + '\n');
 
 	//Data information
 	//case 19: pkgnum: int
 	pkg += ("19>pkgnum>" + string(itoa(PACKAGE_NUMBER, buffer, 10)) + '\n');
 		
 	//case 20: statement
-	
+	pkg += ("20>statement>" + string(itoa(host.statement, buffer, 10)) + '\n');
+
 	return pkg;
 }
 
 string FileControl::pkgsnd (Player & player) {
-	string pkg = "";
+	string pkg = "0>EMPTY_PACKAGE>0\n";
+	//To Host
+	//case 15: position: int
+	pkg += ("15>position>" + string(itoa(player.position, buffer, 10)) + '\n');
+	//case 16: bid(): string
+	pkg += ();
+	//case 17: playCard(): string
+	pkg += ();
+	//case 18: claim(): string
+	pkg += ();
+
+	//Data information
+	//case 19: pkgnum: int
+	pkg += ();
 	
+	//case 20: statement
+	pkg += ();
 	
 	return pkg;
 }
