@@ -1,7 +1,10 @@
+#include <ctime>
+
 #include "FileControl.h"
-#include "Host.h"
+//#include "Host.h"
 
 int main () {
+	srand(time(NULL));
 	FileControl FILE("test.bridge");
 	/*while (true) {
 		string data;

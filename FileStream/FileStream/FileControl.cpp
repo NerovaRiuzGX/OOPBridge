@@ -54,12 +54,22 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 		switch(atoi(list[i][0].c_str())){
 			//From Player
 			case 15: //position: int
+				
 				break;
 			case 16: //bid(): string
+				if (list[i][3]!="00"){
+				
+				}
 				break;
 			case 17: //playCard(): string
+				if (list[i][3]!="00"){
+				
+				}
 				break;
 			case 18: //claim(): string
+				if (list[i][3]!="00"){
+				
+				}
 				break;
 
 			//Data information
@@ -67,6 +77,7 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 				PACKAGE_NUMBER = atoi(list[i][3].c_str());
 				break;
 			case 20: //statement
+				host.statement = atoi(list[i][2].c_str());
 				break;
 
 			default: break;
@@ -75,54 +86,99 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 }
 
 void FileControl::pkgrcv (string pkg, Player & player) {
-	vector<string> variable;
+	vector<string> variable, element;
 	vector<vector<string>> list;
 	split(pkg, "\n", variable);
-
+	list.resize(variable.size());
 	for (int i=0; i<variable.size(); i++) {
 		split(variable[i], ">", list[i]);
 	}
+
+	variable.clear();
 
 	for (int i=0; i<list.size(); i++) {
 		switch(atoi(list[i][0].c_str())){
 			//From Host
 			case 1: //round: int
-				atoi(list[i][2].c_str());
+				player.round = atoi(list[i][2].c_str());
 				break;
 			case 2: //ns_vulnerable: bool
+				if (list[i][2][0]=='1') {player.ns_vulnerable = true;}
+				else {player.ns_vulnerable = false;}
 				break;
 			case 3: //ew_vulnerable: bool
+				if (list[i][2][0]=='1') {player.ew_vulnerable = true;}
+				else {player.ew_vulnerable = false;}
 				break;
 			case 4: //Card[4]: vector<string>
+				split(list[i][2], "-", variable);
+				for (int i=0; i<variable.size(); i++) {
+					split(variable[i], " ", element);
+					player.Card[i].clear();
+					for (int j=0; j<element.size(); j++) {
+						player.Card[i].push_back(element[j]);
+					}
+					element.clear();
+				}
+				variable.clear();
 				break;
 			case 5: //turn: int
+				player.turn = atoi(list[i][2].c_str());
 				break;
 			case 6: //auction_log: vector<string>
+				split(list[i][2], " ", variable);
+				player.auction_log.clear();
+				for (int i=0; i<variable.size(); i++) {
+					player.auction_log.push_back(variable[i]);
+				}
+				variable.clear();
 				break;
 			case 7: //contract_suit: int
+				player.contract_suit = atoi(list[i][2].c_str());
 				break;
 			case 8: //contract_trick: int
+				player.contract_trick = atoi(list[i][2].c_str());
 				break;
 			case 9:	//declarer_positon: int
+				player.declarer_position = atoi(list[i][2].c_str());
 				break;
-			case 10: //trick_log: vector<string>
+			case 10: //trick_log: string[13][4]
+				split(list[i][2], "-", variable);
+				for (int i=0; i<variable.size(); i++) {
+					split(variable[i], " ", element);
+					for (int j=0; j<element.size(); j++) {
+						player.trick_log[i][j] = element[j];
+					}
+					element.clear();
+				}
+				variable.clear();
 				break;
 			case 11: //ns_trick: int
+				player.ns_trick = atoi(list[i][2].c_str());
 				break;
 			case 12: //ew_trick: int
+				player.ew_trick = atoi(list[i][2].c_str());
 				break;
 			case 13: //ns_point: int
+				player.ns_point = atoi(list[i][2].c_str());
 				break;
 			case 14: //ew_point: int
+				player.ew_point = atoi(list[i][2].c_str());
 				break;
 			case 31: //contract_dbl: int
+				player.contract_dbl = atoi(list[i][2].c_str());
 				break;
 
 			//Data information
 			case 19: //pkgnum: int
-
+				if (atoi(list[i][2].c_str()) == PACKAGE_NUMBER) {
+					PACKAGE_NUMBER++;
+				}
 				break;
 			case 20: //statement
+				player.statement = atoi(list[i][2].c_str());
+				break;
+
 			default: break;
 		}
 	}
@@ -130,7 +186,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 
 string FileControl::pkgsnd (Host & host) {
 	string pkg = "0>EMPTY_PACKAGE>0\n";
-	char buffer[11];
+	char buffer[11] = {};
 	//To Player
 	//case 1: round: int
 	pkg += ("1>round>" + string(itoa(host.round, buffer, 10)) + '\n');
@@ -148,7 +204,7 @@ string FileControl::pkgsnd (Host & host) {
 		for (int j=0; j<host.Card[i].size(); j++) {
 			pkg += (host.Card[i][j] + ((j==host.Card[i].size()-1)?"":" "));
 		}
-		pkg += '-';
+		pkg += ((i==3)?"":"-");
 	}
 	pkg += '\n';
 	//case 5: turn: int
@@ -165,15 +221,15 @@ string FileControl::pkgsnd (Host & host) {
 	pkg += ("8>contract_trick>" + string(itoa(host.contract_trick, buffer, 10)) + '\n');
 	//case 9: declarer_positon: int
 	pkg += ("9>declarer_position>" + string(itoa(host.declarer_position, buffer, 10)) + '\n');
-	//case 10: trick_log: vector<string>
-	/*pkg += ("10>trick_log>");
+	//case 10: trick_log: string[13][4]
+	pkg += ("10>trick_log>");
 	for (int i=0; i<13; i++) {
 		for (int j=0; j<4; j++) {
 			pkg += (host.trick_log[i][j] + ((j==3)?"":" "));
 		}
-		pkg += '-';
+		pkg += ((i==12)?"":"-");
 	}
-	pkg += '\n';*/
+	pkg += '\n';
 	//case 11: ns_trick: int
 	pkg += ("11>ns_trick>" + string(itoa(host.ns_trick, buffer, 10)) + '\n');
 	//case 12: ew_trick: int
@@ -197,22 +253,23 @@ string FileControl::pkgsnd (Host & host) {
 
 string FileControl::pkgsnd (Player & player) {
 	string pkg = "0>EMPTY_PACKAGE>0\n";
+	char buffer[11] = {};
+
 	//To Host
 	//case 15: position: int
 	pkg += ("15>position>" + string(itoa(player.position, buffer, 10)) + '\n');
 	//case 16: bid(): string
-	pkg += ();
+	//pkg += ();
 	//case 17: playCard(): string
-	pkg += ();
+	//pkg += ();
 	//case 18: claim(): string
-	pkg += ();
+	//pkg += ();
 
 	//Data information
 	//case 19: pkgnum: int
-	pkg += ();
-	
+	pkg += ("19>pkgnum>" + string(itoa(PACKAGE_NUMBER, buffer, 10)) + '\n');
 	//case 20: statement
-	pkg += ();
+	pkg += ("20>statement>" + string(itoa(player.statement, buffer, 10)) + '\n');
 	
 	return pkg;
 }
