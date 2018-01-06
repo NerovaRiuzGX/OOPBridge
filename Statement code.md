@@ -25,6 +25,9 @@
 | `3` - *RESULT*    | `0`          | Sharing round results              | Send results         | Show results         |
 |                   | `1`          | Table reset                        | Reset table data     | Reset table data     |
 |                   | `2`          | *RESULT* Done                      | Send table data      | Retrieve table data  |
+| ----------------- | ------------ | ---------------------------------- | -------------------- | -------------------- |
+| `4` - *CLAIM*     | `0`          | NS-Claim                           | Ask EW if accept     | Waiting / Response   |
+|                   | `1`          | EW-Claim                           | Ask NS if accept     | Waiting / Response   |
 
 ## Error Code
 WIP
