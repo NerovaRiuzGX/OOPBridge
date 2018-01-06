@@ -56,18 +56,18 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 			case 15: //position: int
 				
 				break;
-			case 16: //bid(): string
+			case 16: //decideBid: string
 				if (list[i][3]!="00"){
 				
 				}
 				break;
-			case 17: //playCard(): string
+			case 17: //decideCard: string
 				if (list[i][3]!="00"){
 				
 				}
 				break;
-			case 18: //claim(): string
-				if (list[i][3]!="00"){
+			case 18: //decideClaim: int
+				if (atoi(list[i][3].c_str())!=-1){
 				
 				}
 				break;
@@ -258,12 +258,12 @@ string FileControl::pkgsnd (Player & player) {
 	//To Host
 	//case 15: position: int
 	pkg += ("15>position>" + string(itoa(player.position, buffer, 10)) + '\n');
-	//case 16: bid(): string
-	//pkg += ();
-	//case 17: playCard(): string
-	//pkg += ();
-	//case 18: claim(): string
-	//pkg += ();
+	//case 16: decideBid: string
+	pkg += ("16>decideBid>" + player.decideBid);
+	//case 17: decideCard: string
+	pkg += ("17>decideCard>" + player.decideCard);
+	//case 18: decideClaim: int
+	pkg += ("18>decideClaim" + string(itoa(player.decideClaim, buffer, 10)) + '\n');
 
 	//Data information
 	//case 19: pkgnum: int
