@@ -1,6 +1,14 @@
 //Client.cpp
 //by NerovaRiuzGX 2018.01.03
 
+// WARNING:
+// This code is currently marked as unused because
+// class TCPClient is already combined with TCPServer.
+// Some code must be rewrite to fit the recent changes.
+// 
+// The code is still in the project because I need to 
+// keep some old reference for any possible future changes.
+
 /*#include "TCPClient.h"
 
 TCPClient tcp;

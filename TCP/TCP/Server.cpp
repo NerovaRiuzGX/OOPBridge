@@ -7,12 +7,13 @@
 
 #include "TCPClient.h"
 
-#pragma execution_character_set("utf-8")
+//#pragma execution_character_set("utf-8")
 
 #define MAXUSERCOUNT 4
 
 int connectCount = 0;
-pthread_mutex_t mutex;
+pthread_mutex_t serverMutex, clientMutex;
+
 
 TCPServer server;
 
@@ -30,9 +31,9 @@ void * loop (void * new_sock) {
 		cout << "From user " << sock << ", Message: " << data << endl;
 		server.sendMessage("received.", sock); //server send back
 
-		pthread_mutex_lock(&mutex);
+		pthread_mutex_lock(&serverMutex);
 		//alter Host data between these two lines
-		pthread_mutex_unlock(&mutex);
+		pthread_mutex_unlock(&serverMutex);
 		
 	}
 	closesocket(sock);
@@ -69,8 +70,10 @@ void * createServer (void * serverPort) {
 
 	}
 
-	pthread_mutex_lock(&mutex);
-	pthread_mutex_unlock(&mutex);
+	pthread_mutex_lock(&serverMutex);
+	pthread_mutex_unlock(&serverMutex);
+
+	pthread_mutex_destroy(&serverMutex);
 
 	server.detach(); //close server
 	pthread_exit(NULL);
@@ -79,7 +82,10 @@ void * createServer (void * serverPort) {
 
 void main () {
 	cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
-	
+
+	pthread_mutex_init(&serverMutex, NULL);
+	pthread_mutex_init(&clientMutex, NULL);
+
 	switch (getch()) {
 		case '1':
 			pthread_t gameThread;
@@ -99,9 +105,7 @@ void main () {
 			cout << "Type \"@\" to close the client." << endl << endl;
 			while (true) {
 				
-				pthread_mutex_lock(&mutex);
-				//alter Host data between these two lines
-				pthread_mutex_unlock(&mutex);
+				
 
 				string data;
 				cout << "Send data: ";
@@ -117,8 +121,12 @@ void main () {
 				}
 
 				cout << client->receiveMessage(0) << endl;
-		
+
+				pthread_mutex_lock(&clientMutex);
+				//alter Host data between these two lines
+				pthread_mutex_unlock(&clientMutex);
 			}
+			pthread_mutex_destroy(&clientMutex);
 			client->detach();
 			system("pause");
 			break;
