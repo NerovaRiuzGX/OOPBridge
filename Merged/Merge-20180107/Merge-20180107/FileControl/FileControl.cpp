@@ -82,7 +82,7 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 				PACKAGE_NUMBER = atoi(list[i][2].c_str());
 				break;
 			case 20: //statement
-				host.statement = atoi(list[i][2].c_str());
+				//host.statement = atoi(list[i][2].c_str());
 				break;
 
 			default: break;
@@ -100,13 +100,6 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 	}
 
 	variable.clear();
-
-	/*for (int i=0; i<list.size(); i++) {
-		for (int j=0; j<list[i].size(); j++) {
-			cout << list[i][j] << " ";
-		}
-		cout << endl;
-	} */
 
 	for (int i=0; i<list.size(); i++) {
 		switch(atoi(list[i][0].c_str())){

@@ -33,8 +33,8 @@ void * serverLoop (void * new_sock) {
 		}
 	}
 
-	char *buffer = new char[10];
-	FileControl FILE("Server-To-Player" + string(itoa(position, buffer, 10)) + ".bridge");
+	char *buffer = new char[5];
+	FileControl FILE("Player" + string(itoa(position, buffer, 10)) + "-To-Server.bridge");
 	delete[] buffer;
 
 	//thread self detach
@@ -43,11 +43,12 @@ void * serverLoop (void * new_sock) {
 	while ((data = server.receiveMessage(sock)) != "") {
 		
 		//test line
-		cout << "Received data from user " << sock << endl;
+		//cout << "Received data from Player " << position << endl;
 
 		FILE.write(data);
 
 		pthread_mutex_lock(&serverMutex); //alter Host data in this mutex lock
+		cout << "Thread of Player " << position << " access Host" << endl;
 		FILE.pkgrcv(data, host);
 		data = FILE.pkgsnd(host);
 		pthread_mutex_unlock(&serverMutex);
@@ -76,9 +77,9 @@ void * createServer (void * serverPort) {
 		cout << endl << "===============" << endl;
 
 		if (connectCount < MAX_USER_COUNT) {
+			connectSock[connectCount] = new_sock;
 			pthread_create(&thread, NULL, serverLoop, (void *)new_sock);
 			cout << "User " << new_sock << " online." << endl;
-			connectSock[connectCount] = new_sock;
 			connectCount++;
 		}
 		else {
@@ -89,9 +90,10 @@ void * createServer (void * serverPort) {
 		cout << "Online users: " << connectCount << endl;
 		cout << "===============" << endl << endl;
 
-		if (connectCount==4 && host.statement==00) {
+		if (connectCount==MAX_USER_COUNT && host.statement==0) {
 			pthread_mutex_lock(&serverMutex);  //alter Host data in this mutex lock
-			host.statement = 01;
+			host.statement = 1;
+			cout << "Server thread access Host" << endl;
 			pthread_mutex_unlock(&serverMutex);
 		}
 		
@@ -111,7 +113,7 @@ void createClient (string ip) {
 	/*cout << "===============" << endl;
 	cout << "Type \"@\" to close the client." << endl << endl;*/
 
-	FileControl FILE ("Client-To-Server.bridge");
+	FileControl FILE ("Server-To-Client.bridge");
 	string data = FILE.pkgsnd(player);
 
 	Sleep(1000);
