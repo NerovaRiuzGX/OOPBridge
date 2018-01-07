@@ -109,7 +109,6 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 	} */
 
 	for (int i=0; i<list.size(); i++) {
-		cout << i << " ";
 		switch(atoi(list[i][0].c_str())){
 			//From Host
 			case 1: //round: int
