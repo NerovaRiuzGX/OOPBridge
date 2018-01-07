@@ -20,6 +20,7 @@
 + 養成好習慣，先 Pull Request，再做 Commit
 + 程式編譯運行平台使用 Visual Studio 2010
 + 需要輸入字串資料，請統一使用 getline (cin, [變數名稱]);
++ 所有在遊戲中通過 Server-Client 傳輸的資料要從 Host 或 Player 取得或改變時，一定要在 pthread_mutex_lock 裡面操作，否則會導致互斥鎖無效
 + 用來傳輸用的變數，如非處於使用階段或狀態，string 變數設為 "00"，int 變數設為 -1，以用來表示不在使用中
 + TCP傳輸資料使用string，編寫方式如下： `[資料編號]>[資料名稱]>[資料內容]\n`
   - 範例：
