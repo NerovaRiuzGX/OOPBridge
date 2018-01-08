@@ -349,7 +349,8 @@ void PlayerTask()
 	{
 		if(	player.position==player.statement%10	)
 		{
-			player.bid();		
+			player.bid();
+			player.statement = 10 + (player.position+1)%4;
 		}
 		else
 		{
