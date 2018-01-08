@@ -22,7 +22,7 @@ Host host;
 Player player;
 
 void hostTask (int);
-void playerTask();
+void PlayerTask();
 
 void * serverLoop (void * new_sock) {
 
@@ -299,4 +299,33 @@ void hostTask (int position) {
 	}
 
 	return;
+}
+
+void PlayerTask()
+{
+	char pos[4] = {'N', 'E', 'S', 'W'};
+	if(player.statement/10==1)
+	{
+		if(	player.position==player.statement%10	)
+		{
+			player.bid();		
+		}
+		else
+		{
+			cout<<"Waiting for player to bid  "<<pos[player.statement%10]<<" !!";
+			player.decideBid="00";
+		}
+	}
+	else if(player.statement/10==2)
+	{
+		if(	player.position==player.statement%10	)
+		{
+			player.play();
+		}
+		else
+		{
+			cout<<"Waiting for player to play card  "<<pos[player.statement%10]<<" !!";
+			player.decideCard="00";
+		}
+	}
 }
