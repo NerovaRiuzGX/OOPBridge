@@ -6,15 +6,14 @@
 using namespace std;
 
 Host::Host()
-	:round(0),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
+	:round(1),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
 {
-	ns_vulnerable=-1;
-	ew_vulnerable=-1;
+	auction_log.clear();
+	ns_vulnerable=ew_vulnerable=-1;
 	contract_suit=-1;
 	contract_trick=-1;
 	contract_dbl=-1;
 	declarer_position=-1;
-	reset();
 }
 
 void Host::reset()
@@ -22,6 +21,12 @@ void Host::reset()
 	round++;
 	turn = 0;
 	ns_trick = ew_trick = 0;
+	ns_vulnerable=ew_vulnerable=-1;
+	contract_suit=-1;
+	contract_trick=-1;
+	contract_dbl=-1;
+	declarer_position=-1;
+	auction_log.clear();
 	vulner();
 	shuffle();
 }
@@ -87,6 +92,10 @@ void Host::shuffle()
 			}
 		}
 	}
+	Card[0].clear();
+	Card[1].clear();
+	Card[2].clear();
+	Card[3].clear();
 	for (int i=0; i<52; i++) //洗牌
 	{
 		int number = rand()%(Deck.size());

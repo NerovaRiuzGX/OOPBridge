@@ -249,17 +249,43 @@ void hostTask (int position) {
 				case 2:
 				case 3:
 					if (host.auction_log.size()==4) { //if all pass
-						
+						if(host.auction_log[0] == host.auction_log[1] == host.auction_log[2] == host.auction_log[3] == "PS")
+							host.statement = 4;
 					}
 					else if (host.auction_log.size()>4) {
 						string last_call = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+3, [](string i){return i!=("XX") && i!=("X");});
 						if (last_call=="PS") {
-							host.statement++;
-							last_call = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+4, [](string i){return i!=("XX") && i!=("X");});
+							host.statement = 14;
+							last_call = *(host.auction.rbegin()+4);
 							string last_bid = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return i!=("XX") && i!=("X") && (i!=("PS") );});
 							
-							host.contract_suit = ;
-							host.contract_trick = 
+							//set contract_suit
+							if(last_bid[1] == 'C')
+								host.contract_suit = 0;
+							else if(last_bid[1] == 'D')
+								host.contract_suit = 1;
+							else if(last_bid[1] == 'H')
+								host.contract_suit = 2;
+							else if(last_bid[1] == 'S')
+								host.contract_suit = 3;
+							else
+								host.contract_suit = 4;
+							
+							//set contract_trick
+							host.contract_trick = last_bid[0] - '0' + 6;
+							
+							//set contract_dbl
+							if(last_call != last_bid){
+								if(last_call == "XX"){
+									host.contract_dbl = 4;
+								}
+								else if(last_call == "X"){
+									host.contract_dbl = 2;
+								}
+							}
+							else
+								host.contract_dbl = 1;
+
 						}
 					}
 					break;
