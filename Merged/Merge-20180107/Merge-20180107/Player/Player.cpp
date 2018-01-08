@@ -22,14 +22,16 @@ void Player::bid()
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
 	auction_log.push_back("2S");*/
-	for(int i=auction_log.size()-1;i>=0;i--)
+	/*for(int i=auction_log.size()-1;i>=0;i--)
 	{
 
 		if(auction_log[i]!="PS" && auction_log[i]!="X" && auction_log[i]!="XX")
 		{
 			Maxbid=auction_log[i]; break;
 		}
-	}
+	}*/
+
+	Maxbid = *(find_if(auction_log.rbegin(), auction_log.rend(), [](string i){return i!="PS" && i!="X" && i!="XX";}));
 
 	while(true)
 	{
