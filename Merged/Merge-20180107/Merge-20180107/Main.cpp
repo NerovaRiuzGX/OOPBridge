@@ -285,14 +285,42 @@ void hostTask (int position) {
 							}
 							else
 								host.contract_dbl = 1;
-							
+
+							//set declarer_postion
+							if(host.auction_log[host.auction_log.size()-6][1] == host.contract_suit)
+								host.declarer_position = (host.round%4 + host.auction_log.size() - 6)%4;
+							else
+								host.declarer_position = (host.round%4 + host.auction_log.size() - 4)%4;
 						}
 					}
 					break;
 				case 4:
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+					if (!found) {
+						host.statement = 30 + (host.declarer_position+3)%4;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
 					break;
 			}
 		case 2: //PLAY
+			switch (host.statement%10){
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+
+					break;
+				case 4:
+
+					break;
+			}
 		case 3: //RESULT
 		case 4: //CLAIM
 		default: /*exit();*/ break;
