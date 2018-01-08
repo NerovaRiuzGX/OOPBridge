@@ -48,7 +48,7 @@ void Player::bid()
 				cout<<bid<<endl;
 				break;
 		}
-		else if( bid=="XX" && ( auction_log[ auction_log.size()-2 ]=="X" || auction_log[ auction_log.size()-4 ]=="X"))	//判斷喊牌是否符合規則 
+		else if( bid=="XX" && ( auction_log[ auction_log.size()-1 ]=="X" || auction_log[ auction_log.size()-3 ]=="X"))	//判斷喊牌是否符合規則 
 		{
 				cout<<bid<<endl;
 				break;
