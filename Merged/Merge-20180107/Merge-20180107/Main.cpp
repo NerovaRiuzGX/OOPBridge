@@ -252,8 +252,10 @@ void hostTask (int position) {
 						
 					}
 					else if (host.auction_log.size()>4) {
-						if (host.auction_log.end()==find_if_not(host.auction_log.end()-3, host.auction_log.end(), "PS")) {
+						string last_call = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+3, [](string i){return i!=("XX") && i!=("X");});
+						if (last_call=="PS") {
 							host.statement++;
+							last_call = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+4, [](string i){return i!=("XX") && i!=("X");});
 							string last_bid = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return i!=("XX") && i!=("X") && (i!=("PS") );});
 							
 							host.contract_suit = ;
