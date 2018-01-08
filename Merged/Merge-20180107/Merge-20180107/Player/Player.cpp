@@ -38,7 +38,17 @@ void Player::bid()
 			<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
 		getline(cin,bid);
 		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
-		if( bid=="PS" || bid=="X" || bid=="XX" || Maxbid=="00")	//耞驰礟琌才砏玥 
+		if( bid=="PS" || Maxbid=="00")	//耞驰礟琌才砏玥 
+		{
+				cout<<bid<<endl;
+				break;
+		}
+		else if( bid=="X" && Maxbid!="00")	//耞驰礟琌才砏玥 
+		{
+				cout<<bid<<endl;
+				break;
+		}
+		else if( bid=="XX" && ( auction_log[ auction_log.size()-2 ]=="X" || auction_log[ auction_log.size()-4 ]=="X"))	//耞驰礟琌才砏玥 
 		{
 				cout<<bid<<endl;
 				break;
