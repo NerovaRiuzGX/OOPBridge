@@ -96,7 +96,7 @@ void Player::printTable()
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<" ------------S------------- "<<endl;
-	cout<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declaredPosition<<endl;
+	cout<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declarer_position<<endl;
 	system("cls");
 }
 
