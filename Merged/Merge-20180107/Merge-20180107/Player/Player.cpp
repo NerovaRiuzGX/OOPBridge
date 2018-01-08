@@ -22,12 +22,12 @@ void Player::bid()
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
 	auction_log.push_back("2S");*/
-	for(int i=auction_log.size()-1;i>0;i--)
+	for(int i=auction_log.size()-1;i>=0;i--)
 	{
 
 		if(auction_log[i]!="PS" && auction_log[i]!="X" && auction_log[i]!="XX")
 		{
-			Maxbid=auction_log[i];
+			Maxbid=auction_log[i]; break;
 		}
 	}
 
@@ -78,6 +78,7 @@ void Player::bid()
 
 void Player::printTable()
 {
+	system("cls");
 	for(int i=0;i<auction_log.size();i++)
 	{
 		cout<<"acution_log: "<<auction_log[i]<<endl;
@@ -97,7 +98,7 @@ void Player::printTable()
 	cout<<"|                          |"<<endl;
 	cout<<" ------------S------------- "<<endl;
 	cout<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declarer_position<<endl;
-	system("cls");
+	
 }
 
 void Player::playCard()
