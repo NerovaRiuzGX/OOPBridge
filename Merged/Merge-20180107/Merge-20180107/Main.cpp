@@ -123,9 +123,10 @@ void * clientInterface (void *) {
 	while (true) {
 		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
 		player.printTable();
+		PlayerTask();
 		pthread_mutex_unlock(&clientMutex);
 
-		PlayerTask();
+		Sleep(500);
 	}
 	pthread_exit(NULL);
 	return 0;
@@ -169,6 +170,8 @@ void createClient (string ip) {
 
 		data = client->receiveMessage(NULL);
 		FILE.write(data);
+
+		cout << data << '\n';
 
 		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
 		FILE.pkgrcv(data, player);
@@ -230,7 +233,7 @@ void hostTask (int position) {
 						}
 					}
 
-					if (found) {
+					if (!found) {
 						host.statement++;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
@@ -245,7 +248,7 @@ void hostTask (int position) {
 						}
 					}
 					if (!found) {
-						host.statement = 20 + (host.round-1)%4;
+						host.statement = 10 + (host.round-1)%4;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
