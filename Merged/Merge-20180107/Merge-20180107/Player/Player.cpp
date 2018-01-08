@@ -78,6 +78,10 @@ void Player::bid()
 
 void Player::printTable()
 {
+	for(int i=0;i<auction_log.size();i++)
+	{
+		cout<<"acution_log: "<<auction_log[i]<<endl;
+	}
 	cout<<" ------------N------------- "<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
@@ -92,6 +96,8 @@ void Player::printTable()
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<" ------------S------------- "<<endl;
+	cout<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declaredPosition<<endl;
+	system("cls");
 }
 
 void Player::playCard()
