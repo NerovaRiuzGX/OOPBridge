@@ -22,7 +22,7 @@ Host host;
 Player player;
 
 void hostTask (int);
-void PlayerTask();
+void PlayerTask(int &);
 
 void * serverLoop (void * new_sock) {
 
@@ -117,13 +117,14 @@ void * createServer (void * serverPort) {
 }
 
 void * clientInterface (void *) {
-		
+	
+	int curr_state=0;
 	pthread_detach(pthread_self());
 
 	while (true) {
 		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
 		player.printTable();
-		PlayerTask();
+		PlayerTask(curr_state);
 		pthread_mutex_unlock(&clientMutex);
 
 		Sleep(500);
@@ -342,20 +343,24 @@ void hostTask (int position) {
 	return;
 }
 
-void PlayerTask()
+void PlayerTask(int & curr_state)
 {
 	char pos[4] = {'N', 'E', 'S', 'W'};
 	if(player.statement/10==1)
 	{
-		if(	player.position==player.statement%10	)
+		if(	player.position==player.statement%10 )
 		{
-			player.bid();
-			player.statement = 99;
+			if (curr_state==player.statement%10) {
+				player.bid();
+				curr_state++;
+				Sleep(200);
+			}
 		}
 		else
 		{
 			cout<<"Waiting for player to bid  "<<pos[player.statement%10]<<" !!";
 			player.decideBid="00";
+			curr_state = player.position;
 		}
 	}
 	else if(player.statement/10==2)
