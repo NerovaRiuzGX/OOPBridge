@@ -17,11 +17,11 @@ void Player::bid()
 {
 	string bid;
 	string Maxbid="00";
-	auction_log;//假設喊牌資訊
+	/*auction_log;//假設喊牌資訊
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
-	auction_log.push_back("2S");
+	auction_log.push_back("2S");*/
 	for(int i=auction_log.size()-1;i>0;i--)
 	{
 
@@ -109,9 +109,9 @@ void Player::playCard()
 			trick_log[i][j]="00";
 		}
 	}
-	ns_trick=1;
+	/*ns_trick=1;
 	ew_trick=11;
-	trick_log[12][0]="00";
+	trick_log[12][0]="00";*/
 	if(trick_log[ns_trick+ew_trick][0]!="00")
 	{
 		cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;

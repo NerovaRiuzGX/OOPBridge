@@ -230,7 +230,7 @@ void hostTask (int position) {
 						}
 					}
 
-					if (!found) {
+					if (found) {
 						host.statement++;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
