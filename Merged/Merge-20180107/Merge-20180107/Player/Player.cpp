@@ -17,6 +17,7 @@ void Player::bid()
 {
 	string bid;
 	string Maxbid="00", Maxcall="00";
+	int Maxcall_pos=0;
 	/*auction_log;//°²³]³ÛµP¸ê°T
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
@@ -34,6 +35,7 @@ void Player::bid()
 	{
 		if(auction_log[i]!="PS")
 		{
+			Maxcall_pos=auction_log.size()-i;
 			Maxcall=auction_log[i]; break;
 		}
 	}
@@ -80,19 +82,26 @@ void Player::bid()
 			cout << bid << endl; break;
 		}
 		else if (bid=="X" || bid=="XX") {
-			if (Maxbid=="00") {
-				cout << "error" << endl; continue;
-			}
-			else if (Maxcall!="X" && bid=="XX") {
-				cout << "error" << endl; continue;
-			}
-			else if (Maxcall=="XX") {
-				cout << "error" << endl; continue;
+			if (Maxcall_pos%2==1) {
+				if (Maxbid=="00") {
+					cout << "error" << endl; continue;
+				}
+				else if (Maxcall!="X" && bid=="XX") {
+					cout << "error" << endl; continue;
+				}
+				else if (Maxcall=="X" && bid=="X") {
+					cout << "error" << endl; continue;
+				}
+				else if (Maxcall=="XX") {
+					cout << "error" << endl; continue;
+				}
+				else {
+					cout << bid << endl; break;
+				}
 			}
 			else {
-				cout << bid << endl; break;
+				cout << "error" << endl; continue;
 			}
-		
 		}
 		else {
 			cout << "error" << endl; continue;
