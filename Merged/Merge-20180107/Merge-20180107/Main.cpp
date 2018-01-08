@@ -249,15 +249,15 @@ void hostTask (int position) {
 				case 2:
 				case 3:
 					if (host.auction_log.size()==4) { //if all pass
-						if(host.auction_log[0] == host.auction_log[1] == host.auction_log[2] == host.auction_log[3] == "PS")
+						if(host.auction_log[0] == "PS" && host.auction_log[1] == "PS" && host.auction_log[2] == "PS" && host.auction_log[3] == "PS")
 							host.statement = 4;
 					}
 					else if (host.auction_log.size()>4) {
-						string last_call = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+3, [](string i){return i!=("XX") && i!=("X");});
+						string last_call = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+3, [](string i){return (i!="XX" && i!="X");}));
 						if (last_call=="PS") {
 							host.statement = 14;
-							last_call = *(host.auction.rbegin()+4);
-							string last_bid = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return i!=("XX") && i!=("X") && (i!=("PS") );});
+							last_call = host.auction_log[host.auction_log.size()-4];
+							string last_bid = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return (i!="XX" && i!="X" && i!="PS");}));
 							
 							//set contract_suit
 							if(last_bid[1] == 'C')
@@ -285,7 +285,7 @@ void hostTask (int position) {
 							}
 							else
 								host.contract_dbl = 1;
-
+							
 						}
 					}
 					break;
