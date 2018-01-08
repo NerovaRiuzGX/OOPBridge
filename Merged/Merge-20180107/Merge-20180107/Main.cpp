@@ -7,10 +7,11 @@
 #include "TCP\TCPServer.h"
 #include "TCP\TCPClient.h"
 
-#define MAX_USER_COUNT 4
+#define MAX_USER_COUNT 1
 
 int connectCount = 0;
 int connectSock[4] = {};
+bool* connectCheck = new bool[MAX_USER_COUNT];
 
 pthread_mutex_t serverMutex, clientMutex;
 
@@ -19,6 +20,9 @@ TCPServer *client = new TCPClient;
 
 Host host;
 Player player;
+
+void hostTask (int);
+void playerTask();
 
 void * serverLoop (void * new_sock) {
 
@@ -35,10 +39,14 @@ void * serverLoop (void * new_sock) {
 
 	char *buffer = new char[5];
 	FileControl FILE("Player" + string(itoa(position, buffer, 10)) + "-To-Server.bridge");
-	delete[] buffer;
-
+	
 	//thread self detach
 	pthread_detach(pthread_self());
+
+	//initiallize player position
+	data = server.receiveMessage(sock);
+	server.sendMessage(string(itoa(position, buffer, 10)), sock);
+	delete[] buffer;
 
 	while ((data = server.receiveMessage(sock)) != "") {
 		
@@ -50,6 +58,7 @@ void * serverLoop (void * new_sock) {
 		pthread_mutex_lock(&serverMutex); //alter Host data in this mutex lock
 		cout << "Thread of Player " << position << " access Host" << endl;
 		FILE.pkgrcv(data, host);
+		hostTask(position);
 		data = FILE.pkgsnd(host);
 		pthread_mutex_unlock(&serverMutex);
 
@@ -57,9 +66,9 @@ void * serverLoop (void * new_sock) {
 	}
 	closesocket(sock);
 
-	cout << endl << "===============" << endl;
+	/*cout << endl << "===============" << endl;
 	cout << "User " << sock << " disconnect." << endl;
-	cout << "===============" << endl << endl;
+	cout << "===============" << endl << endl;*/
 	connectCount--;
 
 	pthread_exit(NULL);
@@ -74,12 +83,12 @@ void * createServer (void * serverPort) {
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {
 
-		cout << endl << "===============" << endl;
+		//cout << endl << "===============" << endl;
 
 		if (connectCount < MAX_USER_COUNT) {
 			connectSock[connectCount] = new_sock;
 			pthread_create(&thread, NULL, serverLoop, (void *)new_sock);
-			cout << "User " << new_sock << " online." << endl;
+			//cout << "User " << new_sock << " online." << endl;
 			connectCount++;
 		}
 		else {
@@ -87,8 +96,8 @@ void * createServer (void * serverPort) {
 			cout << "Client connection denied." << endl;
 		}
 
-		cout << "Online users: " << connectCount << endl;
-		cout << "===============" << endl << endl;
+		/*cout << "Online users: " << connectCount << endl;
+		cout << "===============" << endl << endl;*/
 
 		if (connectCount==MAX_USER_COUNT && host.statement==0) {
 			pthread_mutex_lock(&serverMutex);  //alter Host data in this mutex lock
@@ -107,6 +116,12 @@ void * createServer (void * serverPort) {
 	return 0;
 }
 
+void * clientInterface (void *) {
+		
+	pthread_exit(NULL);
+	return 0;
+}
+
 void createClient (string ip) {
 
 	client->setup(ip, 10555);
@@ -115,6 +130,15 @@ void createClient (string ip) {
 
 	FileControl FILE ("Server-To-Client.bridge");
 	string data = FILE.pkgsnd(player);
+
+	//initiallize player position
+	client->sendMessage(data, NULL);
+	data = client->receiveMessage(NULL);
+	player.position = atoi(data.c_str());
+	data = FILE.pkgsnd(player);
+
+	pthread_t clientThread;
+	pthread_create(&clientThread, NULL, clientInterface, NULL);
 
 	Sleep(1000);
 
@@ -152,6 +176,10 @@ void createClient (string ip) {
 }
 
 void main () {
+	for (int i=0; i<MAX_USER_COUNT; i++) {
+		connectCheck[i] = false;
+	}
+
 	cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
 
 	pthread_mutex_init(&serverMutex, NULL);
@@ -174,4 +202,73 @@ void main () {
 			break;
 	}
 	
+}
+
+void hostTask (int position) {
+	bool found;
+	switch (host.statement/10) {
+		case 0: //SET
+			switch (host.statement%10) {
+				case 1:
+				case 2:
+				case 3:
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+
+					if (!found) {
+						host.statement++;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+				case 4:
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+					if (!found) {
+						host.statement = 20 + (host.round-1)%4;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+			}
+			break;
+		case 1: //AUCTION
+			switch (host.statement%10) {
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+					if (host.auction_log.size()==4) { //if all pass
+						
+					}
+					else if (host.auction_log.size()>4) {
+						if (host.auction_log.end()==find_if_not(host.auction_log.end()-3, host.auction_log.end(), "PS")) {
+							host.statement++;
+							string last_bid = *find(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return i!=("XX") && i!=("X") && (i!=("PS") );});
+							
+							host.contract_suit = ;
+							host.contract_trick = 
+						}
+					}
+					break;
+				case 4:
+					break;
+			}
+		case 2: //PLAY
+		case 3: //RESULT
+		case 4: //CLAIM
+		default: /*exit();*/ break;
+	}
+
+	return;
 }

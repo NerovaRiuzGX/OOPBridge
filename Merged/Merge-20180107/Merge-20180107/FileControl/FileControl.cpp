@@ -55,25 +55,36 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 		split(variable[i], ">", list[i]);
 	}
 
+	int pos = host.statement%10;
+	int position;
+
 	for (int i=0; i<list.size(); i++) {
 		switch(atoi(list[i][0].c_str())){
 			//From Player
 			case 15: //position: int
-				
+				//do nothing, actually
+				position = atoi(list[i][2].c_str());
 				break;
 			case 16: //decideBid: string
 				if (list[i][2]!="00"){
-				
+					if (pos == position) {
+						host.auction_log.push_back(list[i][2]);
+						host.statement = 10 + (pos+1)%4;
+					}
 				}
 				break;
 			case 17: //decideCard: string
 				if (list[i][2]!="00"){
-				
+					if (pos == position) {
+						host.trick_log[host.ns_trick + host.ew_trick][host.turn] = list[i][2];
+						host.Card[pos].erase ( remove ( host.Card[pos].begin(), host.Card[pos].end(), list[i][2] ), host.Card[host.turn].end() );
+						host.statement = 20 + (pos+1)%4;
+					}
 				}
 				break;
 			case 18: //decideClaim: int
 				if (atoi(list[i][2].c_str())!=-1){
-				
+					//will work on this later
 				}
 				break;
 

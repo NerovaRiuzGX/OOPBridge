@@ -20,7 +20,7 @@ Host::Host()
 void Host::reset()
 {
 	round++;
-	turn = (round-1)%4;
+	turn = 0;
 	ns_trick = ew_trick = 0;
 	vulner();
 	shuffle();
