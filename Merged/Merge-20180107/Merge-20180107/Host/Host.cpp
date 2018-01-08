@@ -6,7 +6,7 @@
 using namespace std;
 
 Host::Host()
-	:round(1),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
+	:round(0),turn(0),ns_trick(0),ew_trick(0),ns_point(0),ew_point(0)
 {
 	auction_log.clear();
 	ns_vulnerable=ew_vulnerable=-1;
