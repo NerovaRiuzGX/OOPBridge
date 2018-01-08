@@ -16,7 +16,7 @@ Player::Player()
 void Player::bid()
 {
 	string bid;
-	string Maxbid="00";
+	string Maxbid="00", Maxcall="00";
 	/*auction_log;//安砞驰礟戈癟
 	auction_log.push_back("PS");
 	auction_log.push_back("PS");
@@ -24,10 +24,17 @@ void Player::bid()
 	auction_log.push_back("2S");*/
 	for(int i=auction_log.size()-1;i>=0;i--)
 	{
-
 		if(auction_log[i]!="PS" && auction_log[i]!="X" && auction_log[i]!="XX")
 		{
 			Maxbid=auction_log[i]; break;
+		}
+	}
+
+	for(int i=auction_log.size()-1;i>=0;i--)
+	{
+		if(auction_log[i]!="PS")
+		{
+			Maxcall=auction_log[i]; break;
 		}
 	}
 
@@ -39,42 +46,95 @@ void Player::bid()
 			<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
 		getline(cin,bid);
 		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
-		if( bid=="PS" || Maxbid=="00")	//耞驰礟琌才砏玥 
+		
+		if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
+			if (Maxbid[0]>bid[0]) {
+				cout << "error" << endl; continue;
+			}
+			else if (Maxbid[0]==bid[0]) {
+				bool pass = true;
+				switch (bid[1]) {
+					case 'C':
+						pass = false; break;
+					case 'D':
+						if (!(Maxbid[1]=='C')) {pass = false;} break;
+					case 'H':
+						if (!(Maxbid[1]=='C' || Maxbid[1]=='D')) {pass = false;} break;
+					case 'S':
+						if (Maxbid[1]=='S' || Maxbid[1]=='N') {pass = false;} break;
+					case 'N':
+						if (Maxbid[1]=='N') {pass = false;} break;
+				}
+				if (pass) {
+					cout << bid << endl; break;
+				}
+				else {
+					cout << "error" << endl; continue;
+				}
+			}
+			else {
+				cout << bid << endl; break;
+			}
+		}
+		else if (bid=="PS") {
+			cout << bid << endl; break;
+		}
+		else if (bid=="X" || bid=="XX") {
+			if (Maxbid=="00") {
+				cout << "error" << endl; continue;
+			}
+			else if (Maxcall!="X" && bid=="XX") {
+				cout << "error" << endl; continue;
+			}
+			else if (Maxcall=="XX") {
+				cout << "error" << endl; continue;
+			}
+			else {
+				cout << bid << endl; break;
+			}
+		
+		}
+		else {
+			cout << "error" << endl; continue;
+		}
+
+
+		/*if( bid=="PS" || Maxbid=="00")	//耞驰礟琌才砏玥 
 		{
 				cout<<bid<<endl;
 				break;
 		}
-		else if( bid=="X" && Maxbid!="00")	//耞驰礟琌才砏玥 
+		if( bid=="X" && Maxbid!="00")	//耞驰礟琌才砏玥 
 		{
 				cout<<bid<<endl;
 				break;
 		}
-		else if( bid=="XX" && ( auction_log[ auction_log.size()-1 ]=="X" || auction_log[ auction_log.size()-3 ]=="X"))	//耞驰礟琌才砏玥 
+		if( bid=="XX" && ( auction_log[ auction_log.size()-1 ]=="X" || auction_log[ auction_log.size()-3 ]=="X"))	//耞驰礟琌才砏玥 
 		{
 				cout<<bid<<endl;
 				break;
 		}
-		else if(bid[0]<'8' && bid[0]>Maxbid[0])
+		if(bid[0]<'8' && bid[0]>Maxbid[0])
 		{
 			cout<<bid<<endl;
 			break;
 		}
-		else if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='C' &&( bid[1]=='S' || bid[1]=='H' || bid[1]=='D' ||(bid[1]=='N' && bid[2]=='T')) )
+		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='C' &&( bid[1]=='S' || bid[1]=='H' || bid[1]=='D' ||(bid[1]=='N' && bid[2]=='T')) )
 		{
 			cout<<bid<<endl;
 			break;
 		}
-		else if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='D' &&(bid[1]=='H' || bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T')) )
+		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='D' &&(bid[1]=='H' || bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T')) )
 		{
 			cout<<bid<<endl;
 			break;
 		}
-		else if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='H' && ( bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T') ))
+		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='H' && ( bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T') ))
 		{
 			cout<<bid<<endl;
 			break;
 		}
-		else if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='S' && bid[1]=='N' && bid[2]=='T')
+		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='S' && bid[1]=='N' && bid[2]=='T')
 		{
 			cout<<bid<<endl;
 			break;
@@ -82,7 +142,7 @@ void Player::bid()
 		else
 		{
 			cout<<bid<<endl<<"You have an error bid  !!!"<<endl;
-		}
+		}*/
 	}
 	decideBid=bid;
 }
