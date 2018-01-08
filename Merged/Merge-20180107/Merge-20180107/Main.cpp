@@ -7,7 +7,7 @@
 #include "TCP\TCPServer.h"
 #include "TCP\TCPClient.h"
 
-#define MAX_USER_COUNT 1
+#define MAX_USER_COUNT 4
 
 int connectCount = 0;
 int connectSock[4] = {};
@@ -56,7 +56,7 @@ void * serverLoop (void * new_sock) {
 		FILE.write(data);
 
 		pthread_mutex_lock(&serverMutex); //alter Host data in this mutex lock
-		cout << "Thread of Player " << position << " access Host" << endl;
+		//cout << "Thread of Player " << position << " access Host" << endl;
 		FILE.pkgrcv(data, host);
 		hostTask(position);
 		data = FILE.pkgsnd(host);
