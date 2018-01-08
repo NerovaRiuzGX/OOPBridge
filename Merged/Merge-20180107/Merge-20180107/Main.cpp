@@ -120,12 +120,13 @@ void * clientInterface (void *) {
 		
 	pthread_detach(pthread_self());
 
-	pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
-	player.printTable();
-	pthread_mutex_unlock(&clientMutex);
+	while (true) {
+		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
+		player.printTable();
+		pthread_mutex_unlock(&clientMutex);
 
-	PlayerTask();
-
+		PlayerTask();
+	}
 	pthread_exit(NULL);
 	return 0;
 }
