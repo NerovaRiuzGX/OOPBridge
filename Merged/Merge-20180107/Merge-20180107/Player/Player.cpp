@@ -32,7 +32,8 @@ void Player::bid()
 	}
 
 	while(true)
-	{
+	{	
+		fflush(stdin);
 		cout<<"Max bidding :"<<Maxbid<<endl;
 		cout<<"Please Enter your bid( Pass(PS) , Dbl(X) , Rdbl(XX) )"<<endl
 			<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;

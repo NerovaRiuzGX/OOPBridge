@@ -118,7 +118,7 @@ void * createServer (void * serverPort) {
 
 void * clientInterface (void *) {
 	
-	int curr_state=0;
+	int curr_state=player.position;
 	pthread_detach(pthread_self());
 
 	while (true) {
@@ -267,7 +267,7 @@ void hostTask (int position) {
 							host.statement = 4;
 					}
 					else if (host.auction_log.size()>4) {
-						string last_call = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+3, [](string i){return (i!="XX" && i!="X");}));
+						string last_call = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+2, [](string i){return (i!="PS");}));
 						if (last_call=="PS") {
 							host.statement = 14;
 							last_call = host.auction_log[host.auction_log.size()-4];
@@ -301,10 +301,10 @@ void hostTask (int position) {
 								host.contract_dbl = 1;
 
 							//set declarer_postion
-							if(host.auction_log[host.auction_log.size()-6][1] == host.contract_suit)
+							/*if(host.auction_log[host.auction_log.size()-6][1] == host.contract_suit)
 								host.declarer_position = (host.round%4 + host.auction_log.size() - 6)%4;
 							else
-								host.declarer_position = (host.round%4 + host.auction_log.size() - 4)%4;
+								host.declarer_position = (host.round%4 + host.auction_log.size() - 4)%4;*/
 						}
 					}
 					break;
@@ -353,7 +353,7 @@ void PlayerTask(int & curr_state)
 			if (curr_state==player.statement%10) {
 				player.bid();
 				curr_state++;
-				Sleep(200);
+				//Sleep(200);
 			}
 		}
 		else
