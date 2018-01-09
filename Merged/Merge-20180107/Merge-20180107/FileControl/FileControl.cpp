@@ -130,6 +130,9 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 
 	variable.clear();
 
+	player.decideBid = "00";
+	player.decideCard = "00";
+
 	for (int i=0; i<list.size(); i++) {
 		switch(atoi(list[i][0].c_str())){
 			//From Host
