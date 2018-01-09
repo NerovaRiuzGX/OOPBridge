@@ -418,7 +418,7 @@ void hostTask (int position) {
 						if(total_trick != 13)
 						{
 							host.turn = 0;
-							host.statement = 20 + max_player;
+							host.statement = 20 + (host.statement + max_player) %4;
 						}
 						else
 						{
