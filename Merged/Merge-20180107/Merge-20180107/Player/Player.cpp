@@ -170,7 +170,7 @@ void Player::printTable()
 	//declarer_position=1;
 	char Pos[4]={'N','E','S','W'};
 	//cout<<position<<endl;
-	cout<<" ------------"<<Pos[(position+2)%4]<<"------------- "<<endl;
+	cout<<endl<<" ------------"<<Pos[(position+2)%4]<<"------------- "<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
