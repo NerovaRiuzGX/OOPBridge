@@ -259,11 +259,11 @@ string FileControl::pkgsnd (Player & player) {
 	//case 15: position: int
 	pkg += ("15>position>" + string(itoa(player.position, buffer, 10)) + '\n');
 	//case 16: decideBid: string
-	pkg += ("16>decideBid>" + player.decideBid);
+	pkg += ("16>decideBid>" + player.decideBid + '\n');
 	//case 17: decideCard: string
-	pkg += ("17>decideCard>" + player.decideCard);
+	pkg += ("17>decideCard>" + player.decideCard + '\n');
 	//case 18: decideClaim: int
-	pkg += ("18>decideClaim" + string(itoa(player.decideClaim, buffer, 10)) + '\n');
+	pkg += ("18>decideClaim>" + string(itoa(player.decideClaim, buffer, 10)) + '\n');
 
 	//Data information
 	//case 19: pkgnum: int

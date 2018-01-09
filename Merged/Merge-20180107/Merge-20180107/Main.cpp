@@ -301,24 +301,39 @@ void hostTask (int position) {
 							else
 								host.contract_dbl = 1;
 
+
 							//set declarer_postion
 							for(int i=host.auction_log.size()-1; i>=0; i--)
 							{
 								if(host.auction_log[i] == last_bid)
 								{
-									for(int j=i-2;j>=0;j-=4)
+									/*for(int j=i-2;j>=0;j-=4)
 									{
 										if(host.auction_log[j][1] == host.contract_suit)
 										{
-											host.declarer_position = ((host.round%4) + j)%4;
+											host.declarer_position = (((host.round-1)%4) + j)%4;
 											break;
 										}
 									}
 									if(host.declarer_position != -1)
 										host.declarer_position = ((host.round%4) + i)%4;
+									break;*/
+									host.declarer_position = (((host.round-1)%4) + i)%4;
 									break;
 								}
 							}
+
+							for(int i=host.declarer_position + (host.round-1)%4; i<host.auction_log.size(); i+=2) {
+								if (host.auction_log[i][1] == host.contract_suit) {
+									if (i%4 == host.declarer_position) {
+										break;
+									}
+									else {
+										host.declarer_position = (host.declarer_position+2)%4;
+									}
+								}
+							}
+
 						}
 					}
 					break;

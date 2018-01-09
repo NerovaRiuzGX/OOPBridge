@@ -12,10 +12,12 @@ int main () {
 		FILE.write("variable", data);
 		FILE.read();
 	}*/
-	Host host;
+	Player host;
 	host.shuffle();
 	cout << FILE.pkgsnd(host) << endl;
 	FILE.write(FILE.pkgsnd(host));
+	FILE.pkgrcv(FILE.pkgsnd(host), host);
+	cout << FILE.pkgsnd(host) << endl;
 	system("pause");
 	return 0;
 }
