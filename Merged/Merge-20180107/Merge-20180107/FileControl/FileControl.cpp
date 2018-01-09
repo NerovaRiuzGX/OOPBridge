@@ -90,11 +90,11 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 							for (int j=0; j<host.Card[pos].size(); j++) {
 								if (list[i][2]==host.Card[pos][j]) {
 									host.Card[pos].erase(host.Card[pos].begin()+j);
+									host.statement = 20 + (pos+1)%4;
+									host.turn++;
 									break;
 								}
 							}
-							host.statement = 20 + (pos+1)%4;
-							host.turn++;
 						}
 					}
 				}
@@ -129,9 +129,6 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 	}
 
 	variable.clear();
-
-	player.decideBid = "00";
-	player.decideCard = "00";
 
 	for (int i=0; i<list.size(); i++) {
 		switch(atoi(list[i][0].c_str())){
