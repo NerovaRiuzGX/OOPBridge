@@ -204,7 +204,7 @@ void Player::printTable()
 		//cout<<Pos[statement%10]<<" Play Card: \n";
 		
 		for (int i=0; i<turn; i++) {
-			cout << Pos[(statement-i)%4] << ": " << trick_log[ns_trick + ew_trick][i] << endl;
+			cout << Pos[(statement-turn+i)%4] << ": " << trick_log[ns_trick + ew_trick][i] << endl;
 		}
 	
 }
