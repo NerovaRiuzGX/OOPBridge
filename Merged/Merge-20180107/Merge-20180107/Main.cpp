@@ -221,6 +221,7 @@ void main () {
 
 void hostTask (int position) {
 	bool found;
+	char suit[5] = {'C', 'D', 'H', 'S', 'N'};
 	switch (host.statement/10) {
 		case 0: //SET
 			switch (host.statement%10) {
@@ -304,6 +305,8 @@ void hostTask (int position) {
 
 
 							//set declarer_postion
+							int your_position, teammate_position;
+
 							for(int i=host.auction_log.size()-1; i>=0; i--)
 							{
 								if(host.auction_log[i] == last_bid)
@@ -319,20 +322,21 @@ void hostTask (int position) {
 									if(host.declarer_position != -1)
 										host.declarer_position = ((host.round%4) + i)%4;
 									break;*/
-									host.declarer_position = (((host.round-1)%4) + i)%4;
+									//host.declarer_position = (((host.round-1)%4) + i)%4;
+									your_position = i%4;
+									teammate_position = (i+2)%4;
 									break;
 								}
 							}
 
-							int claimer = (host.declarer_position - (host.round-1)%4 + 4) %4;
-
-							for(int i=(claimer>1?claimer-2:claimer); i<host.auction_log.size(); i+=2) {
-								if (host.auction_log[i][1] == host.contract_suit) {
-									if (i%4 == claimer) {
+							for(int i=(your_position < teammate_position ? your_position : teammate_position); i<host.auction_log.size(); i+=2) {
+								if (host.auction_log[i][1] == suit[host.contract_suit]) {
+									if (i%4 == your_position) {
+										host.declarer_position = your_position + (host.round-1)%4 ;
 										break;
 									}
 									else {
-										host.declarer_position = (host.declarer_position+2)%4;
+										host.declarer_position = teammate_position + (host.round-1)%4 ;;
 									}
 								}
 							}
