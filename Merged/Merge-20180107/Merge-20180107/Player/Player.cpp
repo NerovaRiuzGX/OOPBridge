@@ -238,6 +238,7 @@ void Player::playCard()
 
 		cout<<"Error!!!  You can't play this card."<<endl;
 	}
+	decideCard = playcard;
 }
 
 void Player::claim()
