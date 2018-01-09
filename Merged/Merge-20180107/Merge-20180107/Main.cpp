@@ -324,7 +324,9 @@ void hostTask (int position) {
 								}
 							}
 
-							for(int i=host.declarer_position + (host.round-1)%4; i<host.auction_log.size(); i+=2) {
+							int claimer = host.declarer_position + (host.round-1)%4;
+
+							for(int i=(claimer>1?claimer-2:claimer); i<host.auction_log.size(); i+=2) {
 								if (host.auction_log[i][1] == host.contract_suit) {
 									if (i%4 == host.declarer_position) {
 										break;
