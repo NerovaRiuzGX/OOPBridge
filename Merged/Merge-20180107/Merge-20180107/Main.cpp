@@ -189,7 +189,7 @@ void createClient (string ip) {
 }
 
 void main () {
-	//srand(time(NULL));
+	srand(time(NULL));
 	
 	for (int i=0; i<MAX_USER_COUNT; i++) {
 		connectCheck[i] = false;
@@ -381,8 +381,11 @@ void hostTask (int position) {
 							{
 								if( turn_max[0] == host.trick_log[total_trick][i][0] )
 								{
-									turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-									max_player = i;
+									//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+									if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+										turn_max = host.trick_log[total_trick][i];
+										max_player=i;
+									}
 								}
 							}
 						}
@@ -392,8 +395,11 @@ void hostTask (int position) {
 							{
 								if( turn_max[0] == host.trick_log[total_trick][i][0] )
 								{
-									turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-									max_player = i;
+									//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+									if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+										turn_max = host.trick_log[total_trick][i];
+										max_player=i;
+									}
 								}
 								else if(host.trick_log[total_trick][i][0] == turn_contract_suit)
 								{
