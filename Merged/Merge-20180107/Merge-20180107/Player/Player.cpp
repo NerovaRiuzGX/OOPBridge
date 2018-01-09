@@ -161,23 +161,41 @@ void Player::printTable()
 	system("cls");
 	for(int i=0;i<auction_log.size();i++)
 	{
-		cout<<"acution_log: "<<auction_log[i]<<endl;
+		if(i%4==0){
+			cout<<endl<<"auction_log: ";
+		}
+		cout<<auction_log[i]<<" ";
 	}
-	cout<<" ------------N------------- "<<endl;
+	//position=0;			//等等註解調
+	//declarer_position=1;
+	char Pos[4]={'N','E','S','W'};
+	//cout<<position<<endl;
+	cout<<" ------------"<<Pos[(position+2)%4]<<"------------- "<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
-	cout<<"W             "<<playcard<<"           E"<<endl;
+	cout<<Pos[(position+1)%4]<<"             "<<(playcard==""?"  ":playcard)<<"           "<<Pos[(position+3)%4]<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
-	cout<<" ------------S------------- "<<endl;
-	cout<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declarer_position<<endl;
+	cout<<" -------------"<<Pos[position]<<"------------- "<<endl;
+
+	cout<<"This is myCard !!!"<<endl;
+	for ( int i=0;i<Card[position].size();i++ ){
+		cout<<Card[position][i]<<" ";
+	}
+	if(trick_log[0][0]!=""){
+		cout<<endl<<endl<<"This is dummyCard"<<endl;
+		for ( int i=0;i<Card[(declarer_position+2)%4].size();i++ ){
+			cout<<Card[(declarer_position+2)%4][i]<<" ";
+		}
+	}
+	cout<<endl<<endl<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declarer_position<<endl;
 	
 }
 
@@ -205,8 +223,8 @@ void Player::playCard()
 		cout<<"Please enter a card: ";
 		getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
-		it=find(myCard.begin(),myCard.end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=myCard.end() &&( trick_log[ns_trick+ew_trick][0]=="00" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		it=find(Card[position].begin(),Card[position].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
+		if( it!=Card[position].end() &&( trick_log[ns_trick+ew_trick][0]=="00" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
 		else if(playcard=="CLAIM")
 		{
 			cout<<"How many tricks : ";
@@ -230,9 +248,9 @@ void Player::claim()
 bool Player::MySuits(char suits)	//判斷自己有沒有這個花色 有則回傳 true ，否則回傳 false
 {
 	int check=0;
-	for(int i=0;i<myCard.size();i++)
+	for(int i=0;i<Card[position].size();i++)
 	{
-		if( myCard[i][0]==suits)
+		if( Card[position][i][0]==suits)
 		{
 			check=1;				//找到相同花色 check改變為1
 			return true;

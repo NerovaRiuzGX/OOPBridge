@@ -189,6 +189,7 @@ void createClient (string ip) {
 }
 
 void main () {
+	
 	for (int i=0; i<MAX_USER_COUNT; i++) {
 		connectCheck[i] = false;
 	}
@@ -348,7 +349,11 @@ void PlayerTask(int & curr_state)
 	char pos[4] = {'N', 'E', 'S', 'W'};
 	if(player.statement/10==1)
 	{
-		if(	player.position==player.statement%10 )
+		if(player.statement%10==4)
+		{
+			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
+		}
+		else if(	player.position==player.statement%10 )
 		{
 			if (curr_state==player.statement%10) {
 				player.bid();
@@ -367,7 +372,7 @@ void PlayerTask(int & curr_state)
 	{
 		if(	player.position==player.statement%10	)
 		{
-			player.play();
+			player.play(); 
 		}
 		else
 		{
