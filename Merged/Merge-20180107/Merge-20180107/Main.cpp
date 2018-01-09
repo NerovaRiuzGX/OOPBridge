@@ -455,6 +455,7 @@ void PlayerTask(int & curr_state)
 		if(player.statement%10==4)
 		{
 			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
+			curr_state = player.position;
 		}
 		else if(	player.position==player.statement%10 )
 		{
@@ -476,6 +477,7 @@ void PlayerTask(int & curr_state)
 		if(	player.position==player.statement%10	)
 		{
 			if (curr_state==player.statement%10) {
+				cout << "check" << endl;
 				player.play(); 
 				curr_state++;
 			}
