@@ -86,8 +86,14 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 					if (pos == position && list[i].size()==3){
 						if (list[i][2]!="00") {
 							host.trick_log[host.ns_trick + host.ew_trick][host.turn] = list[i][2];
-							host.Card[pos].erase ( remove ( host.Card[pos].begin(), host.Card[pos].end(), list[i][2] ), host.Card[host.turn].end() );
+							//host.Card[pos].erase ( remove ( host.Card[pos].begin(), host.Card[pos].end(), list[i][2] ), host.Card[host.turn].end() );
+							for (int j=0; j<host.Card[pos].size(); j++) {
+								if (list[i][2]==host.Card[pos][j]) {
+									host.Card[pos].erase(host.Card[pos].begin()+j);
+								}
+							}
 							host.statement = 20 + (pos+1)%4;
+							host.turn++;
 						}
 					}
 				}
