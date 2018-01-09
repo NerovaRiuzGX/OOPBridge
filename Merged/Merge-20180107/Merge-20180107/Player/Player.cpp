@@ -195,7 +195,10 @@ void Player::printTable()
 			cout<<Card[(declarer_position+2)%4][i]<<" ";
 		}
 	}
-	cout<<endl<<endl<<contract_suit<<"  "<<contract_trick<<"  "<<contract_dbl<<"  "<<declarer_position<<endl;
+	cout<<endl<<endl<<"contract_suit: "<<contract_suit<<endl
+					<<"contract_trick: "<<contract_trick<<endl
+					<<"contract_dbl: "<<contract_dbl<<endl
+					<<"declarer_position: "<<declarer_position<<endl;
 	
 }
 
