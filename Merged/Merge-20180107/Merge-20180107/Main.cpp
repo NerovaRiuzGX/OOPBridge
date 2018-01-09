@@ -493,6 +493,9 @@ void PlayerTask(int & curr_state)
 				player.playCard(); 
 				curr_state++;
 			}
+			else if (player.turn == 0) {
+				curr_state = player.position;
+			}
 		}
 		else
 		{
