@@ -489,13 +489,16 @@ void PlayerTask(int & curr_state)
 	{
 		if(	player.position==player.statement%10	)
 		{
-			cout << "check" << endl;
-			player.playCard(); 
+			if (curr_state==player.statement%10) {
+				player.playCard(); 
+				curr_state++;
+			}
 		}
 		else
 		{
 			cout<<"Waiting for player to play card  "<<pos[player.statement%10]<<" !!";
 			player.decideCard="00";
+			curr_state = player.position;
 		}
 	}
 }
