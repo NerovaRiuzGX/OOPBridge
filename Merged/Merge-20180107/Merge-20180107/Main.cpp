@@ -478,7 +478,7 @@ void PlayerTask(int & curr_state)
 		{
 			if (curr_state==player.statement%10) {
 				cout << "check" << endl;
-				player.play(); 
+				player.playCard(); 
 				curr_state++;
 			}
 		}
