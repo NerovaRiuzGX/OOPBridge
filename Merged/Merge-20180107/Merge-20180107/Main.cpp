@@ -330,13 +330,14 @@ void hostTask (int position) {
 							}
 
 							for(int i=(your_position < teammate_position ? your_position : teammate_position); i<host.auction_log.size(); i+=2) {
-								if (host.auction_log[i][1] == suit[host.contract_suit]) {
+								if (host.auction_log[i]!="PS" && host.auction_log[i][1] == suit[host.contract_suit]) {
 									if (i%4 == your_position) {
-										host.declarer_position = your_position + (host.round-1)%4 ;
+										host.declarer_position = ( your_position + (host.round-1)%4 ) %4 ;
 										break;
 									}
 									else {
-										host.declarer_position = teammate_position + (host.round-1)%4 ;;
+										host.declarer_position = ( teammate_position + (host.round-1)%4 ) %4 ;
+										break;
 									}
 								}
 							}
