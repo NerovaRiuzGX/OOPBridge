@@ -32,8 +32,8 @@ void FileControl::write (string data) {
 	return;
 }
 
-void FileControl::split(string phrase, string delim, vector<string> &data) {
-	char* str = &phrase[0];
+void FileControl::split(string phrase, char delim, vector<string> &data) {
+	/*char* str = &phrase[0];
 	char * pch;
 	pch = strtok (str, delim.c_str());
 	while (pch != NULL) {
@@ -41,18 +41,24 @@ void FileControl::split(string phrase, string delim, vector<string> &data) {
 		data.push_back(string(pch));
 		pch = strtok (NULL, delim.c_str());
 	}
-	return;
+	return;*/
+
+	istringstream iss(phrase);
+	string token;
+	while (getline(iss, token, delim)) {
+		data.push_back(token);
+	}
 }
 
 void FileControl::pkgrcv (string pkg, Host & host) {
 	vector<string> variable;
 	vector<vector<string>> list;
-	split(pkg, "\n", variable);
+	split(pkg, '\n', variable);
 
 	list.resize(variable.size());
 
 	for (int i=0; i<variable.size(); i++) {
-		split(variable[i], ">", list[i]);
+		split(variable[i], '>', list[i]);
 	}
 
 	int pos = host.statement%10;
@@ -109,10 +115,10 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 void FileControl::pkgrcv (string pkg, Player & player) {
 	vector<string> variable, element;
 	vector<vector<string>> list;
-	split(pkg, "\n", variable);
+	split(pkg, '\n', variable);
 	list.resize(variable.size());
 	for (int i=0; i<variable.size(); i++) {
-		split(variable[i], ">", list[i]);
+		split(variable[i], '>', list[i]);
 	}
 
 	variable.clear();
@@ -132,9 +138,9 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 				else {player.ew_vulnerable = false;}
 				break;
 			case 4: //Card[4]: vector<string>
-				split(list[i][2], "-", variable);
+				split(list[i][2], '-', variable);
 				for (int j=0; j<variable.size(); j++) {
-					split(variable[j], " ", element);
+					split(variable[j], ' ', element);
 					player.Card[j].clear();
 					for (int k=0; k<element.size(); k++) {
 						player.Card[j].push_back(element[k]);
@@ -148,7 +154,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 				break;
 			case 6: //auction_log: vector<string>
 				if (list[i].size()==3) {
-					split(list[i][2], " ", variable);
+					split(list[i][2], ' ', variable);
 				}
 				
 				player.auction_log.clear();
@@ -167,9 +173,9 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 				player.declarer_position = atoi(list[i][2].c_str());
 				break;
 			case 10: //trick_log: string[13][4]
-				split(list[i][2], "-", variable);
+				split(list[i][2], '-', variable);
 				for (int j=0; j<variable.size(); j++) {
-					split(variable[j], " ", element);
+					split(variable[j], ' ', element);
 					for (int k=0; k<element.size(); k++) {
 						player.trick_log[j][k] = element[k];
 					}

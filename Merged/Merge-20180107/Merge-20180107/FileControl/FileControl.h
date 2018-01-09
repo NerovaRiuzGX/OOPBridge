@@ -5,6 +5,7 @@
 #include "..\Player\Player.h"
 
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class FileControl {
 		void read ();
 		void write (string); 
 		// ([variable name], [data])
-		void split (string, string, vector<string> &); 
+		void split (string, char, vector<string> &); 
 		// ([string source], [delimiter], [output vector])
 
 		void pkgrcv (string, Host &);
