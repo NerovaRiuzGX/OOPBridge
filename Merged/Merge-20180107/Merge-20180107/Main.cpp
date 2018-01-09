@@ -189,6 +189,7 @@ void createClient (string ip) {
 }
 
 void main () {
+	//srand(time(NULL));
 	
 	for (int i=0; i<MAX_USER_COUNT; i++) {
 		connectCheck[i] = false;
@@ -347,7 +348,7 @@ void hostTask (int position) {
 						}
 					}
 					if (!found) {
-						host.statement = 20 + (host.declarer_position+3)%4;
+						host.statement = 20 + (host.declarer_position+1)%4;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
@@ -474,12 +475,16 @@ void PlayerTask(int & curr_state)
 	{
 		if(	player.position==player.statement%10	)
 		{
-			player.play(); 
+			if (curr_state==player.statement%10) {
+				player.play(); 
+				curr_state++;
+			}
 		}
 		else
 		{
 			cout<<"Waiting for player to play card  "<<pos[player.statement%10]<<" !!";
 			player.decideCard="00";
+			curr_state = player.position;
 		}
 	}
 }

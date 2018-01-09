@@ -14,6 +14,7 @@ Host::Host()
 	contract_trick=-1;
 	contract_dbl=-1;
 	declarer_position=-1;
+	srand(time(NULL));
 }
 
 void Host::reset()
