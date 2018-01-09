@@ -268,7 +268,7 @@ void hostTask (int position) {
 						if(host.auction_log[0] == "PS" && host.auction_log[1] == "PS" && host.auction_log[2] == "PS" && host.auction_log[3] == "PS")
 							host.statement = 4;
 					}
-					else if (host.auction_log.size()>4) {
+					if (host.auction_log.size()>=4) {
 						string last_call = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+2, [](string i){return (i!="PS");}));
 						if (last_call=="PS") {
 							host.statement = 14;

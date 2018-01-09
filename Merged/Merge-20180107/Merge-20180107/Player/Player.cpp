@@ -211,7 +211,7 @@ void Player::playCard()
 	ns_trick=1;
 	ew_trick=11;
 	trick_log[12][0]="00";*/
-	if(trick_log[ns_trick+ew_trick][0]!="00")
+	if(trick_log[ns_trick+ew_trick][0]!="")
 	{
 		cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;
 		Suits=trick_log[ns_trick+ew_trick][0][0];
@@ -224,7 +224,7 @@ void Player::playCard()
 		getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
 		it=find(Card[position].begin(),Card[position].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=Card[position].end() &&( trick_log[ns_trick+ew_trick][0]=="00" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		if( it!=Card[position].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
 		else if(playcard=="CLAIM")
 		{
 			cout<<"How many tricks : ";

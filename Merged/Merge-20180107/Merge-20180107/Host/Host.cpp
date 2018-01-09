@@ -28,13 +28,14 @@ void Host::reset()
 	contract_dbl=-1;
 	declarer_position=-1;
 	auction_log.clear();
-	for(int i=0;i<13;i++)
+	/*for(int i=0;i<13;i++)
 	{
 		for(int j=0;j<4;j++)
 		{
-			trick_log[i][j]="00";
+			trick_log[i][j]="";
 		}
-	}
+	}*/
+	fill (trick_log, trick_log + sizeof(trick_log), "");
 	vulner();
 	shuffle();
 }
