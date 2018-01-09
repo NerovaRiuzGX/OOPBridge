@@ -302,10 +302,23 @@ void hostTask (int position) {
 								host.contract_dbl = 1;
 
 							//set declarer_postion
-							/*if(host.auction_log[host.auction_log.size()-6][1] == host.contract_suit)
-								host.declarer_position = (host.round%4 + host.auction_log.size() - 6)%4;
-							else
-								host.declarer_position = (host.round%4 + host.auction_log.size() - 4)%4;*/
+							for(int i=host.auction_log.size()-1; i>=0; i--)
+							{
+								if(host.auction_log[i] == last_bid)
+								{
+									for(int j=i-2;j>=0;j-=4)
+									{
+										if(host.auction_log[j][1] == host.contract_suit)
+										{
+											host.declarer_position = ((host.round%4) + j)%4;
+											break;
+										}
+									}
+									if(host.declarer_position != -1)
+										host.declarer_position = ((host.round%4) + i)%4;
+									break;
+								}
+							}
 						}
 					}
 					break;
@@ -330,10 +343,84 @@ void hostTask (int position) {
 				case 1:
 				case 2:
 				case 3:
+					if(host.turn == 4)
+					{
+						int total_trick = host.ns_trick+host.ew_trick;
+						string turn_max = host.trick_log[total_trick][0]; 
+						int max_player=0;
+						char turn_contract_suit = 'C';
 
+						switch(host.contract_suit)
+						{
+							case 1: turn_contract_suit='D'; break;
+							case 2: turn_contract_suit='H'; break;
+							case 3: turn_contract_suit='S'; break;
+						}
+
+						if(host.contract_suit == 4) //NT
+						{
+							for(int i=1; i<4; i++)
+							{
+								if( turn_max[0] == host.trick_log[total_trick][i][0] )
+								{
+									turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+									max_player = i;
+								}
+							}
+						}
+						else //other contract_suit
+						{
+							for(int i=1; i<4; i++)
+							{
+								if( turn_max[0] == host.trick_log[total_trick][i][0] )
+								{
+									turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+									max_player = i;
+								}
+								else if(host.trick_log[total_trick][i][0] == turn_contract_suit)
+								{
+									turn_max = host.trick_log[total_trick][i];
+									max_player = i;
+								}
+							}
+						}
+						//set win trick
+						switch( (host.statement + max_player)%4 )
+						{
+							case 0:
+							case 2:
+								host.ns_trick++;
+								break;
+							case 1:
+							case 3:
+								host.ew_trick++;
+								break;
+						}
+						//change statement
+						if(total_trick != 13)
+						{
+							host.turn = 0;
+							host.statement = 20 + max_player;
+						}
+						else
+						{
+							host.statement = 24;
+						}
+					}
 					break;
 				case 4:
-
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+					if (!found) {
+						host.statement = 20;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
 					break;
 			}
 		case 3: //RESULT
