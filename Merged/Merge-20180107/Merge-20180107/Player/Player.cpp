@@ -199,6 +199,13 @@ void Player::printTable()
 					<<"contract_trick: "<<contract_trick<<endl
 					<<"contract_dbl: "<<contract_dbl<<endl
 					<<"declarer_position: "<<declarer_position<<endl;
+
+
+		cout<<Pos[statement%10]<<" Play Card: \n";
+		
+		for (int i=0; i<turn; i++) {
+			cout << Pos[(statement-turn)%4] << ": " << trick_log[ns_trick + ew_trick][i] << endl;
+		}
 	
 }
 
