@@ -201,14 +201,14 @@ void Player::printTable()
 
 void Player::playCard()
 {
-	for(int i=0;i<13;i++)
+	/*for(int i=0;i<13;i++)
 	{
 		for(int j=0;j<4;j++)
 		{
 			trick_log[i][j]="00";
 		}
 	}
-	/*ns_trick=1;
+	ns_trick=1;
 	ew_trick=11;
 	trick_log[12][0]="00";*/
 	if(trick_log[ns_trick+ew_trick][0]!="00")
