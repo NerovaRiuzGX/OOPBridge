@@ -106,7 +106,7 @@ void Host::shuffle()
 	Card[3].clear();
 	for (int i=0; i<52; i++) //洗牌
 	{
-		int number = rand()%(Deck.size());
+		int number = rd()%(Deck.size());
 		Card[i%4].push_back(Deck[number]);
 		Deck.erase(Deck.begin()+number);
 	}

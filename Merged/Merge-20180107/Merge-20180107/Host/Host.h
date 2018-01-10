@@ -7,9 +7,8 @@
 #include<vector>
 #include<string>
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include <algorithm>
+#include <random>
 
 using namespace std;
 
@@ -44,6 +43,9 @@ public:
 	int ns_point;
 	int ew_point;
 	int statement;
+
+private:
+	random_device rd;
 };
 
 #endif

@@ -24,7 +24,8 @@ Host host;
 Player player;
 
 void hostTask (int);
-void PlayerTask(int &);
+void PlayerTask (int &);
+bool Check (int);
 
 void * serverLoop (void * new_sock) { //this function handles what server thread react with each client
 
@@ -130,6 +131,7 @@ void * clientInterface (void *) { //this function handles how the interface shou
 	
 	//a variable that checks and prevents double input bug
 	int curr_state=player.position;
+	int print_state=player.statement;
 
 	//thread self detach
 	pthread_detach(pthread_self());
@@ -138,8 +140,12 @@ void * clientInterface (void *) { //this function handles how the interface shou
 	while (true) {
 
 		//alter Host data in this mutex lock
-		pthread_mutex_lock(&clientMutex);  
-		player.printTable();
+		pthread_mutex_lock(&clientMutex); 
+		if (print_state!=player.statement) {
+			player.printTable();
+			print_state=player.statement;
+		}
+		
 		PlayerTask(curr_state);
 		pthread_mutex_unlock(&clientMutex);
 
@@ -210,9 +216,6 @@ void createClient (string ip) { //this function creates a client and keep doing 
 
 void main () {
 
-	//random seed
-	srand(time(NULL));
-
 	//initiallize two mutex locks
 	pthread_mutex_init(&serverMutex, NULL);
 	pthread_mutex_init(&clientMutex, NULL);
@@ -252,30 +255,13 @@ void hostTask (int position) {
 				case 1:
 				case 2:
 				case 3:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-
-					if (!found) {
+					if (Check(position)) {
 						host.statement++;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
 				case 4:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-					if (!found) {
+					if (Check(position)) {
 						host.reset();
 						host.statement = 10 + (host.round-1)%4;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
@@ -370,15 +356,7 @@ void hostTask (int position) {
 					}
 					break;
 				case 4:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-					if (!found) {
+					if (Check(position)) {
 						host.statement = 20 + (host.declarer_position+1)%4;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
@@ -395,14 +373,14 @@ void hostTask (int position) {
 						int total_trick = host.ns_trick+host.ew_trick;
 						string turn_max = host.trick_log[total_trick][0]; 
 						int max_player=0;
-						char turn_contract_suit = 'C';
+						/*char turn_contract_suit = 'C';
 
 						switch(host.contract_suit)
 						{
 							case 1: turn_contract_suit='D'; break;
 							case 2: turn_contract_suit='H'; break;
 							case 3: turn_contract_suit='S'; break;
-						}
+						}*/
 
 						if(host.contract_suit == 4) //NT
 						{
@@ -430,7 +408,7 @@ void hostTask (int position) {
 										max_player=i;
 									}
 								}
-								else if(host.trick_log[total_trick][i][0] == turn_contract_suit)
+								else if(host.trick_log[total_trick][i][0] == suit[host.contract_suit])
 								{
 									turn_max = host.trick_log[total_trick][i];
 									max_player = i;
@@ -453,7 +431,7 @@ void hostTask (int position) {
 						if(total_trick != 13)
 						{
 							host.turn = 0;
-							host.statement = 20 + (host.statement + max_player) %4;
+							host.statement = 25 + (host.statement + max_player) %4;
 						}
 						else
 						{
@@ -462,19 +440,16 @@ void hostTask (int position) {
 					}
 					break;
 				case 4:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-					if (!found) {
+					if (Check(position)) {
 						host.statement = 20;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
+				default:
+					if (Check(position)) {
+						host.statement-=5;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
 			}
 		case 3: //RESULT
 		case 4: //CLAIM
@@ -492,9 +467,10 @@ void PlayerTask(int & curr_state)
 		if(player.statement%10==4)
 		{
 			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
+			Sleep(2000);
 			curr_state = player.position;
 		}
-		else if(	player.position==player.statement%10 )
+		else if ( player.position==player.statement%10 )
 		{
 			if (curr_state==player.statement%10) {
 				player.bid();
@@ -504,22 +480,29 @@ void PlayerTask(int & curr_state)
 		}
 		else
 		{
+			
 			cout<<"Waiting for player to bid  "<<pos[player.statement%10]<<" !!";
 			player.decideBid="00";
 			curr_state = player.position;
+
 		}
 	}
 	else if(player.statement/10==2)
 	{
-		if(	player.position==player.statement%10	)
+		if(	player.position==player.statement%10 )
 		{
-			if (curr_state==player.statement%10 ) {
+			if ( curr_state==player.statement%10 ) {
 				player.playCard(); 
 				curr_state++;
 			}
 			else if (player.turn == 0) {
-				curr_state = (curr_state+1)%4;
+				curr_state = player.position;
 			}
+		}
+		else if (player.statement%10 >= 5) {
+			cout << "Player " << pos[(player.statement-5)%10] << " wins the trick" << endl;
+			curr_state = (player.statement-5)%10;
+			Sleep(2000);
 		}
 		else
 		{
@@ -528,4 +511,19 @@ void PlayerTask(int & curr_state)
 			curr_state = player.position;
 		}
 	}
+}
+
+bool Check (int position) { //check if everyone has updated the data
+
+	connectCheck[position] = true;
+	bool found = false;
+
+	for (int i=0; i<MAX_USER_COUNT; i++) {
+		if (!connectCheck[i]) {
+			found = !found;
+			break;
+		}
+	}
+
+	return !found;
 }
