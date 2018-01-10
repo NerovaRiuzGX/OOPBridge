@@ -453,6 +453,38 @@ void hostTask (int position) {
 					break;
 			}
 		case 3: //RESULT
+			switch (host.statement%10) {
+				case 0:
+					host.score();
+				case 1:
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+					if (!found) {
+						host.statement++;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+				case 2:
+					connectCheck[position] = true;
+					found = false;
+					for (int i=0; i<MAX_USER_COUNT; i++) {
+						if (!connectCheck[i]) {
+							found = !found;
+							break;
+						}
+					}
+					if (!found) {
+						host.statement = 4;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+			}
 		case 4: //CLAIM
 		default: /*exit();*/ break;
 	}
