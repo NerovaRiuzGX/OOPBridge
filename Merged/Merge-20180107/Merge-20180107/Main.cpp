@@ -489,12 +489,12 @@ void PlayerTask(int & curr_state)
 	{
 		if(	player.position==player.statement%10	)
 		{
-			if (curr_state==player.statement%10) {
+			if (curr_state==player.statement%10 ) {
 				player.playCard(); 
 				curr_state++;
 			}
 			else if (player.turn == 0) {
-				curr_state = player.position;
+				curr_state = (curr_state+1)%4;
 			}
 		}
 		else
