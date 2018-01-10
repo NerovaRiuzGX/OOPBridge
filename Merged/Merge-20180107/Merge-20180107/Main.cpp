@@ -9,10 +9,12 @@
 
 #define MAX_USER_COUNT 4
 
+//these variables are for connections, send positions, check...etc.
 int connectCount = 0;
 int connectSock[4] = {};
 bool* connectCheck = new bool[MAX_USER_COUNT];
 
+//mutex lock
 pthread_mutex_t serverMutex, clientMutex;
 
 TCPServer server;
@@ -24,19 +26,20 @@ Player player;
 void hostTask (int);
 void PlayerTask(int &);
 
-void * serverLoop (void * new_sock) {
+void * serverLoop (void * new_sock) { //this function handles what server thread react with each client
 
 	string data;
 	int sock = (long)new_sock;
 	int position = -1;
 
-	//get position
+	//send position
 	for (int i=0; i<4; i++) {
 		if (connectSock[i] == sock) {
 			position = i; break;
 		}
 	}
 
+	//generates debug data
 	char *buffer = new char[5];
 	FileControl FILE("Player" + string(itoa(position, buffer, 10)) + "-To-Server.bridge");
 	
@@ -48,6 +51,7 @@ void * serverLoop (void * new_sock) {
 	server.sendMessage(string(itoa(position, buffer, 10)), sock);
 	delete[] buffer;
 
+	//receive-send loop
 	while ((data = server.receiveMessage(sock)) != "") {
 		
 		//test line
@@ -55,7 +59,8 @@ void * serverLoop (void * new_sock) {
 
 		FILE.write(data);
 
-		pthread_mutex_lock(&serverMutex); //alter Host data in this mutex lock
+		//alter Host data in this mutex lock
+		pthread_mutex_lock(&serverMutex); 
 		//cout << "Thread of Player " << position << " access Host" << endl;
 		FILE.pkgrcv(data, host);
 		hostTask(position);
@@ -64,34 +69,37 @@ void * serverLoop (void * new_sock) {
 
 		server.sendMessage(data, sock);
 	}
-	closesocket(sock);
 
+	closesocket(sock);
 	/*cout << endl << "===============" << endl;
 	cout << "User " << sock << " disconnect." << endl;
 	cout << "===============" << endl << endl;*/
 	connectCount--;
 
+	//thread has to be destroyed after done
 	pthread_exit(NULL);
 	return 0;
 }
 
-void * createServer (void * serverPort) {
+void * createServer (void * serverPort) { //this function creates a server that can make multiple threads
 	
 	pthread_t thread;
 	
+	//socket setup
 	server.setup("",(long)serverPort);
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {
 
 		//cout << endl << "===============" << endl;
 
+		//check if the table is full
 		if (connectCount < MAX_USER_COUNT) {
 			connectSock[connectCount] = new_sock;
 			pthread_create(&thread, NULL, serverLoop, (void *)new_sock);
 			//cout << "User " << new_sock << " online." << endl;
 			connectCount++;
 		}
-		else {
+		else { //close the connection if the table is full
 			closesocket(new_sock);
 			cout << "Client connection denied." << endl;
 		}
@@ -99,6 +107,7 @@ void * createServer (void * serverPort) {
 		/*cout << "Online users: " << connectCount << endl;
 		cout << "===============" << endl << endl;*/
 
+		//change statement when the table is full
 		if (connectCount==MAX_USER_COUNT && host.statement==0) {
 			pthread_mutex_lock(&serverMutex);  //alter Host data in this mutex lock
 			host.statement = 1;
@@ -109,6 +118,7 @@ void * createServer (void * serverPort) {
 
 	}
 
+	//mutex lock has to be destroyed
 	pthread_mutex_destroy(&serverMutex);
 
 	server.detach(); //close server
@@ -116,29 +126,40 @@ void * createServer (void * serverPort) {
 	return 0;
 }
 
-void * clientInterface (void *) {
+void * clientInterface (void *) { //this function handles how the interface should be showned
 	
+	//a variable that checks and prevents double input bug
 	int curr_state=player.position;
+
+	//thread self detach
 	pthread_detach(pthread_self());
 
+	//client interface loop
 	while (true) {
-		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
+
+		//alter Host data in this mutex lock
+		pthread_mutex_lock(&clientMutex);  
 		player.printTable();
 		PlayerTask(curr_state);
 		pthread_mutex_unlock(&clientMutex);
 
+		//grab information every 500 ms
 		Sleep(500);
 	}
+
+	//thread has to be destroyed after done
 	pthread_exit(NULL);
 	return 0;
 }
 
-void createClient (string ip) {
+void createClient (string ip) { //this function creates a client and keep doing the send-receive loop
 
+	//client setup, connect to the certain ip and port
 	client->setup(ip, 10555);
 	/*cout << "===============" << endl;
 	cout << "Type \"@\" to close the client." << endl << endl;*/
 
+	//generates debug data
 	FileControl FILE ("Server-To-Client.bridge");
 	string data = FILE.pkgsnd(player);
 
@@ -148,19 +169,15 @@ void createClient (string ip) {
 	player.position = atoi(data.c_str());
 	data = FILE.pkgsnd(player);
 
+	//create a client interface thread
 	pthread_t clientThread;
 	pthread_create(&clientThread, NULL, clientInterface, NULL);
 
+	//start doing send-receive loop after 1 second
 	Sleep(1000);
 
+	//send-receive loop
 	while (true) {
-
-		/*cout << "Send data: ";
-		getline(cin, data);
-		if (data[0]=='@') {
-			cout << "Client closed by user." << endl;
-			break;
-		}*/
 
 		if (client->sendMessage(data, NULL) == SOCKET_ERROR) {
 			cout << "Client terminated by server." << endl;
@@ -174,14 +191,17 @@ void createClient (string ip) {
 
 		//cout << data << '\n';
 
-		pthread_mutex_lock(&clientMutex);  //alter Host data in this mutex lock
+		//alter Host data in this mutex lock
+		pthread_mutex_lock(&clientMutex);
 		FILE.pkgrcv(data, player);
 		data = FILE.pkgsnd(player);
 		pthread_mutex_unlock(&clientMutex);
 
+		//send data package every 500 ms
 		Sleep(500);
 	}
 
+	//destroy mutex lock
 	pthread_mutex_destroy(&clientMutex);
 	client->detach();
 	system("pause");
@@ -189,16 +209,20 @@ void createClient (string ip) {
 }
 
 void main () {
+
+	//random seed
 	srand(time(NULL));
+
+	//initiallize two mutex locks
+	pthread_mutex_init(&serverMutex, NULL);
+	pthread_mutex_init(&clientMutex, NULL);
 	
+	//initiallize the connection check array
 	for (int i=0; i<MAX_USER_COUNT; i++) {
 		connectCheck[i] = false;
 	}
 
 	cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
-
-	pthread_mutex_init(&serverMutex, NULL);
-	pthread_mutex_init(&clientMutex, NULL);
 
 	switch (getchar()) {
 		case '1':
@@ -453,38 +477,6 @@ void hostTask (int position) {
 					break;
 			}
 		case 3: //RESULT
-			switch (host.statement%10) {
-				case 0:
-					host.score();
-				case 1:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-					if (!found) {
-						host.statement++;
-						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
-					}
-					break;
-				case 2:
-					connectCheck[position] = true;
-					found = false;
-					for (int i=0; i<MAX_USER_COUNT; i++) {
-						if (!connectCheck[i]) {
-							found = !found;
-							break;
-						}
-					}
-					if (!found) {
-						host.statement = 4;
-						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
-					}
-					break;
-			}
 		case 4: //CLAIM
 		default: /*exit();*/ break;
 	}

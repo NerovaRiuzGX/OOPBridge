@@ -29,6 +29,7 @@ class TCPServer {
 		virtual int sendMessage (string, int); //from TCPClient
 		virtual string receiveMessage (int);
 
+	private:
 		int serverSocket;
 		struct sockaddr_in serverInfo;
 		struct sockaddr_in clientInfo;

@@ -13,9 +13,8 @@ class TCPClient: public TCPServer {
 		virtual void setup (string, int);
 		void detach ();
 
-		int sendMessage (string, int = 0);
-		string receiveMessage (int = 0);
-		
+		virtual int sendMessage (string, int = 0);
+		virtual string receiveMessage (int = 0);
 
 	private:
 		int sock;

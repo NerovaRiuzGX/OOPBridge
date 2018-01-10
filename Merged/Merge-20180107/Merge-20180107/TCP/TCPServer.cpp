@@ -4,6 +4,8 @@
 #include "TCPServer.h"
 
 TCPServer::TCPServer () {
+
+	//basic settings for windwows socket programming
 	WORD wVersion;
 	WSADATA wsaData;
 	wVersion = MAKEWORD(2,2);
@@ -30,7 +32,7 @@ void TCPServer::setup (string tmp, int port) {
 	getIP();
 }
 
-int TCPServer::acceptConn () {
+int TCPServer::acceptConn () { //accepting connections through this function
 	char str[20];
 	int addrlen = sizeof(clientInfo);
 	int conn = accept(serverSocket, (struct sockaddr *)&clientInfo, &addrlen);
@@ -40,16 +42,24 @@ int TCPServer::acceptConn () {
 
 int TCPServer::sendMessage (string dat, int sock) {
 	
-	return send(sock, dat.c_str(), dat.length(), 0);
+	int length =  send(sock, dat.c_str(), dat.length(), 0);
+
+	//if error
+	if (length==0 || length==SOCKET_ERROR) {
+		cout << "Send failed." << endl;
+		return -1;
+	}
+
+	return length;
 }
 
-void TCPServer::detach() {
+void TCPServer::detach() { //close socket
 	
 	closesocket(serverSocket);
 	WSACleanup();
 }
 
-string TCPServer::getIP () {
+string TCPServer::getIP () { //this function returns the IP of your computer (IPv4)
 	string IP;
     char hostname[80];
     if (gethostname(hostname, sizeof(hostname)) == SOCKET_ERROR) {
@@ -79,11 +89,12 @@ string TCPServer::receiveMessage (int sock) {
 	char buffer[4096];
 	int length = recv(sock, buffer, 4096, 0); 
 
+	//if error
 	if (length==0 || length==SOCKET_ERROR) {
 		cout << "Receive failed." << endl;
 		return "";
 	}
-	else {
+	else { //transform string into char-array type
 		buffer[length] = '\0';
 		//cout << "Server response: " << string(buffer) << endl << endl;
 	}
