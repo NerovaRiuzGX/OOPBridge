@@ -278,16 +278,18 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 1:
 				case 2:
 				case 3:
-					if (host.auction_log.size()==4) { //if all pass
-						if(host.auction_log[0] == "PS" && host.auction_log[1] == "PS" && host.auction_log[2] == "PS" && host.auction_log[3] == "PS")
+					if (host.auction_log.size()==4 && host.auction_log[0]=="PS") { //if all pass
+						if(host.auction_log[0] == "PS" && host.auction_log[1] == "PS" && host.auction_log[2] == "PS" && host.auction_log[3] == "PS") {
 							host.statement = 4;
+							break;
+						}
 					}
 					if (host.auction_log.size()>=4) {
 						string last_call = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+2, [](string i){return (i!="PS");}));
 						if (last_call=="PS") {
 							host.statement = 14;
 							last_call = host.auction_log[host.auction_log.size()-4];
-							string last_bid = *(find_if(host.auction_log.rbegin(), host.auction_log.rbegin()+10, [](string i){return (i!="XX" && i!="X" && i!="PS");}));
+							string last_bid = *(find_if(host.auction_log.rbegin(), (host.auction_log.size()>10 ? host.auction_log.rbegin()+10 : host.auction_log.rend() ), [](string i){return (i!="XX" && i!="X" && i!="PS");}));
 							
 							//set contract_suit
 							if(last_bid[1] == 'C')
@@ -324,17 +326,6 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 							{
 								if(host.auction_log[i] == last_bid)
 								{
-									/*for(int j=i-2;j>=0;j-=4)
-									{
-										if(host.auction_log[j][1] == host.contract_suit)
-										{
-											host.declarer_position = (((host.round-1)%4) + j)%4;
-											break;
-										}
-									}
-									if(host.declarer_position != -1)
-										host.declarer_position = ((host.round%4) + i)%4;
-									break;*/
 									//host.declarer_position = (((host.round-1)%4) + i)%4;
 									your_position = i%4;
 									teammate_position = (i+2)%4;
@@ -365,6 +356,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					}
 					break;
 			}
+			break;
 		case 2: //PLAY
 			switch (host.statement%10){
 				case 0:
