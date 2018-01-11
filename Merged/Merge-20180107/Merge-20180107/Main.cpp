@@ -87,7 +87,7 @@ void * createServer (void * serverPort) { //this function creates a server that 
 	pthread_t thread;
 	
 	//socket setup
-	server.setup(NULL,(long)serverPort);
+	server.setup("",(long)serverPort);
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {
 
