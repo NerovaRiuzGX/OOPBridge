@@ -9,6 +9,7 @@ FileControl::FileControl (string name) {
 }
 
 void FileControl::read () { // not really useful in this game
+
 	FILE_INPUT.open (FILE_NAME);
 	if (FILE_INPUT.is_open()) {
 		string buffer;
@@ -23,7 +24,8 @@ void FileControl::read () { // not really useful in this game
 	return;
 }
 
-void FileControl::write (string data) {
+void FileControl::write (string data) { //to write a package in a certain file
+
 	FILE_OUTPUT.open (FILE_NAME/*, ios::app*/); // only add app when you want to get multiple packages in file.
 	if (FILE_OUTPUT.is_open()) {
 		FILE_OUTPUT << data;
@@ -32,7 +34,7 @@ void FileControl::write (string data) {
 	return;
 }
 
-void FileControl::split(string phrase, char delim, vector<string> &data) {
+void FileControl::split(string phrase, char delim, vector<string> &data) { //to split a string into multiple datas and store them into a certain vector<string>
 	/*char* str = &phrase[0];
 	char * pch;
 	pch = strtok (str, delim.c_str());
@@ -50,7 +52,7 @@ void FileControl::split(string phrase, char delim, vector<string> &data) {
 	}
 }
 
-void FileControl::pkgrcv (string pkg, Host & host) {
+void FileControl::pkgrcv (string pkg, Host & host) { //(on Host side) to receive a package and make reaction
 	vector<string> variable;
 	vector<vector<string>> list;
 	split(pkg, '\n', variable);
@@ -119,7 +121,7 @@ void FileControl::pkgrcv (string pkg, Host & host) {
 	}
 }
 
-void FileControl::pkgrcv (string pkg, Player & player) {
+void FileControl::pkgrcv (string pkg, Player & player) { //(on Player side) to receive a packet and store it in the Player class
 	vector<string> variable, element;
 	vector<vector<string>> list;
 	split(pkg, '\n', variable);
@@ -221,7 +223,7 @@ void FileControl::pkgrcv (string pkg, Player & player) {
 	}
 }
 
-string FileControl::pkgsnd (Host & host) {
+string FileControl::pkgsnd (Host & host) { //(on Host side) to pack the whole data of Host together and return a long string
 	string pkg = "0>EMPTY_PACKAGE>0\n";
 	char buffer[11] = {};
 	//To Player
@@ -288,7 +290,7 @@ string FileControl::pkgsnd (Host & host) {
 	return pkg;
 }
 
-string FileControl::pkgsnd (Player & player) {
+string FileControl::pkgsnd (Player & player) { //(on Player side) to pack all the necessary data into one string for Host to judge
 	string pkg = "0>EMPTY_PACKAGE>0\n";
 	char buffer[11] = {};
 

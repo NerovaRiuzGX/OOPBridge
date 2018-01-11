@@ -50,7 +50,7 @@ void * serverLoop (void * new_sock) { //this function handles what server thread
 	//initiallize player position
 	data = server.receiveMessage(sock);
 	server.sendMessage(string(itoa(position, buffer, 10)), sock);
-	delete[] buffer;
+	delete[] buffer; //free memory space
 
 	//receive-send loop
 	while ((data = server.receiveMessage(sock)) != "") {
@@ -87,7 +87,7 @@ void * createServer (void * serverPort) { //this function creates a server that 
 	pthread_t thread;
 	
 	//socket setup
-	server.setup("",(long)serverPort);
+	server.setup(NULL,(long)serverPort);
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {
 
@@ -95,6 +95,7 @@ void * createServer (void * serverPort) { //this function creates a server that 
 
 		//check if the table is full
 		if (connectCount < MAX_USER_COUNT) {
+			//create a loop thread and pass a socket for it
 			connectSock[connectCount] = new_sock;
 			pthread_create(&thread, NULL, serverLoop, (void *)new_sock);
 			//cout << "User " << new_sock << " online." << endl;
@@ -112,7 +113,7 @@ void * createServer (void * serverPort) { //this function creates a server that 
 		if (connectCount==MAX_USER_COUNT && host.statement==0) {
 			pthread_mutex_lock(&serverMutex);  //alter Host data in this mutex lock
 			host.statement = 1;
-			cout << "Server thread access Host" << endl;
+			//cout << "Server thread access Host" << endl;
 			pthread_mutex_unlock(&serverMutex);
 		}
 		
@@ -141,7 +142,9 @@ void * clientInterface (void *) { //this function handles how the interface shou
 
 		//alter Host data in this mutex lock
 		pthread_mutex_lock(&clientMutex); 
-		if (print_state!=player.statement) {
+
+		//only print when the statement changes
+		if (print_state!=player.statement) { 
 			player.printTable();
 			print_state=player.statement;
 		}
@@ -246,7 +249,7 @@ void main () {
 	
 }
 
-void hostTask (int position) {
+void hostTask (int position) { //what Host should do whenever it receives a package
 	bool found;
 	char suit[5] = {'C', 'D', 'H', 'S', 'N'};
 	switch (host.statement/10) {
@@ -459,7 +462,7 @@ void hostTask (int position) {
 	return;
 }
 
-void PlayerTask(int & curr_state)
+void PlayerTask(int & curr_state) //what Players should react when they receive a package
 {
 	char pos[4] = {'N', 'E', 'S', 'W'};
 	if(player.statement/10==1)
@@ -513,7 +516,7 @@ void PlayerTask(int & curr_state)
 	}
 }
 
-bool Check (int position) { //check if everyone has updated the data
+bool Check (int position) { //check if everyone has received the latest package
 
 	connectCheck[position] = true;
 	bool found = false;
