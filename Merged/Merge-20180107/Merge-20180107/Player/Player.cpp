@@ -190,7 +190,7 @@ void Player::printTable()
 		cout<<Card[position][i]<<" ";
 	}
 	if(trick_log[0][0]!=""){
-		cout<<endl<<endl<<"This is dummyCard"<<endl;
+		cout<<endl<<endl<<endl<<endl<<endl<<"This is dummyCard"<<endl;
 		for ( int i=0;i<Card[(declarer_position+2)%4].size();i++ ){
 			cout<<Card[(declarer_position+2)%4][i]<<" ";
 		}
