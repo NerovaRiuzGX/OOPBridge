@@ -440,11 +440,15 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
-				default:
+				case 5:
+				case 6:
+				case 7:
+				case 8:
 					if (Check(position)) {
 						host.statement-=5;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
+					break;
 			}
 		case 3: //RESULT
 			switch (host.statement%10){
