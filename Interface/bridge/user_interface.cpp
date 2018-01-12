@@ -1,9 +1,13 @@
 ﻿#include"interface.h"
 using namespace std;
+#include<windows.h>
+
 
 int main()
-{
-	Interface a(72,0,72,0,0,0);
+{	
+	
+	SetConsoleOutputCP(951);
+	Interface a(72,0,72,0,0,0,0);
 	a.gamemodeoption();
 
 	system("pause");
