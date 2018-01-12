@@ -93,8 +93,8 @@
   - dummyCard: vector string 
   - position: int
   - vulnerable: bool
-  - reset()  //下一局
-  - printTable()    //印出牌桌資訊
+  - reset()  //下一局
+  - printTable()    //印出牌桌資訊
   - bid()   //喊牌
   - playCard()    //出牌
   - claim()   //放入playcard()
