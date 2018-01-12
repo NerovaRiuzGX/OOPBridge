@@ -364,11 +364,11 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 2:
 				case 3:
 
-					if(host.ns_trick+host.ew_trick==13)
+					/*if(host.ns_trick+host.ew_trick==13)
 					{
 						host.statement=29;
 						break;
-					}
+					}*/
 					if(host.turn == 4)
 					{
 						int total_trick = host.ns_trick+host.ew_trick;
@@ -448,7 +448,13 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 7:
 				case 8:
 					if (Check(position)) {
-						host.statement-=5;
+						if (host.ns_trick+host.ew_trick==13) {
+							host.statement = 29;
+						}
+						else {
+							host.statement-=5;
+						}
+						
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
@@ -532,6 +538,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 			else {
 				curr_state = (player.position+2)%4;
 			}
+		}
+		else if (player.statement-20 == 9) {
+			cout << "Waiting..." << endl;
 		}
 		else if ( player.statement-20 >= 5 ) {
 			cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
