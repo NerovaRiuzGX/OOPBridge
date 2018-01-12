@@ -365,8 +365,10 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 3:
 
 					if(host.ns_trick+host.ew_trick==13)
+					{
 						host.statement=24;
-
+						break;
+					}
 					if(host.turn == 4)
 					{
 						int total_trick = host.ns_trick+host.ew_trick;

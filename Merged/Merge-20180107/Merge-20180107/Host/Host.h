@@ -1,6 +1,6 @@
 //Host.h
 //by kkrun
-//
+
 #ifndef HOST_H
 #define HOST_H
 
