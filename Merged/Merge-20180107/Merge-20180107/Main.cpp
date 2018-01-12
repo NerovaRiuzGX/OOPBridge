@@ -436,7 +436,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					break;
 				case 4:
 					if (Check(position)) {
-						host.statement = 20;
+						host.statement = 30;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
@@ -451,6 +451,22 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					break;
 			}
 		case 3: //RESULT
+			switch (host.statement%10){
+				case 0:
+					host.score();
+					host.statement++;
+					break;
+				case 1:
+					host.reset();
+					host.statement++;
+					break;
+				case 2:
+					if (Check(position)) {
+						host.statement = 4;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+			}
 		case 4: //CLAIM
 		default: /*exit();*/ break;
 	}

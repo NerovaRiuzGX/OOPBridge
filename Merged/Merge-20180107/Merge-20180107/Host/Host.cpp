@@ -284,8 +284,8 @@ void Host::score()
 		}
 	}
 
-	cout<<"NS_Point : "<<ns_point<<endl
-		<<"EW_Point : "<<ew_point<<endl;
+	/*cout<<"NS_Point : "<<ns_point<<endl
+		<<"EW_Point : "<<ew_point<<endl;*/
 }
 
 int Host::CardToInt (string card) {
