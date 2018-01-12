@@ -198,14 +198,18 @@ void Player::printTable()
 	cout<<endl<<endl<<"contract_suit: "<<contract_suit<<endl
 					<<"contract_trick: "<<contract_trick<<endl
 					<<"contract_dbl: "<<contract_dbl<<endl
-					<<"declarer_position: "<<declarer_position<<endl;
-
+					<<"declarer_position: "<<declarer_position<<endl
+					<<"ns_trick: "<<ns_trick<<endl
+					<<"ew_trick: "<<ew_trick<<endl
+					<<"ns_point: "<<ns_point<<endl
+					<<"ew_point: "<<ew_point<<endl;
 
 		//cout<<Pos[statement%10]<<" Play Card: \n";
 		
 		for (int i=0; i<turn; i++) {
 			cout << Pos[(statement-turn+i)%4] << ": " << trick_log[ns_trick + ew_trick][i] << endl;
 		}
+
 	
 }
 
