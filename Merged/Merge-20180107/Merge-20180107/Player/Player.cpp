@@ -198,9 +198,11 @@ void Player::printTable()
 	cout<<endl<<endl<<"contract_suit: "<<contract_suit<<endl
 					<<"contract_trick: "<<contract_trick<<endl
 					<<"contract_dbl: "<<contract_dbl<<endl
-					<<"declarer_position: "<<declarer_position<<endl;
-
-
+					<<"declarer_position: "<<declarer_position<<endl
+					<<"ns_trick: "<<ns_trick<<endl
+					<<"ew_trick: "<<ew_trick<<endl
+					<<"ns_point: "<<ns_point<<endl
+					<<"ew_point: "<<ew_point<<endl;
 		//cout<<Pos[statement%10]<<" Play Card: \n";
 		
 		for (int i=0; i<turn; i++) {
@@ -233,8 +235,8 @@ void Player::playCard()
 		cout<<"Please enter a card: ";
 		getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
-		it=find(Card[position].begin(),Card[position].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=Card[position].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		it=find(Card[statement%10].begin(),Card[statement%10].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
+		if( it!=Card[statement%10].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
 		else if(playcard=="CLAIM")
 		{
 			cout<<"How many tricks : ";
@@ -259,9 +261,9 @@ void Player::claim()
 bool Player::MySuits(char suits)	//判斷自己有沒有這個花色 有則回傳 true ，否則回傳 false
 {
 	int check=0;
-	for(int i=0;i<Card[position].size();i++)
+	for(int i=0;i<Card[statement%10].size();i++)
 	{
-		if( Card[position][i][0]==suits)
+		if( Card[statement%10][i][0]==suits)
 		{
 			check=1;				//找到相同花色 check改變為1
 			return true;

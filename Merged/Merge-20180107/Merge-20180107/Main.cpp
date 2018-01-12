@@ -500,14 +500,18 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	}
 	else if(player.statement/10==2)
 	{
-		if(	player.position==player.statement%10 )
+		if( (player.statement%10 == (player.declarer_position+2)%4 ) &&(player.position==player.declarer_position) )
 		{
 			if ( curr_state==player.statement%10 ) {
 				player.playCard(); 
 				curr_state++;
 			}
-			else if (player.turn == 0) {
-				curr_state = player.position;
+		}
+		else if(	player.position==player.statement%10 )
+		{
+			if ( curr_state==player.statement%10 ) {
+				player.playCard(); 
+				curr_state++;
 			}
 		}
 		else if (player.statement%10 >= 5) {
@@ -517,10 +521,15 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		}
 		else
 		{
-			cout<<"Waiting for player to play card  "<<pos[player.statement%10]<<" !!";
+			cout<<"Waiting for player"<<pos[player.statement%10]<<" to play card !!";
 			player.decideCard="00";
 			curr_state = player.position;
 		}
+	}
+	else if(player.statement/10==3)
+	{
+		cout<<"NS_Point : "<<player.ns_point<<endl
+			<<"EW_Point : "<<player.ew_point<<endl;
 	}
 }
 
