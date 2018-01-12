@@ -172,7 +172,7 @@ void Host::score()
 		{
 			BasicScore=    contract_dbl*( ( 40+(contract_trick-7)*30) );
 		}
-		cout<<"BasicScore : "<<BasicScore<<endl;
+		//cout<<"BasicScore : "<<BasicScore<<endl;
 		if(Vulner==false)
 		{	
 			if(BasicScore>100) RewardScore=300;		//RewardScore 計算線位獎分
@@ -187,11 +187,11 @@ void Host::score()
 			if(Mytrick==13 && contract_trick==13)	RewardScore=RewardScore+1500;
 			else if(Mytrick==12 && contract_trick==12) RewardScore=RewardScore+750;
 		}
-		cout<<"RewardScore : "<<RewardScore<<endl;
+		//cout<<"RewardScore : "<<RewardScore<<endl;
 		if( Mytrick>=contract_trick && contract_dbl==2 )		DblScore=50;		// DblScore計算 Dbl獎分
 		else if( Mytrick>=contract_trick && contract_dbl==4 )	DblScore=100;
 		else DblScore=0;
-		cout<<"DblScore : "<<DblScore<<endl;
+		//cout<<"DblScore : "<<DblScore<<endl;
 
 		if(Mytrick-contract_trick>0)
 		{
@@ -216,7 +216,7 @@ void Host::score()
 			}
 		}
 		else ExceedScore=0;
-		cout<<"ExceedScore : "<<ExceedScore<<endl;
+		//cout<<"ExceedScore : "<<ExceedScore<<endl;
 		if(declarer_position%2==0)	//最後分數計算
 		{
 			ns_point += BasicScore + RewardScore + DblScore + ExceedScore; 
@@ -284,8 +284,6 @@ void Host::score()
 		}
 	}
 
-	cout<<"NS_Point : "<<ns_point<<endl
-		<<"EW_Point : "<<ew_point<<endl;
 }
 
 int Host::CardToInt (string card) {
