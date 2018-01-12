@@ -366,7 +366,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 
 					if(host.ns_trick+host.ew_trick==13)
 					{
-						host.statement=24;
+						host.statement=29;
 						break;
 					}
 					if(host.turn == 4)
@@ -452,6 +452,12 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
+				case 9:
+					if (Check(position)) {
+						host.statement=24;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
 			}
 			break;
 		case 3: //RESULT
@@ -532,7 +538,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 			curr_state = player.statement-25;
 			Sleep(2000);
 		}
-		else
+		else 
 		{
 			cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
 			player.decideCard="00";
