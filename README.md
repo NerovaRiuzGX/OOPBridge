@@ -64,8 +64,8 @@
   - ns_vulnerable: bool
   - ew_vulnerable: bool
   - Card[4]: vector string
-  - turn: int
-  - auction_log: vector string
+  - turn: int   //出牌階段，一輪中出牌的順序
+  - auction_log: vector string
   - contract_suit: int
   - contract_trick: int
   - contract_dbl: int 
@@ -75,7 +75,7 @@
   - ew_trick: int
   - ns_point: int
   - ew_point: int
-  - statement: int
+  - statement: int  //遊戲進行狀態
   - reset()  //下一局
   - vulner()    //設定本局身價
   - shuffle()   //洗牌發牌階段
