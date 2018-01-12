@@ -521,7 +521,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				curr_state++;
 			}
 			else {
-				curr_state = (curr_state+1)%4;
+				curr_state = (player.position+2)%4;
 			}
 		}
 		else if ( player.statement-20 >= 5 ) {
