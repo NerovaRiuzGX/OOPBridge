@@ -481,15 +481,15 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	char pos[4] = {'N', 'E', 'S', 'W'};
 	if(player.statement/10==1)
 	{
-		if(player.statement%10==4)
+		if(player.statement-10==4)
 		{
 			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
 			Sleep(2000);
 			curr_state = player.position;
 		}
-		else if ( player.position==player.statement%10 )
+		else if ( player.position==player.statement-10 )
 		{
-			if (curr_state==player.statement%10) {
+			if (curr_state==player.statement-10) {
 				player.bid();
 				curr_state++;
 				//Sleep(200);
@@ -498,7 +498,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		else
 		{
 			
-			cout<<"Waiting for player to bid  "<<pos[player.statement%10]<<" !!";
+			cout<<"Waiting for player to bid  "<<pos[player.statement-10]<<" !!";
 			player.decideBid="00";
 			curr_state = player.position;
 
@@ -506,28 +506,28 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	}
 	else if(player.statement/10==2)
 	{
-		if( (player.statement%10 == (player.declarer_position+2)%4 ) &&(player.position==player.declarer_position) )
+		if( player.position==player.statement-20 )
 		{
 			if ( curr_state==player.statement%10 ) {
 				player.playCard(); 
 				curr_state++;
 			}
 		}
-		else if(	player.position==player.statement%10 )
+		else if( (player.statement-20 == (player.declarer_position+2)%4 ) &&(player.position==player.declarer_position) )
 		{
-			if ( curr_state==player.statement%10 ) {
+			if ( curr_state==player.statement-20 ) {
 				player.playCard(); 
 				curr_state++;
 			}
 		}
-		else if (player.statement%10 >= 5) {
+		else if ( player.statement-20 >= 5 ) {
 			cout << "Player " << pos[(player.statement-5)%10] << " wins the trick" << endl;
 			curr_state = (player.statement-5)%10;
 			Sleep(2000);
 		}
 		else
 		{
-			cout<<"Waiting for player"<<pos[player.statement%10]<<" to play card !!";
+			cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
 			player.decideCard="00";
 			curr_state = player.position;
 		}
