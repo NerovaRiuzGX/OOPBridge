@@ -486,7 +486,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		{
 			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
 			Sleep(2000);
-			curr_state = player.statement-10;
+			curr_state = player.position;
 		}
 		else if ( player.position==player.statement-10 )
 		{
@@ -501,8 +501,8 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 			
 			cout<<"Waiting for player to bid  "<<pos[player.statement-10]<<" !!";
 			player.decideBid="00";
-			curr_state = player.statement-10;
-			Sleep(500);
+			curr_state = player.position;
+
 		}
 	}
 	else if(player.statement/10==2)
@@ -520,6 +520,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				player.playCard(); 
 				curr_state++;
 			}
+			else {
+				curr_state = (curr_state+1)%4;
+			}
 		}
 		else if ( player.statement-20 >= 5 ) {
 			cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
@@ -530,8 +533,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		{
 			cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
 			player.decideCard="00";
-			curr_state = player.statement-20;
-			Sleep(500);
+			curr_state = player.position;
 		}
 	}
 	else if(player.statement/10==3)
