@@ -477,7 +477,8 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 }
 
 void PlayerTask(int & curr_state) //what Players should react when they receive a package
-{
+{	
+	int dummy = (player.declarer_position+2)%4;
 	char pos[4] = {'N', 'E', 'S', 'W'};
 	if(player.statement/10==1)
 	{
@@ -506,14 +507,14 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	}
 	else if(player.statement/10==2)
 	{
-		if( player.position==player.statement-20 )
+		if( player.position == player.statement-20 && player.statement-20 != dummy)
 		{
-			if ( curr_state==player.statement%10 ) {
+			if ( curr_state==player.statement-20 ) {
 				player.playCard(); 
 				curr_state++;
 			}
 		}
-		else if( (player.statement-20 == (player.declarer_position+2)%4 ) &&(player.position==player.declarer_position) )
+		else if( (player.statement-20 == dummy) && (player.position == player.declarer_position) )
 		{
 			if ( curr_state==player.statement-20 ) {
 				player.playCard(); 
@@ -521,8 +522,8 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 			}
 		}
 		else if ( player.statement-20 >= 5 ) {
-			cout << "Player " << pos[(player.statement-5)%10] << " wins the trick" << endl;
-			curr_state = (player.statement-5)%10;
+			cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
+			curr_state = player.statement-25;
 			Sleep(2000);
 		}
 		else
