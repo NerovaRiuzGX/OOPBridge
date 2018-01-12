@@ -21,7 +21,7 @@
 |                   | `2`          | S player plays                     | Push trick_log       | (S) Play a card      |
 |                   | `3`          | W player plays                     | Push trick_log       | (W) Play a card      |
 |                   | `4`          | *PLAY* Done                        | Generate results     | Waiting              |
-|                   | `5`~`8`      | Round Finished                     | Redirect statement   | Waiting              |
+|                   | `5`~`9`      | Round Finished                     | Redirect statement   | Waiting              |
 | ----------------- | ------------ | ---------------------------------- | -------------------- | -------------------- |
 | `3` - *RESULT*    | `0`          | Sharing round results              | Send results         | Show results         |
 |                   | `1`          | Table reset                        | Reset table data     | Reset table data     |
