@@ -467,7 +467,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					host.statement++;
 					break;
 				case 1:
-					host.reset();
+					//host.reset(); reset in statement 4
 					host.statement++;
 					break;
 				case 2:
