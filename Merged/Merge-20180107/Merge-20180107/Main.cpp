@@ -450,6 +450,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					}
 					break;
 			}
+			break;
 		case 3: //RESULT
 			switch (host.statement%10){
 				case 0:
@@ -467,6 +468,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					}
 					break;
 			}
+			break;
 		case 4: //CLAIM
 		default: /*exit();*/ break;
 	}
