@@ -363,14 +363,16 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 1:
 				case 2:
 				case 3:
-					if(total_trick==13)
-						host.statement=24;
 
 					if(host.turn == 4)
 					{
 						int total_trick = host.ns_trick+host.ew_trick;
 						string turn_max = host.trick_log[total_trick][0]; 
 						int max_player=0;
+
+						if(total_trick==13)
+							host.statement=24;
+
 						/*char turn_contract_suit = 'C';
 
 						switch(host.contract_suit)
