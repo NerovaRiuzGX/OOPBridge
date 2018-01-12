@@ -436,7 +436,7 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					break;
 				case 4:
 					if (Check(position)) {
-						host.statement = 20;
+						host.statement = 30;
 						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
 					}
 					break;
@@ -447,6 +447,22 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					}
 			}
 		case 3: //RESULT
+			switch (host.statement%10){
+				case 0:
+					host.score();
+					host.statement++;
+					break;
+				case 1:
+					host.reset();
+					host.statement++;
+					break;
+				case 2:
+					if (Check(position)) {
+						host.statement = 4;
+						fill(connectCheck, connectCheck + sizeof(connectCheck), false);
+					}
+					break;
+			}
 		case 4: //CLAIM
 		default: /*exit();*/ break;
 	}
@@ -484,18 +500,14 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	}
 	else if(player.statement/10==2)
 	{
-		if( (player.statement%10== (player.declarer_position+2) %4) && ( player.position==player.declarer_position )   )
+		if(	player.position==player.statement%10 )
 		{
 			if ( curr_state==player.statement%10 ) {
 				player.playCard(); 
 				curr_state++;
 			}
-		}
-		else if(	player.position==player.statement%10)
-		{
-			if ( curr_state==player.statement%10 ) {
-				player.playCard(); 
-				curr_state++;
+			else if (player.turn == 0) {
+				curr_state = player.position;
 			}
 		}
 		else if (player.statement%10 >= 5) {
@@ -505,17 +517,11 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		}
 		else
 		{
-			cout<<"Waiting for"<<pos[player.statement%10]<<" player to play card !!"<<endl;
+			cout<<"Waiting for player to play card  "<<pos[player.statement%10]<<" !!";
 			player.decideCard="00";
 			curr_state = player.position;
 		}
 	}
-	else if(player.statement/10==3)
-	{
-		cout<<"NS_Point : "<<player.ns_point<<endl
-			<<"EW_Point : "<<player.ew_point<<endl;
-	}
-
 }
 
 bool Check (int position) { //check if everyone has received the latest package

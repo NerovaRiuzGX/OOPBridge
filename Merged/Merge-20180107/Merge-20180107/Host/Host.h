@@ -31,7 +31,7 @@ public:
 	bool ns_vulnerable;
 	bool ew_vulnerable;
 	vector<string> Card[4];
-	int turn; //player's turn
+	int turn; //出牌階段，一輪中出牌的順序
 	vector<string> auction_log;
 	int contract_suit;
 	int contract_trick;
