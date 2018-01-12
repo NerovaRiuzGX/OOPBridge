@@ -363,6 +363,9 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 1:
 				case 2:
 				case 3:
+					if(total_trick==13)
+						host.statement=24;
+
 					if(host.turn == 4)
 					{
 						int total_trick = host.ns_trick+host.ew_trick;
@@ -427,10 +430,6 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 						{
 							host.turn = 0;
 							host.statement = 25 + (host.statement + max_player) %4;
-						}
-						else
-						{
-							host.statement = 24;
 						}
 					}
 					break;
