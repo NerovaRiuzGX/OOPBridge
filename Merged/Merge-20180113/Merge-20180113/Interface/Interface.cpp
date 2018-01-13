@@ -1060,6 +1060,9 @@ void Interface::contract(Player & player)
 		case 3:
 			cout<<"\4";
 			break;
+		case 4:
+			cout<<"NT";
+			break;
 		}
 		switch(player.contract_dbl)
 		{
