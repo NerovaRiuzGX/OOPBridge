@@ -193,7 +193,7 @@ void Interface::dummycard(Player & player)
 		switch(player.position)
 		{
 		case 2:
-			if(nCard[0][0]=='S')
+			if(nCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -227,7 +227,7 @@ void Interface::dummycard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -239,7 +239,7 @@ void Interface::dummycard(Player & player)
 			}
 			break;
 		case 3:
-			if(eCard[0][0]=='S')
+			if(eCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -273,7 +273,7 @@ void Interface::dummycard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -319,7 +319,7 @@ void Interface::dummycard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -331,7 +331,7 @@ void Interface::dummycard(Player & player)
 			}
 			break;
 		case 1:
-			if(wCard[0][0]=='S')
+			if(wCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -365,7 +365,7 @@ void Interface::dummycard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -387,7 +387,7 @@ void Interface::dummycard(Player & player)
 			switch(player.position)
 			{
 			case 0:
-				if(eCard[0][0]=='S')
+				if(eCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -420,7 +420,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(2,y);y++;
@@ -464,7 +464,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(2,y);y++;
@@ -475,7 +475,7 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 2:
-				if(wCard[0][0]=='S')
+				if(wCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -508,7 +508,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(2,y);y++;
@@ -519,7 +519,7 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 3:
-				if(nCard[0][0]=='S')
+				if(nCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -552,7 +552,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(2,y);y++;
@@ -570,7 +570,7 @@ void Interface::dummycard(Player & player)
 			switch(player.position)
 			{
 			case 0:
-				if(eCard[0][0]=='S')
+				if(eCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -603,7 +603,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(41,y);y++;
@@ -647,7 +647,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(41,y);y++;
@@ -658,7 +658,7 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 2:
-				if(wCard[0][0]=='S')
+				if(wCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -691,7 +691,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(41,y);y++;
@@ -702,7 +702,7 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 3:
-				if(nCard[0][0]=='S')
+				if(nCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
 					cout<<"\6";
@@ -735,7 +735,7 @@ void Interface::dummycard(Player & player)
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
-						case 'C':
+						case 'S':
 							setcolor(colorcode(0,2));
 							cout<<"\5";
 							gotoxy(41,y);y++;
@@ -783,7 +783,7 @@ void Interface::playercard(Player & player)
 	switch(player.position)
 		{
 		case 0:
-			if(nCard[0][0]=='S')
+			if(nCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -817,7 +817,7 @@ void Interface::playercard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -829,7 +829,7 @@ void Interface::playercard(Player & player)
 			}
 			break;
 		case 1:
-			if(eCard[0][0]=='S')
+			if(eCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -863,7 +863,7 @@ void Interface::playercard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -909,7 +909,7 @@ void Interface::playercard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -921,7 +921,7 @@ void Interface::playercard(Player & player)
 			}
 			break;
 		case 3:
-			if(wCard[0][0]=='S')
+			if(wCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
 				cout<<"\6";
@@ -955,7 +955,7 @@ void Interface::playercard(Player & player)
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
-					case 'C':
+					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
 						cout<<"\5";
@@ -991,7 +991,8 @@ void Interface::trick(Player & player)
 
 void Interface::table(Player & player)
 {
-		cout<<"\n\n\n     ■■■■■■■■■■■■■■■■■\n"
+	gotoxy(0,3);
+		cout<<"     ■■■■■■■■■■■■■■■■■\n"
 			<<"     ■                              ■\n"
 			<<"     ■                              ■\n"
 			<<"     ■                              ■\n"
@@ -1036,8 +1037,11 @@ void Interface::contract(Player & player)
 	cout<<"           ";
 
 	gotoxy(75,10);
-	cout<<player.contract_trick-6<<player.contract_suit<<player.contract_dbl;
-
+	if(player.contract_dbl!=-1&&player.contract_suit!=-1&&player.contract_trick!=-1)
+	{
+		cout<<player.contract_trick-6<<player.contract_suit<<player.contract_dbl;
+	}
+	
 	gotoxy(0,23);
 }
 
@@ -1259,9 +1263,9 @@ void Interface::scoreboard(Player & player)
 	gotoxy(77,5);
 	cout<<player.round;
 	gotoxy(49,14);
-	cout<<player.ns_point;
+	cout<<"NS :"<<player.ns_point;
 	gotoxy(49,15);
-	cout<<player.ew_point;
+	cout<<"EW :"<<player.ew_point;
 	
 	gotoxy(0,23);
 }
