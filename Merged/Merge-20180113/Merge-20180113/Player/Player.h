@@ -18,7 +18,7 @@ public:
 	void playCard();
 	bool MySuits(char);
 	void claim();
-	void bid();
+	bool bid (string); //return true if the card is correct
 
 	string decideCard;		//傳給server的資訊
 	string decideBid;		//不用時為"00"

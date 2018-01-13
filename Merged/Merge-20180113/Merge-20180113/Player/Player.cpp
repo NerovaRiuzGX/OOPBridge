@@ -13,9 +13,9 @@ Player::Player()
 	decideClaim = -1;
 }
 
-void Player::bid()
+bool Player::bid (string bid)
 {
-	string bid;
+	//string bid;
 	string Maxbid="00", Maxcall="00";
 	int Maxcall_pos=0;
 	/*auction_log;//°²³]³ÛµP¸ê°T
@@ -40,18 +40,18 @@ void Player::bid()
 		}
 	}
 
-	while(true)
-	{	
-		fflush(stdin);
+	//while(true)
+	//{	
+		//fflush(stdin);
 		//cout<<"Max bidding :"<<Maxbid<<endl;
 		//cout<<"Please Enter your bid( Pass(PS) , Dbl(X) , Rdbl(XX) )"<<endl
 		//	<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
-		getline(cin,bid);
+		//getline(cin,bid);
 		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
 		
 		if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
 			if (Maxbid[0]>bid[0]) {
-				cout << "error" << endl; continue;
+				return false;
 			}
 			else if (Maxbid[0]==bid[0]) {
 				bool pass = true;
@@ -68,43 +68,43 @@ void Player::bid()
 						if (Maxbid[1]=='N') {pass = false;} break;
 				}
 				if (pass) {
-					cout << bid << endl; break;
+					return true;
 				}
 				else {
-					cout << "error" << endl; continue;
+					return false;
 				}
 			}
 			else {
-				cout << bid << endl; break;
+				return true;
 			}
 		}
 		else if (bid=="PS") {
-			cout << bid << endl; break;
+			return true;
 		}
 		else if (bid=="X" || bid=="XX") {
 			if (Maxcall_pos%2==1) {
 				if (Maxbid=="00") {
-					cout << "error" << endl; continue;
+					return false;
 				}
 				else if (Maxcall!="X" && bid=="XX") {
-					cout << "error" << endl; continue;
+					return false;
 				}
 				else if (Maxcall=="X" && bid=="X") {
-					cout << "error" << endl; continue;
+					return false;
 				}
 				else if (Maxcall=="XX") {
-					cout << "error" << endl; continue;
+					return false;
 				}
 				else {
-					cout << bid << endl; break;
+					return true;
 				}
 			}
 			else {
-				cout << "error" << endl; continue;
+				return false;
 			}
 		}
 		else {
-			cout << "error" << endl; continue;
+			return false;
 		}
 
 
@@ -152,8 +152,8 @@ void Player::bid()
 		{
 			cout<<bid<<endl<<"You have an error bid  !!!"<<endl;
 		}*/
-	}
-	decideBid=bid;
+	//}
+	//decideBid=bid;
 }
 
 void Player::printTable()

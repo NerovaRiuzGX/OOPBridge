@@ -562,7 +562,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		else if ( player.position==player.statement-10 )
 		{
 			if (curr_state==player.statement-10) {
-				player.bid();
+				do {
+					player.decideBid = UI.bidding();
+				} while (!player.bid(player.decideBid));
 				curr_state++;
 				//Sleep(200);
 			}
