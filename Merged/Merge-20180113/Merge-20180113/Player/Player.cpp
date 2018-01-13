@@ -43,9 +43,9 @@ void Player::bid()
 	while(true)
 	{	
 		fflush(stdin);
-		cout<<"Max bidding :"<<Maxbid<<endl;
-		cout<<"Please Enter your bid( Pass(PS) , Dbl(X) , Rdbl(XX) )"<<endl
-			<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
+		//cout<<"Max bidding :"<<Maxbid<<endl;
+		//cout<<"Please Enter your bid( Pass(PS) , Dbl(X) , Rdbl(XX) )"<<endl
+		//	<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
 		getline(cin,bid);
 		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
 		
@@ -225,14 +225,14 @@ void Player::playCard()
 	trick_log[12][0]="00";*/
 	if(trick_log[ns_trick+ew_trick][0]!="")
 	{
-		cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;
+		//cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;
 		Suits=trick_log[ns_trick+ew_trick][0][0];
 	}
-	else cout<<"You are the first"<<endl;
+	//else cout<<"You are the first"<<endl;
 	vector<string>::iterator it;	
 	while (true)
 	{
-		cout<<"Please enter a card: ";
+		//cout<<"Please enter a card: ";
 		getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
 		it=find(Card[statement%10].begin(),Card[statement%10].end(),playcard);			//判斷 myCard 裡面有沒有 playCard

@@ -133,12 +133,12 @@ void * createServer (void * serverPort) { //this function creates a server that 
 
 void * clientInterface (void *) { //this function handles how the interface should be showned
 	
+	//thread self detach
+	pthread_detach(pthread_self());
+
 	//a variable that checks and prevents double input bug
 	int curr_state=player.position;
 	int print_state=player.statement;
-
-	//thread self detach
-	pthread_detach(pthread_self());
 
 	//client interface loop
 	while (true) {
@@ -148,8 +148,33 @@ void * clientInterface (void *) { //this function handles how the interface shou
 
 		//only print when the statement changes
 		if (print_state!=player.statement) { 
-			player.printTable();
-			print_state=player.statement;
+			switch (player.statement/10) {
+				case 0:
+					break;
+				case 1:
+					UI.table(player);
+					UI.playercard(player);
+					UI.biddingtable(player);
+					UI.scoreboard(player);
+					UI.contract(player);
+					break;
+				case 2:
+					UI.table(player);
+					UI.playercard(player);
+					if (player.trick_log[0][0]!="") {
+						UI.dummycard(player);
+					}
+					//UI.biddingtable(player);
+					//UI.scoreboard(player);
+					//UI.contract(player);
+					break;
+				case 3:
+					break;
+			}
+
+			//interface for testing
+			//player.printTable();
+			print_state=player.statement; //print_state reset
 		}
 		
 		PlayerTask(curr_state);
@@ -237,6 +262,8 @@ void main () {
 		switch (UI.multiplayeroption()) {
 			case 0: //create
 				UI.createtable(server);
+
+				//open another thread for server
 				pthread_t serverThread;
 				pthread_create(&serverThread, NULL, createServer, (void *)10555);
 				Sleep(1000);
@@ -524,7 +551,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	{
 		if(player.statement-10==4)
 		{
-			cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
+			//cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
 			Sleep(2000);
 			curr_state = player.position;
 		}
@@ -539,7 +566,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		else
 		{
 			
-			cout<<"Waiting for player to bid  "<<pos[player.statement-10]<<" !!";
+			//cout<<"Waiting for player to bid  "<<pos[player.statement-10]<<" !!";
 			player.decideBid="00";
 			curr_state = player.position;
 
@@ -565,24 +592,24 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 			}
 		}
 		else if (player.statement-20 == 9) {
-			cout << "Waiting..." << endl;
+			//cout << "Waiting..." << endl;
 		}
 		else if ( player.statement-20 >= 5 ) {
-			cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
+			//cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
 			curr_state = player.statement-25;
 			Sleep(2000);
 		}
 		else 
 		{
-			cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
+			//cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
 			player.decideCard="00";
 			curr_state = player.position;
 		}
 	}
 	else if(player.statement/10==3)
 	{
-		cout<<"NS_Point : "<<player.ns_point<<endl
-			<<"EW_Point : "<<player.ew_point<<endl;
+		//cout<<"NS_Point : "<<player.ns_point<<endl
+			//<<"EW_Point : "<<player.ew_point<<endl;
 	}
 }
 
