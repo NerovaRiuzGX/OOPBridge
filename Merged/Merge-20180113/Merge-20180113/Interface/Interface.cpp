@@ -196,7 +196,7 @@ void Interface::dummycard(Player & player)
 			if(nCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -230,7 +230,7 @@ void Interface::dummycard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -242,7 +242,7 @@ void Interface::dummycard(Player & player)
 			if(eCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -276,7 +276,7 @@ void Interface::dummycard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -322,7 +322,7 @@ void Interface::dummycard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -334,7 +334,7 @@ void Interface::dummycard(Player & player)
 			if(wCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -368,7 +368,7 @@ void Interface::dummycard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -390,7 +390,7 @@ void Interface::dummycard(Player & player)
 				if(eCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -422,7 +422,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -466,7 +466,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -478,7 +478,7 @@ void Interface::dummycard(Player & player)
 				if(wCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -510,7 +510,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -522,7 +522,7 @@ void Interface::dummycard(Player & player)
 				if(nCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -554,7 +554,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(2,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -573,7 +573,7 @@ void Interface::dummycard(Player & player)
 				if(eCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -605,7 +605,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -661,7 +661,7 @@ void Interface::dummycard(Player & player)
 				if(wCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -693,7 +693,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -705,7 +705,7 @@ void Interface::dummycard(Player & player)
 				if(nCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -737,7 +737,7 @@ void Interface::dummycard(Player & player)
 							break;
 						case 'S':
 							setcolor(colorcode(0,2));
-							cout<<"\5";
+							cout<<"\6";
 							gotoxy(41,y);y++;
 							setcolor(colorcode(15,2));
 							break;
@@ -786,7 +786,7 @@ void Interface::playercard(Player & player)
 			if(nCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -820,7 +820,7 @@ void Interface::playercard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -832,7 +832,7 @@ void Interface::playercard(Player & player)
 			if(eCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -866,7 +866,7 @@ void Interface::playercard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -924,7 +924,7 @@ void Interface::playercard(Player & player)
 			if(wCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -958,7 +958,7 @@ void Interface::playercard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
