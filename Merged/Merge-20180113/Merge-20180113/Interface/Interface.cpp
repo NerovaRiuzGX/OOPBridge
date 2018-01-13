@@ -1086,7 +1086,7 @@ void Interface::biddingtable(Player & player)
 	}
 	cout<<"   W  ";
 	
-	setcolor(colorcode(0,7));
+	
 	int count=4;
 	int count2=0;
 	
@@ -1113,6 +1113,7 @@ void Interface::biddingtable(Player & player)
 		cout<<"  "<<player.auction_log[i];
 		if(player.auction_log[i][1]=='N')
 		{
+			cout<<" ";
 			count2+=5;
 		}
 		else
@@ -1126,6 +1127,7 @@ void Interface::biddingtable(Player & player)
 			count2=46;
 			count+=1;
 		}
+		setcolor(colorcode(15,2));
 	}
 	setcolor(colorcode(15,2));
 }
