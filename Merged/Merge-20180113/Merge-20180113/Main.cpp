@@ -152,6 +152,7 @@ void * clientInterface (void *) { //this function handles how the interface shou
 				case 0:
 					break;
 				case 1:
+					system("cls");
 					UI.table(player);
 					UI.playercard(player);
 					UI.biddingtable(player);
@@ -246,6 +247,9 @@ void createClient (string ip) { //this function creates a client and keep doing 
 }
 
 void main () {
+
+	//output codepage 951
+	SetConsoleOutputCP(951);
 
 	//initiallize two mutex locks
 	pthread_mutex_init(&serverMutex, NULL);
