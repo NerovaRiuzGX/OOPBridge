@@ -58,6 +58,7 @@ int Interface::gamemodeoption()
 	{
 		//gametable();
 	}
+	setcolor(colorcode(15,2));
 }
 
 int Interface::multiplayeroption()
@@ -105,6 +106,7 @@ int Interface::multiplayeroption()
 	{
 		return 1; //join
 	}
+	setcolor(colorcode(15,2));
 }
 
 void Interface::createtable(TCPServer & server)
@@ -120,6 +122,7 @@ void Interface::createtable(TCPServer & server)
 	{
 		cout<<"error"<<endl;
 	}
+	setcolor(colorcode(15,2));
 }
 
 string Interface::jointable()
@@ -138,7 +141,7 @@ string Interface::jointable()
 	{
 		cout<<"error";
 	}
-
+	setcolor(colorcode(15,2));
 	return connectIP;
 }
 
@@ -748,6 +751,7 @@ void Interface::dummycard(Player & player)
 			}
 		}
 	}
+	setcolor(colorcode(15,2));
 	gotoxy(0,23);
 }
 
@@ -967,6 +971,7 @@ void Interface::playercard(Player & player)
 			}
 			break;
 		}
+	setcolor(colorcode(15,2));
 	gotoxy(0,23);
 }
 
@@ -986,6 +991,7 @@ void Interface::trick(Player & player)
 	gotoxy(63,15);
 	cout<<player.ew_trick;
 
+	setcolor(colorcode(15,2));
 	gotoxy(0,23);
 }
 
@@ -1041,13 +1047,14 @@ void Interface::contract(Player & player)
 	{
 		cout<<player.contract_trick-6<<player.contract_suit<<player.contract_dbl;
 	}
-	
+	setcolor(colorcode(15,2));
 	gotoxy(0,23);
 }
 
 void Interface::biddingtable(Player & player)
 {
 	setcolor(colorcode(15,2));
+
 	gotoxy(46,3);
 	if(player.ns_vulnerable!=1)
 	{
@@ -1108,19 +1115,36 @@ void Interface::biddingtable(Player & player)
 
 	for(unsigned int i=0;i<player.auction_log.size();i++)
 	{
-		
+		setcolor(colorcode(0,7));
 		gotoxy(count2,count);
 		cout<<"  "<<player.auction_log[i];
-		if(player.auction_log[i][1]=='N')
+		if(player.auction_log[i][0]=='X')
 		{
-			cout<<" ";
-			count2+=5;
+			cout<<"   ";
+			count2+=7;
 		}
 		else
 		{
-			cout<<"  ";
-			count2+=6;
+			if(player.auction_log[i]=="XX")
+			{
+				cout<<"  ";
+				count2+=6;
+			}
+			else
+			{
+				if(player.auction_log[i][1]=='N')
+				{
+					cout<<" ";
+					count2+=5;
+				}
+				else
+				{
+					cout<<"  ";
+					count2+=6;
+				}
+			}
 		}
+		
 		
 		if(count2>=66)
 		{
@@ -1134,6 +1158,7 @@ void Interface::biddingtable(Player & player)
 
 string Interface::bidding()
 {
+	setcolor(colorcode(15,2));
 	string bid;
 	//cin.clear;
 
@@ -1155,6 +1180,7 @@ string Interface::bidding()
 
 string Interface::playcard()
 {
+	setcolor(colorcode(15,2));
 	string play;
 	//cin.clear;
 
@@ -1330,6 +1356,8 @@ void Interface::scoreboard(Player & player)
 	cout<<"NS :"<<player.ns_point;
 	gotoxy(49,15);
 	cout<<"EW :"<<player.ew_point;
+
+	setcolor(colorcode(15,2));
 	
 	gotoxy(0,23);
 }
