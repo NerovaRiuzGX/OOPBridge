@@ -8,6 +8,12 @@
 #include<vector>
 #include<stdio.h>
 #include<MMSystem.h>
+
+//extern TCPServer server;
+
+#include "../Player/Player.h"
+#include "../TCP/TCPServer.h"
+
 #pragma  comment(lib,"WinMM.Lib")
 
 using namespace std;
@@ -15,22 +21,25 @@ using namespace std;
 class Interface
 {
 public:
-	Interface(char,char,char,char,int,int,int);
-	void gamemodeoption();
-	void multiplayeroption();
-	void createtable();
-	void jointable();
-	void gametable();
-	void dummycard();
-	void playercard();
-	void trick();
-	void table();
-	void contract();
-	void bidding();
-	void playcard();
-	void card();
-	void suit(int,int,char &,char &);
-	void scoreboard();
+	extern TCPServer server;
+	extern Player player;
+	Interface(char,char,char,char);
+	void gamemodeoption();//單雙人模式選擇
+	void multiplayeroption();//加入or開桌選擇
+	void createtable(TCPServer &);//顯示server的ip
+	string jointable();//回傳玩家輸入的ip
+	//void gametable();//我自己測試用的 不要理他
+	void dummycard(Player &);//印出夢家的牌
+	void playercard(Player &);//印出玩家的牌
+	void trick(Player &);//印出目前兩隊吃到的墩數
+	void table(Player &);//印出牌桌的框框
+	void contract(Player &);//印出喊到的合約
+	void biddingtable(Player &);//喊牌
+	string bidding();//回傳玩家的喊牌內容
+	string playcard();//回傳玩家打出的牌
+	void card(Player &);//有人打牌的時候 牌桌上印出牌
+	void suit(int,int,char &,char &);//我自己function用的 不要理他
+	void scoreboard(Player &);//印出兩隊目前分數
 	void gotoxy(int xpos, int ypos)
 	{
 		COORD scrn;
@@ -48,9 +57,9 @@ public:
 		return f + 16*b;
 	}
 private:
-	int turn;//testing
-	int declarer_position;//testing
-	int position;//testing
+	//int turn;//testing
+	//int declarer_position;//testing
+	//int position;//testing
 	char modechoose;
 	char modeconfirm;
 	char gamechoose;

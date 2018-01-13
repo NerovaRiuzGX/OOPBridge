@@ -7,7 +7,7 @@ int main()
 {	
 	
 	SetConsoleOutputCP(951);
-	Interface a(72,0,72,0,0,0,0);
+	Interface a(72,0,72,0);
 	a.gamemodeoption();
 
 	system("pause");

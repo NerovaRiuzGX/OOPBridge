@@ -4,8 +4,8 @@ using namespace std;
 string Interface::pos[4]={"Ｎ","Ｅ","Ｓ","Ｗ"};
 int Interface::cardcounter=0;
 
-Interface::Interface(char a=72,char b=0,char c=72,char d=0,int e=0,int f=0,int t=0)
-	:modechoose(a),modeconfirm(b),gamechoose(c),gamestart(d),declarer_position(e),position(f),turn(t)
+Interface::Interface(char a=72,char b=0,char c=72,char d=0)
+	:modechoose(a),modeconfirm(b),gamechoose(c),gamestart(d)
 {
 	
 }
@@ -54,7 +54,7 @@ void Interface::gamemodeoption()
 	}
 	else
 	{
-		gametable();
+		//gametable();
 	}
 }
 
@@ -97,7 +97,7 @@ void Interface::multiplayeroption()
 	}
 	if(gamechoose==13&&gamestart==72)
 	{
-		createtable();
+		createtable(server);
 	}
 	if(gamechoose==13&&gamestart==80)
 	{
@@ -105,13 +105,12 @@ void Interface::multiplayeroption()
 	}
 }
 
-void Interface::createtable()
+void Interface::createtable(TCPServer & tcpserver)
 {
 	system("cls");
-	string serverIP="192.168.1.113";//testing
 	if(gamechoose==13&&gamestart==72)
 	{
-		cout<<"\n\n\n\n\n\n\n\n\n                                     YOUR IP IS "<<serverIP
+		cout<<"\n\n\n\n\n\n\n\n\n                                     YOUR IP IS "<<tcpserver.getIP()
 			<<"\n\n                                        WAITING FOR PLAYERS"<<endl;
 		gotoxy(0,23);
 	}
@@ -121,10 +120,11 @@ void Interface::createtable()
 	}
 }
 
-void Interface::jointable()
+string Interface::jointable()
 {
 	string connectIP;//testing
 	system("cls");
+	cin.clear();
 	if(gamechoose==13&&gamestart==80)
 	{
 		cout<<"\n\n\n\n\n\n\n\n\n                                        ENTER THE TABLE'S IP\n"<<endl;
@@ -136,24 +136,17 @@ void Interface::jointable()
 	{
 		cout<<"error";
 	}
-	if(connectIP=="1")
-	{
-		gametable();
-	}
-	else
-	{
-		gotoxy(43,13);
-		cout<<"The table doesn't exist!";
-		gotoxy(0,23);
-	}
+
+	return connectIP;
 }
 
-void Interface::gametable()
+/*void Interface::gametable()
 {
 	system("cls");
 	setcolor(colorcode(15,2));
 
 	table();
+	biddingtable();
 	bidding();
 	scoreboard();
 	trick();
@@ -163,9 +156,9 @@ void Interface::gametable()
 	dummycard();
 	
 	gotoxy(0,23);
-}
+}*/
 
-void Interface::dummycard()
+void Interface::dummycard(Player & player)
 {
 	vector<string> sCard(13,"SA");
 	vector<string> nCard(13,"SA");
@@ -177,9 +170,9 @@ void Interface::dummycard()
 	int w=wCard.size();//testing
 	
 	gotoxy(6,1);
-	if(declarer_position==position)
+	if(player.declarer_position==player.position)
 	{
-		switch(position)
+		switch(player.position)
 		{
 		case 2:
 			if(nCard[0][0]=='S')
@@ -370,10 +363,10 @@ void Interface::dummycard()
 	else
 	{
 		int y=4;
-		if(declarer_position==position-1||declarer_position+1==position)
+		if(player.declarer_position==player.position-1||player.declarer_position+1==player.position)
 		{
 			gotoxy(2,3);
-			switch(position)
+			switch(player.position)
 			{
 			case 0:
 				if(eCard[0][0]=='S')
@@ -556,7 +549,7 @@ void Interface::dummycard()
 		else
 		{
 			gotoxy(41,3);
-			switch(position)
+			switch(player.position)
 			{
 			case 0:
 				if(eCard[0][0]=='S')
@@ -740,7 +733,7 @@ void Interface::dummycard()
 	gotoxy(0,23);
 }
 
-void Interface::playercard()
+void Interface::playercard(Player & player)
 {
 	vector<string> sCard(13,"SA");
 	vector<string> nCard(13,"SA");
@@ -753,7 +746,7 @@ void Interface::playercard()
 	
 	gotoxy(6,21);
 	
-	switch(position)
+	switch(player.position)
 		{
 		case 0:
 			if(nCard[0][0]=='S')
@@ -943,7 +936,7 @@ void Interface::playercard()
 	gotoxy(0,23);
 }
 
-void Interface::trick()
+void Interface::trick(Player & player)
 {
 	gotoxy(61,13);
 	setcolor(colorcode(0,15));
@@ -955,14 +948,14 @@ void Interface::trick()
 	cout<<"         ";
 
 	gotoxy(63,14);
-	cout<<"NS:13";
+	cout<<player.ns_trick;
 	gotoxy(63,15);
-	cout<<"EW: 0";
+	cout<<player.ew_trick;
 
 	gotoxy(0,23);
 }
 
-void Interface::table()
+void Interface::table(Player & player)
 {
 		cout<<"\n\n\n     ■■■■■■■■■■■■■■■■■\n"
 			<<"     ■                              ■\n"
@@ -984,18 +977,18 @@ void Interface::table()
 			<<endl;
 		
 		gotoxy(21,19);
-		cout<<pos[position];
+		cout<<pos[player.position];
 		gotoxy(5,11);
-		cout<<pos[(position+1)%4];
+		cout<<pos[(player.position+1)%4];
 		gotoxy(21,3);
-		cout<<pos[(position+2)%4];
+		cout<<pos[(player.position+2)%4];
 		gotoxy(37,11);
-		cout<<pos[(position+3)%4];
+		cout<<pos[(player.position+3)%4];
 
 		gotoxy(0,23);
 }
 
-void Interface::contract()
+void Interface::contract(Player & player)
 {
 	gotoxy(72,8);
 	setcolor(colorcode(0,15));
@@ -1009,12 +1002,12 @@ void Interface::contract()
 	cout<<"           ";
 
 	gotoxy(75,10);
-	cout<<"7NTXX";//contract_trick<<contract_suit<<contract_dbl;
+	cout<<player.contract_trick-6<<player.contract_suit<<player.contract_dbl;
 
 	gotoxy(0,23);
 }
 
-void Interface::bidding()
+void Interface::biddingtable(Player & player)
 {
 	gotoxy(46,3);
 	setcolor(colorcode(0,15));
@@ -1022,52 +1015,69 @@ void Interface::bidding()
 	setcolor(colorcode(0,7));
 	int count=4;
 	int count2=46;
-	int a[32]={11,21,31,14,51,61,71,81,10,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32};//testing
-	int i=0;
-	while(i<32)
+
+	for(unsigned int i=0;i<player.auction_log.size();i++)
 	{
 		gotoxy(count2,count);
-		cout<<"  "<<a[i]<<"  ";
+		cout<<"  "<<player.auction_log[i]<<"  ";
 		count2+=6;
 		if(count2>=66)
 		{
 			count2=46;
 			count+=1;
 		}
-		i++;
 	}
 	setcolor(colorcode(15,2));
-	if(turn==position)
-	{
-		gotoxy(46,18);
-		cout<<"It's your turn,";
-		gotoxy(46,19);
-		cout<<"enter your bidding:";
-		//cin
-		gotoxy(0,23);
-	}
 }
 
-void Interface::playcard()
+string Interface::bidding()
 {
-	if(turn==position)
-	{
-		setcolor(colorcode(15,2));
-		gotoxy(45,18); cout<<"It's your turn,";
-		gotoxy(45,19); cout<<"enter the card you play:";
-		//cin
-		gotoxy(0,23);
-	}
-	card();
+	string bid;
+	//cin.clear;
+
+	gotoxy(46,18);
+	cout<<"It's your turn,";
+	gotoxy(46,19);
+	cout<<"enter your bidding:";
+	cin>>bid;
+
+	gotoxy(46,18);
+	cout<<"                      ";
+	gotoxy(46,19);
+	cout<<"                      ";
+
 	gotoxy(0,23);
+
+	return bid;
 }
 
-void Interface::card()
+string Interface::playcard()
 {
-	char card[2]={'S','A'};//testing
-	int turn=3;//testing
-	int i=0;//testing
-	switch(turn)
+	string play;
+	//cin.clear;
+
+	setcolor(colorcode(15,2));
+	gotoxy(45,18); 
+	cout<<"It's your turn,";
+	gotoxy(45,19); 
+	cout<<"enter the card you play:";
+	cin>>play;
+
+	setcolor(colorcode(15,2));
+	gotoxy(45,18); 
+	cout<<"                          ";
+	gotoxy(45,19); 
+	cout<<"                          ";
+	
+	gotoxy(0,23);
+	return play;
+}
+
+void Interface::card(Player & player)
+{
+	int i=player.ns_trick+player.ew_trick;
+
+	switch(player.turn)
 	{
 	case 0:
 		setcolor(colorcode(15,2));
@@ -1101,54 +1111,43 @@ void Interface::card()
 		cout<<"   ";
 		
 		//lead
-		//char card[2]=trick_log[i][0];
-		suit(21,14,card[0],card[1]);
+		suit(21,14,player.trick_log[i][0][0],player.trick_log[i][0][1]);
 		break;
 	case 1:
 		//once right card
-		//char card2[2]=trick_log[i][0];
-		suit(28,10,card[0],card[1]);
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
+		suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+		if(player.trick_log[i][1]!="")
 		{
-			//char cardt[2]=trick_log[i][1];
-			suit(21,14,card[0],card[1]);
+			suit(21,14,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
 		break;
 	case 2:
 		//once top card + once right card
-		//char card4[2]=trick_log[i][0];
-		suit(28,10,card[0],card[1]);
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
+		suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+		if(player.trick_log[i][1]!="")
 		{
-			//char cardt[2]=trick_log[i][1];
-			suit(20,6,card[0],card[1]);
+			suit(20,6,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
+		if(player.trick_log[i][2]!="")
 		{
-			//char cardt[2]=trick_log[i][2];
-			suit(21,14,card[0],card[1]);
+			suit(21,14,player.trick_log[i][2][0],player.trick_log[i][2][1]);
 		}
 		break;
 	case 3:
 		//full
-		//char card5[2]=trick_log[i][0];
-		suit(28,10,card[0],card[1]);
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
+		suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+		if(player.trick_log[i][1]!="")
 		{
-			//char cardt[2]=trick_log[i][1];
-			suit(20,6,card[0],card[1]);
+			suit(20,6,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
+		if(player.trick_log[i][2]!="")
+		{			
+			suit(13,10,player.trick_log[i][2][0],player.trick_log[i][2][1]);
+		}
+		if(player.trick_log[i][3]!="")
 		{
-			//char cardt[2]=trick_log[i][2];
-			suit(13,10,card[0],card[1]);
+			suit(21,14,player.trick_log[i][3][0],player.trick_log[i][3][1]);
 		}
-		if(/*trick_log[i][1]!=0*/card[0]!=0)
-		{
-			//char cardt[2]=trick_log[i][3];
-			suit(21,14,card[0],card[1]);
-		}
-		
 		break;
 	}
 }
@@ -1201,7 +1200,7 @@ void Interface::suit(int x,int y,char &s,char &p)
 	gotoxy(0,23);
 }
 
-void Interface::scoreboard()
+void Interface::scoreboard(Player & player)
 {
 	gotoxy(72,3);
 	setcolor(colorcode(0,15));
@@ -1224,11 +1223,11 @@ void Interface::scoreboard()
 	cout<<"             ";
 	
 	gotoxy(77,5);
-	cout<<"1";//round;
+	cout<<player.round;
 	gotoxy(49,14);
-	cout<<"NS: 500";//ns_point;
+	cout<<player.ns_point;
 	gotoxy(49,15);
-	cout<<"EW:-500";//ew_point;
+	cout<<player.ew_point;
 	
 	gotoxy(0,23);
 }
