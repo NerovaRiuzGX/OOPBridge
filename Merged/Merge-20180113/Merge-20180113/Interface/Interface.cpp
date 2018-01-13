@@ -163,22 +163,22 @@ string Interface::jointable()
 void Interface::dummycard(Player & player)
 {
 	vector<string> sCard;
-	for(int i=0;i<player.Card[2].size();i++)
+	for(unsigned int i=0;i<player.Card[2].size();i++)
 	{
 		sCard.push_back(player.Card[2][i]);
 	}
 	vector<string> nCard;
-	for(int i=0;i<player.Card[0].size();i++)
+	for(unsigned int i=0;i<player.Card[0].size();i++)
 	{
 		nCard.push_back(player.Card[0][i]);
 	}
 	vector<string> eCard;
-	for(int i=0;i<player.Card[1].size();i++)
+	for(unsigned int i=0;i<player.Card[1].size();i++)
 	{
 		eCard.push_back(player.Card[1][i]);
 	}
 	vector<string> wCard;//testing
-	for(int i=0;i<player.Card[3].size();i++)
+	for(unsigned int i=0;i<player.Card[3].size();i++)
 	{
 		wCard.push_back(player.Card[3][i]);
 	}
@@ -285,10 +285,10 @@ void Interface::dummycard(Player & player)
 			}
 			break;
 		case 0:
-			if(sCard[0][0]=='S')
+			if(sCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -431,10 +431,10 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 1:
-				if(sCard[0][0]=='S')
+				if(sCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -614,10 +614,10 @@ void Interface::dummycard(Player & player)
 				}
 				break;
 			case 1:
-				if(sCard[0][0]=='S')
+				if(sCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
-					cout<<"\6";
+					cout<<"\5";
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
@@ -754,22 +754,22 @@ void Interface::dummycard(Player & player)
 void Interface::playercard(Player & player)
 {
 	vector<string> sCard;
-	for(int i=0;i<player.Card[2].size();i++)
+	for(unsigned int i=0;i<player.Card[2].size();i++)
 	{
 		sCard.push_back(player.Card[2][i]);
 	}
 	vector<string> nCard;
-	for(int i=0;i<player.Card[0].size();i++)
+	for(unsigned int i=0;i<player.Card[0].size();i++)
 	{
 		nCard.push_back(player.Card[0][i]);
 	}
 	vector<string> eCard;
-	for(int i=0;i<player.Card[1].size();i++)
+	for(unsigned int i=0;i<player.Card[1].size();i++)
 	{
 		eCard.push_back(player.Card[1][i]);
 	}
 	vector<string> wCard;//testing
-	for(int i=0;i<player.Card[3].size();i++)
+	for(unsigned int i=0;i<player.Card[3].size();i++)
 	{
 		wCard.push_back(player.Card[3][i]);
 	}
@@ -875,10 +875,10 @@ void Interface::playercard(Player & player)
 			}
 			break;
 		case 2:
-			if(sCard[0][0]=='S')
+			if(sCard[0][0]=='C')
 			{
 				setcolor(colorcode(0,2));
-				cout<<"\6";
+				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
@@ -1047,18 +1047,80 @@ void Interface::contract(Player & player)
 
 void Interface::biddingtable(Player & player)
 {
+	setcolor(colorcode(15,2));
 	gotoxy(46,3);
-	setcolor(colorcode(0,15));
-	cout<<"   N     E     S     W  ";
+	if(player.ns_vulnerable!=1)
+	{
+		setcolor(colorcode(0,15));
+	}
+	else
+	{
+		setcolor(colorcode(0,12));
+	}
+	cout<<"   N  ";
+	if(player.ew_vulnerable!=1)
+	{
+		setcolor(colorcode(0,15));
+	}
+	else
+	{
+		setcolor(colorcode(0,12));
+	}
+	cout<<"   E  ";
+	if(player.ns_vulnerable!=1)
+	{
+		setcolor(colorcode(0,15));
+	}
+	else
+	{
+		setcolor(colorcode(0,12));
+	}
+	cout<<"   S  ";
+	if(player.ew_vulnerable!=1)
+	{
+		setcolor(colorcode(0,15));
+	}
+	else
+	{
+		setcolor(colorcode(0,12));
+	}
+	cout<<"   W  ";
+	
 	setcolor(colorcode(0,7));
 	int count=4;
-	int count2=46;
+	int count2=0;
+	
+	switch(player.round%4)
+	{
+	case 1:
+		count2=46;
+		break;
+	case 2:
+		count2=52;
+		break;
+	case 3:
+		count2=58;
+		break;
+	case 4:
+		count2=66;
+		break;
+	}
 
 	for(unsigned int i=0;i<player.auction_log.size();i++)
 	{
+		
 		gotoxy(count2,count);
-		cout<<"  "<<player.auction_log[i]<<"  ";
-		count2+=6;
+		cout<<"  "<<player.auction_log[i];
+		if(player.auction_log[i][1]=='N')
+		{
+			count2+=5;
+		}
+		else
+		{
+			cout<<"  ";
+			count2+=6;
+		}
+		
 		if(count2>=66)
 		{
 			count2=46;
