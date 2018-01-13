@@ -1185,7 +1185,7 @@ string Interface::bidding()
 {
 	setcolor(colorcode(15,2));
 	string bid;
-	//cin.clear;
+	cin.clear();
 
 	gotoxy(46,18);
 	cout<<"It's your turn,";
@@ -1209,7 +1209,7 @@ string Interface::playcard()
 {
 	setcolor(colorcode(15,2));
 	string play;
-	//cin.clear;
+	cin.clear();
 
 	setcolor(colorcode(15,2));
 	gotoxy(45,18); 
@@ -1218,6 +1218,7 @@ string Interface::playcard()
 	cout<<"enter the card you play:";
 	cin>>play;
 
+	transform(play.begin(),play.end(),play.begin(),::toupper);
 	setcolor(colorcode(15,2));
 	gotoxy(45,18); 
 	cout<<"                          ";

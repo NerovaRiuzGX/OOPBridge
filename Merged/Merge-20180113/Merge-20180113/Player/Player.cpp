@@ -212,8 +212,9 @@ void Player::printTable()
 	
 }
 
-void Player::playCard()
+bool Player::playCard (string playcard)
 {
+	//cin.clear();
 	/*for(int i=0;i<13;i++)
 	{
 		for(int j=0;j<4;j++)
@@ -231,14 +232,14 @@ void Player::playCard()
 	}
 	//else cout<<"You are the first"<<endl;
 	vector<string>::iterator it;	
-	while (true)
-	{
+	//while (true)
+	//{
 		//cout<<"Please enter a card: ";
-		getline(cin,playcard);
+		//getline(cin,playcard);
 		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
 		it=find(Card[statement%10].begin(),Card[statement%10].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=Card[statement%10].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ break; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
-		else if(playcard=="CLAIM")
+		if( it!=Card[statement%10].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ return true; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
+		/*else if(playcard=="CLAIM")
 		{
 			cout<<"How many tricks : ";
 			int i=1;
@@ -246,12 +247,13 @@ void Player::playCard()
 			cout<<endl;
 			cin>>decideClaim;
 			claim();
-			break;
-		}
+			//break;
+		}*/
 
-		cout<<"Error!!!  You can't play this card."<<endl;
-	}
-	decideCard = playcard;
+		return false;
+		//cout<<"Error!!!  You can't play this card."<<endl;
+	//}
+	//decideCard = playcard;
 }
 
 void Player::claim()

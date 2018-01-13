@@ -15,7 +15,7 @@ public:
 		 Player();
 	void printTable();
 	void undo();
-	void playCard();
+	bool playCard (string);
 	bool MySuits(char);
 	void claim();
 	bool bid (string); //return true if the card is correct
