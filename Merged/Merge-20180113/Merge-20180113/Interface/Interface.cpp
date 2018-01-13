@@ -1175,6 +1175,8 @@ string Interface::bidding()
 
 	gotoxy(0,23);
 
+	transform(bid.begin(),bid.end(),bid.begin(),::toupper);
+
 	return bid;
 }
 

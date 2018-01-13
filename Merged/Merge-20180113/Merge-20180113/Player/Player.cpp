@@ -49,7 +49,33 @@ bool Player::bid (string bid)
 		//getline(cin,bid);
 		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
 		
-		if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
+		
+		if (bid=="PS") {
+			return true;
+		}
+		else if (bid=="X" || bid=="XX") {
+			if (Maxcall_pos%2==1) {
+				if (Maxbid=="00") {
+					return false;
+				}
+				else if (Maxcall!="X" && bid=="XX") {
+					return false;
+				}
+				else if (Maxcall=="X" && bid=="X") {
+					return false;
+				}
+				else if (Maxcall=="XX") {
+					return false;
+				}
+				else {
+					return true;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+		else if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
 			if (Maxbid[0]>bid[0]) {
 				return false;
 			}
@@ -76,31 +102,6 @@ bool Player::bid (string bid)
 			}
 			else {
 				return true;
-			}
-		}
-		else if (bid=="PS") {
-			return true;
-		}
-		else if (bid=="X" || bid=="XX") {
-			if (Maxcall_pos%2==1) {
-				if (Maxbid=="00") {
-					return false;
-				}
-				else if (Maxcall!="X" && bid=="XX") {
-					return false;
-				}
-				else if (Maxcall=="X" && bid=="X") {
-					return false;
-				}
-				else if (Maxcall=="XX") {
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
-			else {
-				return false;
 			}
 		}
 		else {
