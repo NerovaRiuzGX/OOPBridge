@@ -46,3 +46,4 @@
 *.opensdf
 *.bridge
 *.unsuccessfulbuild
+*.exe
