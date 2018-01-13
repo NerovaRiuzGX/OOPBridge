@@ -1045,7 +1045,33 @@ void Interface::contract(Player & player)
 	gotoxy(75,10);
 	if(player.contract_dbl!=-1&&player.contract_suit!=-1&&player.contract_trick!=-1)
 	{
-		cout<<player.contract_trick-6<<player.contract_suit<<player.contract_dbl;
+		cout<<player.contract_trick-6;
+		switch(player.contract_suit)
+		{
+		case 0:
+			cout<<"\5";
+			break;
+		case 1:
+			cout<<"\3";
+			break;
+		case 2:
+			cout<<"\6";
+			break;
+		case 3:
+			cout<<"\4";
+			break;
+		}
+		switch(player.contract_dbl)
+		{
+		case 1:
+			break;
+		case 2:
+			cout<<"X";
+			break;
+		case 4:
+			cout<<"XX";
+			break;
+		}
 	}
 	setcolor(colorcode(15,2));
 	gotoxy(0,23);
