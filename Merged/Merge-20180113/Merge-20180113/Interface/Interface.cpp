@@ -162,10 +162,26 @@ string Interface::jointable()
 
 void Interface::dummycard(Player & player)
 {
-	vector<string> sCard(13,"SA");
-	vector<string> nCard(13,"SA");
-	vector<string> eCard(13,"SA");
-	vector<string> wCard(13,"SA");//testing
+	vector<string> sCard;
+	for(int i=0;i<player.Card[2].size();i++)
+	{
+		sCard.push_back(player.Card[2][i]);
+	}
+	vector<string> nCard;
+	for(int i=0;i<player.Card[0].size();i++)
+	{
+		nCard.push_back(player.Card[0][i]);
+	}
+	vector<string> eCard;
+	for(int i=0;i<player.Card[1].size();i++)
+	{
+		eCard.push_back(player.Card[1][i]);
+	}
+	vector<string> wCard;//testing
+	for(int i=0;i<player.Card[3].size();i++)
+	{
+		wCard.push_back(player.Card[3][i]);
+	}
 	int s=sCard.size();
 	int n=nCard.size();
 	int e=eCard.size();
@@ -737,10 +753,26 @@ void Interface::dummycard(Player & player)
 
 void Interface::playercard(Player & player)
 {
-	vector<string> sCard(13,"SA");
-	vector<string> nCard(13,"SA");
-	vector<string> eCard(13,"SA");
-	vector<string> wCard(13,"SA");//testing
+	vector<string> sCard;
+	for(int i=0;i<player.Card[2].size();i++)
+	{
+		sCard.push_back(player.Card[2][i]);
+	}
+	vector<string> nCard;
+	for(int i=0;i<player.Card[0].size();i++)
+	{
+		nCard.push_back(player.Card[0][i]);
+	}
+	vector<string> eCard;
+	for(int i=0;i<player.Card[1].size();i++)
+	{
+		eCard.push_back(player.Card[1][i]);
+	}
+	vector<string> wCard;//testing
+	for(int i=0;i<player.Card[3].size();i++)
+	{
+		wCard.push_back(player.Card[3][i]);
+	}
 	int s=sCard.size();
 	int n=nCard.size();
 	int e=eCard.size();
