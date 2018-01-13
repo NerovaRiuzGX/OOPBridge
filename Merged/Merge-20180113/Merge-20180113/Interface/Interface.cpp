@@ -1118,17 +1118,17 @@ void Interface::biddingtable(Player & player)
 		setcolor(colorcode(0,7));
 		gotoxy(count2,count);
 		cout<<"  "<<player.auction_log[i];
-		if(player.auction_log[i][0]=='X')
+		if(player.auction_log[i]=="XX")
 		{
-			cout<<"   ";
-			count2+=7;
+			cout<<"  ";
+			count2+=6;			
 		}
 		else
 		{
-			if(player.auction_log[i]=="XX")
+			if(player.auction_log[i][0]=='X')
 			{
-				cout<<"  ";
-				count2+=6;
+				cout<<"    ";
+				count2+=7;
 			}
 			else
 			{
