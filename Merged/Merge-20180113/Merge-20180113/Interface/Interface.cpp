@@ -1120,31 +1120,27 @@ void Interface::biddingtable(Player & player)
 		cout<<"  "<<player.auction_log[i];
 		if(player.auction_log[i]=="XX")
 		{
-			cout<<"  ";
-			count2+=6;			
+			cout<<"  ";		
 		}
 		else
 		{
 			if(player.auction_log[i][0]=='X')
 			{
-				cout<<"    ";
-				count2+=7;
+				cout<<"   ";
 			}
 			else
 			{
 				if(player.auction_log[i][1]=='N')
 				{
 					cout<<" ";
-					count2+=5;
 				}
 				else
 				{
 					cout<<"  ";
-					count2+=6;
 				}
 			}
 		}
-		
+		count2+=6;
 		
 		if(count2>=66)
 		{
