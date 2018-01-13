@@ -77,10 +77,10 @@
     <ClCompile Include="FileControl\FileControl.cpp" />
     <ClCompile Include="Host\Host.cpp" />
     <ClCompile Include="Interface\Interface.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player\Player.cpp" />
     <ClCompile Include="TCP\TCPClient.cpp" />
     <ClCompile Include="TCP\TCPServer.cpp" />
-    <ClCompile Include="user_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileControl\FileControl.h" />

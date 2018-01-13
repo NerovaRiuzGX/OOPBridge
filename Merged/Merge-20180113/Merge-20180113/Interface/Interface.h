@@ -1,31 +1,18 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include<iostream>
-#include<conio.h>
-#include<Windows.h>
-#include<string>
-#include<vector>
-#include<stdio.h>
-#include<MMSystem.h>
-
-//extern TCPServer server;
+#include <conio.h>
 
 #include "../Player/Player.h"
 #include "../TCP/TCPServer.h"
 
-#pragma  comment(lib,"WinMM.Lib")
-
-using namespace std;
-
 class Interface
 {
 public:
-	extern TCPServer server;
-	extern Player player;
-	Interface(char,char,char,char);
-	void gamemodeoption();//單雙人模式選擇
-	void multiplayeroption();//加入or開桌選擇
+	
+	Interface();
+	int gamemodeoption();//單雙人模式選擇
+	int multiplayeroption();//加入or開桌選擇
 	void createtable(TCPServer &);//顯示server的ip
 	string jointable();//回傳玩家輸入的ip
 	//void gametable();//我自己測試用的 不要理他

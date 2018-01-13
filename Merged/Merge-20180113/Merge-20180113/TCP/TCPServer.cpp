@@ -28,7 +28,7 @@ void TCPServer::setup (string tmp, int port) {
 	
 	bind(serverSocket, (struct sockaddr *)&serverInfo, sizeof(serverInfo));
 	listen(serverSocket, 5);
-	cout << "Server started." << endl;	//start msg
+	//cout << "Server started." << endl;	//start msg
 	getIP();
 }
 
@@ -67,7 +67,7 @@ string TCPServer::getIP () { //this function returns the IP of your computer (IP
                 " when getting local host name." << endl;
         return "";
     }
-    cout << "Host name is " << hostname << "." << endl;
+    //cout << "Host name is " << hostname << "." << endl;
 
     struct hostent *hostip = gethostbyname(hostname);
     if (hostip == 0) {
@@ -79,7 +79,7 @@ string TCPServer::getIP () { //this function returns the IP of your computer (IP
         struct in_addr addr;
         memcpy(&addr, hostip->h_addr_list[i], sizeof(struct in_addr));
 		IP = inet_ntoa(addr);
-        cout << "Server IP address: " << IP << endl;
+        //cout << "Server IP address: " << IP << endl;
     }
 	return IP;
 }

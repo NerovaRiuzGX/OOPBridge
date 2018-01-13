@@ -1,4 +1,4 @@
-﻿#include"Interface/Interface.h"
+﻿/*#include"Interface/Interface.h"
 using namespace std;
 #include<windows.h>
 
@@ -12,4 +12,4 @@ int main()
 
 	system("pause");
 	return 0;
-}
+}*/

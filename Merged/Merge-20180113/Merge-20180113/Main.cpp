@@ -4,6 +4,7 @@
 #include "Host\Host.h"
 #include "Player\Player.h"
 #include "FileControl\FileControl.h"
+#include "Interface\Interface.h"
 #include "TCP\TCPServer.h"
 #include "TCP\TCPClient.h"
 
@@ -22,6 +23,8 @@ TCPServer *client = new TCPClient;
 
 Host host;
 Player player;
+
+Interface UI;
 
 void hostTask (int);
 void PlayerTask (int &);
@@ -228,9 +231,32 @@ void main () {
 		connectCheck[i] = false;
 	}
 
-	cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
+	int choice = UI.gamemodeoption();
 
-	switch (getchar()) {
+	if (choice == 1) {
+		switch (UI.multiplayeroption()) {
+			case 0: //create
+				UI.createtable(server);
+				pthread_t serverThread;
+				pthread_create(&serverThread, NULL, createServer, (void *)10555);
+				Sleep(1000);
+				createClient("127.0.0.1");
+				break;
+
+			case 1: //join
+				/*fflush(stdin);
+				string ip;
+				cout << "Enter destination IP: ";
+				getline(cin, ip);*/
+				createClient(UI.jointable());
+				break;
+		}
+	}
+
+	//old test interface
+	//cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
+
+	/*switch (getchar()) {
 		case '1':
 			pthread_t serverThread;
 			pthread_create(&serverThread, NULL, createServer, (void *)10555);
@@ -245,12 +271,11 @@ void main () {
 			getline(cin, ip);
 			createClient(ip);
 			break;
-	}
+	}*/
 	
 }
 
 void hostTask (int position) { //what Host should do whenever it receives a package
-	bool found;
 	char suit[5] = {'C', 'D', 'H', 'S', 'N'};
 	switch (host.statement/10) {
 		case 0: //SET

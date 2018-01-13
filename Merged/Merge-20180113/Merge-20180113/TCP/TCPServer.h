@@ -1,5 +1,7 @@
 //TCPServer.h
 //by NerovaRiuzGX 2017.12.30
+#pragma once
+
 #ifndef TCPSERVER_H
 #define TCPSERVER_H
 
@@ -8,12 +10,15 @@
 #include <string>
 #include <WS2tcpip.h>
 #include <winsock2.h> //for tcp socket
+#include <MMSystem.h>
 #include <windows.h> //for tcp socket
+
 
 #include "pthread.h"
 
 #pragma comment(lib, "Ws2_32.lib") //for tcp socket
 #pragma comment(lib, "pthreadVC2.lib")
+#pragma comment(lib,"WinMM.Lib")
 
 using namespace std;
 

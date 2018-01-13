@@ -4,15 +4,17 @@ using namespace std;
 string Interface::pos[4]={"Ｎ","Ｅ","Ｓ","Ｗ"};
 int Interface::cardcounter=0;
 
-Interface::Interface(char a=72,char b=0,char c=72,char d=0)
-	:modechoose(a),modeconfirm(b),gamechoose(c),gamestart(d)
+Interface::Interface()
 {
-	
+	modechoose = 72;
+	modeconfirm = 0;
+	gamechoose = 72;
+	gamestart = 0;
 }
 
-void Interface::gamemodeoption()
+int Interface::gamemodeoption()
 {
-	PlaySound(TEXT("C:\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
+	//PlaySound(TEXT("C:\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
 	system("mode con: cols=100 lines=25");
 	system("color 2f");
 	cout<<"\n\n\n\n\n\n"             
@@ -50,7 +52,7 @@ void Interface::gamemodeoption()
 	}
 	if(modechoose==13&&modeconfirm==80)
 	{
-		multiplayeroption();
+		return 1; //multi
 	}
 	else
 	{
@@ -58,7 +60,7 @@ void Interface::gamemodeoption()
 	}
 }
 
-void Interface::multiplayeroption()
+int Interface::multiplayeroption()
 {
 	system("cls");
 	if(modechoose==13&&modeconfirm==80)
@@ -97,20 +99,20 @@ void Interface::multiplayeroption()
 	}
 	if(gamechoose==13&&gamestart==72)
 	{
-		createtable(server);
+		return 0; //create
 	}
 	if(gamechoose==13&&gamestart==80)
 	{
-		jointable();
+		return 1; //join
 	}
 }
 
-void Interface::createtable(TCPServer & tcpserver)
+void Interface::createtable(TCPServer & server)
 {
 	system("cls");
 	if(gamechoose==13&&gamestart==72)
 	{
-		cout<<"\n\n\n\n\n\n\n\n\n                                     YOUR IP IS "<<tcpserver.getIP()
+		cout<<"\n\n\n\n\n\n\n\n\n                                     YOUR IP IS "<<server.getIP()
 			<<"\n\n                                        WAITING FOR PLAYERS"<<endl;
 		gotoxy(0,23);
 	}
