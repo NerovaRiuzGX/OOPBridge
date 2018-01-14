@@ -25,7 +25,7 @@ public:
 	string bidding();//回傳玩家的喊牌內容
 	string playcard();//回傳玩家打出的牌
 	void card(Player &);//有人打牌的時候 牌桌上印出牌
-	void suit(int,int,char &,char &);//我自己function用的 不要理他
+	void suit(int,int,char ,char );//我自己function用的 不要理他
 	void scoreboard(Player &);//印出兩隊目前分數
 	void gotoxy(int xpos, int ypos)
 	{
