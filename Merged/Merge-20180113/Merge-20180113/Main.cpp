@@ -157,19 +157,19 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.playercard(player);
 					UI.biddingtable(player);
 					UI.scoreboard(player);
-					//UI.contract(player);
+					UI.contract(player);
 					break;
 				case 2:
 					UI.table(player);
 					UI.playercard(player);
 					if (player.trick_log[0][0]!="") {
-						//UI.dummycard(player);
+						UI.dummycard(player);
 					}
-					//UI.biddingtable(player);
+					UI.biddingtable(player);
 					UI.scoreboard(player);
 					UI.contract(player);
 					UI.trick(player);
-					//UI.card(player);
+					UI.card(player);
 					break;
 				case 3:
 					break;
