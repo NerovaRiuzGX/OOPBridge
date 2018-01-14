@@ -1282,7 +1282,7 @@ void Interface::card(Player & player)
 {
 	int i=player.ns_trick+player.ew_trick;
 
-	switch(player.turn)
+	switch((player.statement+player.position)%4)
 	{
 	case 0:
 		setcolor(colorcode(15,2));
@@ -1315,14 +1315,25 @@ void Interface::card(Player & player)
 		gotoxy(21,16);
 		cout<<"   ";
 		
-		//lead
 		if(player.trick_log[i][0]!="")
 		{
 			suit(21,14,player.trick_log[i][0][0],player.trick_log[i][0][1]);
 		}
+		if(player.trick_log[i][1]!="")
+		{
+			suit(13,10,player.trick_log[i][1][0],player.trick_log[i][1][1]);
+		}
+		if(player.trick_log[i][2]!="")
+		{
+			suit(20,6,player.trick_log[i][2][0],player.trick_log[i][2][1]);
+		}
+		if(player.trick_log[i][3]!="")
+		{
+			suit(28,10,player.trick_log[i][3][0],player.trick_log[i][3][1]);
+		}
+
 		break;
 	case 1:
-		//once right card
 		if(player.trick_log[i][0]!="")
 		{
 			suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
@@ -1331,35 +1342,45 @@ void Interface::card(Player & player)
 		{
 			suit(21,14,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
+		if(player.trick_log[i][2]!="")
+		{
+			suit(13,10,player.trick_log[i][2][0],player.trick_log[i][2][1]);
+		}
+		if(player.trick_log[i][3]!="")
+		{
+			suit(20,6,player.trick_log[i][3][0],player.trick_log[i][3][1]);
+		}
 		break;
 	case 2:
-		//once top card + once right card
 		if(player.trick_log[i][0]!="")
 		{
-			suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+			suit(20,6,player.trick_log[i][0][0],player.trick_log[i][0][1]);
 		}
 		if(player.trick_log[i][1]!="")
 		{
-			suit(20,6,player.trick_log[i][1][0],player.trick_log[i][1][1]);
+			suit(28,10,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
 		if(player.trick_log[i][2]!="")
 		{
 			suit(21,14,player.trick_log[i][2][0],player.trick_log[i][2][1]);
 		}
+		if(player.trick_log[i][3]!="")
+		{
+			suit(13,10,player.trick_log[i][3][0],player.trick_log[i][3][1]);
+		}
 		break;
 	case 3:
-		//full
 		if(player.trick_log[i][0]!="")
 		{
-			suit(28,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+			suit(13,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
 		}
 		if(player.trick_log[i][1]!="")
 		{
 			suit(20,6,player.trick_log[i][1][0],player.trick_log[i][1][1]);
 		}
 		if(player.trick_log[i][2]!="")
-		{			
-			suit(13,10,player.trick_log[i][2][0],player.trick_log[i][2][1]);
+		{
+			suit(28,10,player.trick_log[i][2][0],player.trick_log[i][2][1]);
 		}
 		if(player.trick_log[i][3]!="")
 		{
