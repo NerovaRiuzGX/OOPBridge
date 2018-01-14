@@ -250,10 +250,10 @@ void Interface::dummycard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<e;i++)
 			{
 				cout<<eCard[i][1];
-				if(i==n-2)
+				if(i==e-2)
 				{
 					cout<<eCard[i+1][1];
 					break;
@@ -297,10 +297,10 @@ void Interface::dummycard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<s;i++)
 			{
 				cout<<sCard[i][1];
-				if(i==n-2)
+				if(i==s-2)
 				{
 					cout<<sCard[i+1][1];
 					break;
@@ -344,10 +344,10 @@ void Interface::dummycard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<w;i++)
 			{
 				cout<<wCard[i][1];
-				if(i==n-2)
+				if(i==w-2)
 				{
 					cout<<wCard[i+1][1];
 					break;
@@ -401,11 +401,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<e;i++)
 				{
 					cout<<eCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-2)
+					if(i==e-2)
 					{
 						cout<<eCard[i+1][1];
 						break;
@@ -446,11 +446,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<s;i++)
 				{
 					cout<<sCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-2)
+					if(i==s-2)
 					{
 						cout<<sCard[i+1][1];
 						break;
@@ -491,11 +491,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<w;i++)
 				{
 					cout<<wCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-2)
+					if(i==w-2)
 					{
 						cout<<wCard[i+1][1];
 						break;
@@ -588,11 +588,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<e;i++)
 				{
 					cout<<eCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-2)
+					if(i==e-2)
 					{
 						cout<<eCard[i+1][1];
 						break;
@@ -633,11 +633,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<s;i++)
 				{
 					cout<<sCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-2)
+					if(i==s-2)
 					{
 						cout<<sCard[i+1][1];
 						break;
@@ -678,11 +678,11 @@ void Interface::dummycard(Player & player)
 					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
 				}
-				for(int i=0;i<n;i++)
+				for(int i=0;i<w;i++)
 				{
 					cout<<wCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-2)
+					if(i==w-2)
 					{
 						cout<<wCard[i+1][1];
 						break;
@@ -853,10 +853,10 @@ void Interface::playercard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<e;i++)
 			{
 				cout<<eCard[i][1];
-				if(i==n-2)
+				if(i==e-2)
 				{
 					cout<<eCard[i+1][1];
 					break;
@@ -900,10 +900,10 @@ void Interface::playercard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<s;i++)
 			{
 				cout<<sCard[i][1];
-				if(i==n-2)
+				if(i==s-2)
 				{
 					cout<<sCard[i+1][1];
 					break;
@@ -947,10 +947,10 @@ void Interface::playercard(Player & player)
 				setcolor(colorcode(15,2));
 				cout<<" ";
 			}
-			for(int i=0;i<n;i++)
+			for(int i=0;i<w;i++)
 			{
 				cout<<wCard[i][1];
-				if(i==n-2)
+				if(i==w-2)
 				{
 					cout<<wCard[i+1][1];
 					break;
