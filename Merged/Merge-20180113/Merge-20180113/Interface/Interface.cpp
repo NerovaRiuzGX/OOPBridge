@@ -384,7 +384,7 @@ void Interface::dummycard(Player & player)
 	else
 	{
 		int y=4;
-		if(player.declarer_position==player.position-1||player.declarer_position+1==player.position)
+		if(player.declarer_position==(player.position+3)%4)
 		{
 			gotoxy(2,3);
 			switch(player.position)
@@ -1052,13 +1052,17 @@ void Interface::contract(Player & player)
 			cout<<"\5";
 			break;
 		case 1:
-			cout<<"\3";
+			setcolor(colorcode(12,7));
+			cout<<"\4";
+			setcolor(colorcode(0,7));
 			break;
 		case 2:
-			cout<<"\6";
+			setcolor(colorcode(12,7));
+			cout<<"\3";
+			setcolor(colorcode(0,7));
 			break;
 		case 3:
-			cout<<"\4";
+			cout<<"\6";
 			break;
 		case 4:
 			cout<<"NT";
@@ -1146,25 +1150,44 @@ void Interface::biddingtable(Player & player)
 	{
 		setcolor(colorcode(0,7));
 		gotoxy(count2,count);
-		cout<<"  "<<player.auction_log[i];
+		cout<<"  ";
 		if(player.auction_log[i]=="XX")
 		{
-			cout<<"  ";		
+			cout<<"XX  ";		
 		}
 		else
 		{
 			if(player.auction_log[i][0]=='X')
 			{
-				cout<<"   ";
+				cout<<"X   ";
 			}
 			else
 			{
 				if(player.auction_log[i][1]=='N')
 				{
-					cout<<" ";
+					cout<<"NT ";
 				}
 				else
 				{
+					switch(player.auction_log[i][0])
+					{
+					case 'S':
+						cout<<"\6";
+						break;
+					case 'H':
+						setcolor(colorcode(12,7));
+						cout<<"\3";
+						setcolor(colorcode(0,7));
+						break;
+					case 'C':
+						cout<<"\5";
+						break;
+					case 'D':
+						setcolor(colorcode(12,7));
+						cout<<"\4";
+						setcolor(colorcode(0,7));
+						break;
+					}
 					cout<<"  ";
 				}
 			}
