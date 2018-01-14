@@ -916,7 +916,7 @@ void Interface::playercard(Player & player)
 					case 'S':
 						cout<<"  ";
 						setcolor(colorcode(0,2));
-						cout<<"\5";
+						cout<<"\6";
 						setcolor(colorcode(15,2));
 						cout<<" ";
 						break;
@@ -987,9 +987,9 @@ void Interface::trick(Player & player)
 	cout<<"         ";
 
 	gotoxy(63,14);
-	cout<<player.ns_trick;
+	cout<<"NS :"<<player.ns_trick;
 	gotoxy(63,15);
-	cout<<player.ew_trick;
+	cout<<"EW :"<<player.ew_trick;
 
 	setcolor(colorcode(15,2));
 	gotoxy(0,23);
@@ -1151,44 +1151,52 @@ void Interface::biddingtable(Player & player)
 		setcolor(colorcode(0,7));
 		gotoxy(count2,count);
 		cout<<"  ";
-		if(player.auction_log[i]=="XX")
+		if(player.auction_log[i]=="PS")
 		{
-			cout<<"XX  ";		
+			cout<<"PASS";
 		}
 		else
 		{
-			if(player.auction_log[i][0]=='X')
+			if(player.auction_log[i]=="XX")
 			{
-				cout<<"X   ";
+				cout<<"XX  ";		
 			}
 			else
 			{
-				if(player.auction_log[i][1]=='N')
+				if(player.auction_log[i][0]=='X')
 				{
-					cout<<"NT ";
+					cout<<"X   ";
 				}
 				else
 				{
-					switch(player.auction_log[i][0])
+					if(player.auction_log[i][1]=='N')
 					{
-					case 'S':
-						cout<<"\6";
-						break;
-					case 'H':
-						setcolor(colorcode(12,7));
-						cout<<"\3";
-						setcolor(colorcode(0,7));
-						break;
-					case 'C':
-						cout<<"\5";
-						break;
-					case 'D':
-						setcolor(colorcode(12,7));
-						cout<<"\4";
-						setcolor(colorcode(0,7));
-						break;
+
+						cout<<player.auction_log[i][0]<<"NT ";
 					}
-					cout<<"  ";
+					else
+					{
+						switch(player.auction_log[i][1])
+						{
+						case 'S':
+							cout<<player.auction_log[i][0]<<"\6";
+							break;
+						case 'H':
+							setcolor(colorcode(12,7));
+							cout<<player.auction_log[i][0]<<"\3";
+							setcolor(colorcode(0,7));
+							break;
+						case 'C':
+							cout<<player.auction_log[i][0]<<"\5";
+							break;
+						case 'D':
+							setcolor(colorcode(12,7));
+							cout<<player.auction_log[i][0]<<"\4";
+							setcolor(colorcode(0,7));
+							break;
+						}
+						cout<<"  ";
+					}
 				}
 			}
 		}
