@@ -206,8 +206,9 @@ void Interface::dummycard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<nCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<nCard[i+1][1];
 					break;
 				}
 				
@@ -252,8 +253,9 @@ void Interface::dummycard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<eCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<eCard[i+1][1];
 					break;
 				}
 				
@@ -298,8 +300,9 @@ void Interface::dummycard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<sCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<sCard[i+1][1];
 					break;
 				}
 
@@ -344,8 +347,9 @@ void Interface::dummycard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<wCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<wCard[i+1][1];
 					break;
 				}
 				
@@ -401,8 +405,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<eCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<eCard[i+1][1];
 						break;
 					}
 				
@@ -445,8 +450,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<sCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<sCard[i+1][1];
 						break;
 					}
 				
@@ -489,8 +495,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<wCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<wCard[i+1][1];
 						break;
 					}
 				
@@ -533,8 +540,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<nCard[i][1];
 					gotoxy(2,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<nCard[i+1][1];
 						break;
 					}
 				
@@ -567,7 +575,7 @@ void Interface::dummycard(Player & player)
 				break;
 			}
 		}
-		else
+		if(player.declarer_position==(player.position+1)%4)
 		{
 			gotoxy(41,3);
 			switch(player.position)
@@ -584,8 +592,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<eCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<eCard[i+1][1];
 						break;
 					}
 				
@@ -628,8 +637,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<sCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<sCard[i+1][1];
 						break;
 					}
 				
@@ -672,8 +682,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<wCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<wCard[i+1][1];
 						break;
 					}
 				
@@ -716,8 +727,9 @@ void Interface::dummycard(Player & player)
 				{
 					cout<<nCard[i][1];
 					gotoxy(41,y);y++;
-					if(i==n-1)
+					if(i==n-2)
 					{
+						cout<<nCard[i+1][1];
 						break;
 					}
 				
@@ -797,8 +809,9 @@ void Interface::playercard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<nCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<nCard[i+1][1];
 					break;
 				}
 				
@@ -843,8 +856,9 @@ void Interface::playercard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<eCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<eCard[i+1][1];
 					break;
 				}
 				
@@ -889,8 +903,9 @@ void Interface::playercard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<sCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<sCard[i+1][1];
 					break;
 				}
 				
@@ -935,8 +950,9 @@ void Interface::playercard(Player & player)
 			for(int i=0;i<n;i++)
 			{
 				cout<<wCard[i][1];
-				if(i==n-1)
+				if(i==n-2)
 				{
+					cout<<wCard[i+1][1];
 					break;
 				}
 				
