@@ -575,12 +575,12 @@ void Interface::dummycard(Player & player)
 				break;
 			}
 		}
-		if(player.declarer_position==(player.position+1)%4)
+		if((player.declarer_position+3)%4==player.position)
 		{
 			gotoxy(41,3);
 			switch(player.position)
 			{
-			case 0:
+			case 2:
 				if(eCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
@@ -625,7 +625,7 @@ void Interface::dummycard(Player & player)
 					}
 				}
 				break;
-			case 1:
+			case 3:
 				if(sCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
@@ -670,7 +670,7 @@ void Interface::dummycard(Player & player)
 					}
 				}
 				break;
-			case 2:
+			case 0:
 				if(wCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
@@ -715,7 +715,7 @@ void Interface::dummycard(Player & player)
 					}
 				}
 				break;
-			case 3:
+			case 1:
 				if(nCard[0][0]=='C')
 				{
 					setcolor(colorcode(0,2));
@@ -1198,16 +1198,18 @@ void Interface::biddingtable(Player & player)
 							cout<<player.auction_log[i][0]<<"\6";
 							break;
 						case 'H':
+							cout<<player.auction_log[i][0];
 							setcolor(colorcode(12,7));
-							cout<<player.auction_log[i][0]<<"\3";
+							cout<<"\3";
 							setcolor(colorcode(0,7));
 							break;
 						case 'C':
 							cout<<player.auction_log[i][0]<<"\5";
 							break;
 						case 'D':
+							cout<<player.auction_log[i][0];
 							setcolor(colorcode(12,7));
-							cout<<player.auction_log[i][0]<<"\4";
+							cout<<"\4";
 							setcolor(colorcode(0,7));
 							break;
 						}
