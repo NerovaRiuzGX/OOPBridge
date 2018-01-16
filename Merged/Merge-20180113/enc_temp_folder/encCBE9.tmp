@@ -163,6 +163,7 @@ string Interface::jointable()
 	gotoxy(0,23);
 }*/
 
+
 void Interface::dummycard(Player & player)
 {
 	vector<string> sCard;
