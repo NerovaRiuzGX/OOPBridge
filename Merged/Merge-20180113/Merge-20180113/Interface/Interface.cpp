@@ -1571,6 +1571,8 @@ void Interface::table(Player & player)
 		gotoxy(61,15);
 		cout<<"         ";
 
+		setcolor(colorcode(15,2));
+
 		//now turn
 		gotoxy(45,18); 
 		cout<<"Now turn : ";
