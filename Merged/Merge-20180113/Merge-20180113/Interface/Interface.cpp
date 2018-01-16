@@ -1564,7 +1564,7 @@ void Interface::table(Player & player)
 		//trick table
 		gotoxy(61,13);
 		setcolor(colorcode(0,15));
-		cout<<"  trick  ";
+		cout<<"  Trick  ";
 		setcolor(colorcode(0,7));
 		gotoxy(61,14);
 		cout<<"         ";
@@ -1574,9 +1574,9 @@ void Interface::table(Player & player)
 		setcolor(colorcode(15,2));
 
 		//now turn
-		gotoxy(45,18); 
+		gotoxy(46,18); 
 		cout<<"Now turn : ";
-		switch(player.statement)
+		switch(player.statement%4)
 		{
 		case 0:
 			cout<<"N    ";
@@ -1591,7 +1591,7 @@ void Interface::table(Player & player)
 			cout<<"W    ";
 			break;
 		}
-		gotoxy(45,19);
+		gotoxy(46,19);
 		cout<<"Please wait......                                ";
 
 		gotoxy(21,19);
@@ -2014,7 +2014,7 @@ void Interface::scoreboard(Player & player)
 
 	gotoxy(46,13);
 	setcolor(colorcode(0,15));
-	cout<<" total point ";
+	cout<<" Total Point ";
 	setcolor(colorcode(0,7));
 	gotoxy(46,14);
 	cout<<"             ";
