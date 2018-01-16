@@ -1561,6 +1561,15 @@ void Interface::table(Player & player)
 			<<"     ■■■■■■■■■■■■■■■■■"
 			<<endl;
 		
+		gotoxy(61,13);
+		setcolor(colorcode(0,15));
+		cout<<"  trick  ";
+		setcolor(colorcode(0,7));
+		gotoxy(61,14);
+		cout<<"         ";
+		gotoxy(61,15);
+		cout<<"         ";//trick
+
 		gotoxy(21,19);
 		cout<<pos[player.position];
 		gotoxy(5,11);
@@ -1586,7 +1595,7 @@ void Interface::contract(Player & player)
 	gotoxy(72,11);
 	cout<<"           ";
 
-	gotoxy(75,10);
+	gotoxy(76,10);
 	if(player.contract_dbl!=-1&&player.contract_suit!=-1&&player.contract_trick!=-1)
 	{
 		cout<<player.contract_trick-6;
