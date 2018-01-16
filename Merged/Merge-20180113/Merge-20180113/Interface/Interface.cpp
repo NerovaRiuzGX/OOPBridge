@@ -133,8 +133,10 @@ string Interface::jointable()
 	if(gamechoose==13&&gamestart==80)
 	{
 		cout<<"\n\n\n\n\n\n\n\n\n                                        ENTER THE TABLE'S IP\n"<<endl;
-		gotoxy(43,13);
+		gotoxy(45,12);
 		cin>>connectIP;
+		gotoxy(37,15);
+		cout<<"NOW LOADING PLEASE WAIT......";
 		gotoxy(0,23);
 	}
 	else
@@ -163,6 +165,7 @@ string Interface::jointable()
 	gotoxy(0,23);
 }*/
 
+
 void Interface::dummycard(Player & player)
 {
 	vector<string> sCard;
@@ -190,197 +193,269 @@ void Interface::dummycard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();//testing
 	
-	gotoxy(6,1);
+	
 	if(player.declarer_position==player.position)
 	{
+		gotoxy(6,1);
+		cout<<"                                                 ";
+		gotoxy(6,1);
+
 		switch(player.position)
 		{
 		case 2:
-			if(nCard[0][0]=='C')
+			switch(nCard[0][0])
 			{
+			case 'C':
 				setcolor(colorcode(0,2));
 				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
 			}
+
 			for(int i=0;i<n;i++)
 			{
-				cout<<nCard[i][1];
-				if(i==n-2)
+				if(i>=1)
 				{
-					cout<<nCard[i+1][1];
-					break;
-				}
-				
-				if(nCard[i][0]!=nCard[i+1][0])
-				{
-					
-					switch(nCard[i+1][0])
+					if(nCard[i-1][0]!=nCard[i][0])
 					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
+						switch(nCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
 					}
 				}
+				cout<<nCard[i][1];
 			}
 			break;
 		case 3:
-			if(eCard[0][0]=='C')
+			switch(eCard[0][0])
 			{
+			case 'C':
 				setcolor(colorcode(0,2));
 				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
 			}
+
 			for(int i=0;i<e;i++)
 			{
-				cout<<eCard[i][1];
-				if(i==e-2)
+				if(i>=1)
 				{
-					cout<<eCard[i+1][1];
-					break;
-				}
-				
-				if(eCard[i][0]!=eCard[i+1][0])
-				{
-					
-					switch(eCard[i+1][0])
+					if(eCard[i-1][0]!=eCard[i][0])
 					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
+						switch(eCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
 					}
 				}
+				cout<<eCard[i][1];
 			}
 			break;
 		case 0:
-			if(sCard[0][0]=='C')
+			switch(sCard[0][0])
 			{
+			case 'C':
 				setcolor(colorcode(0,2));
 				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
 			}
+
 			for(int i=0;i<s;i++)
 			{
-				cout<<sCard[i][1];
-				if(i==s-2)
+				if(i>=1)
 				{
-					cout<<sCard[i+1][1];
-					break;
-				}
-
-				if(sCard[i][0]!=sCard[i+1][0])
-				{
-					
-					switch(sCard[i+1][0])
+					if(sCard[i-1][0]!=sCard[i][0])
 					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
+						switch(sCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
 					}
 				}
+				cout<<sCard[i][1];
 			}
 			break;
 		case 1:
-			if(wCard[0][0]=='C')
+			switch(wCard[0][0])
 			{
+			case 'C':
 				setcolor(colorcode(0,2));
 				cout<<"\5";
 				setcolor(colorcode(15,2));
 				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
 			}
+
 			for(int i=0;i<w;i++)
 			{
-				cout<<wCard[i][1];
-				if(i==w-2)
+				if(i>=1)
 				{
-					cout<<wCard[i+1][1];
-					break;
-				}
-				
-				if(wCard[i][0]!=wCard[i+1][0])
-				{
-					
-					switch(wCard[i+1][0])
+					if(wCard[i-1][0]!=wCard[i][0])
 					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
+						switch(wCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
 					}
 				}
+				cout<<wCard[i][1];
 			}
 			break;
 		}
@@ -388,381 +463,763 @@ void Interface::dummycard(Player & player)
 	else
 	{
 		int y=4;
+
+		//左邊
 		if(player.declarer_position==(player.position+3)%4)
 		{
+			for(int i=3;i<23;i++)
+			{
+				gotoxy(2,i);
+				cout<<" ";
+			}//clear                                         ";
 			gotoxy(2,3);
+			
 			switch(player.position)
 			{
 			case 0:
-				if(eCard[0][0]=='C')
+				switch(eCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(2,y);y++;
+
 				for(int i=0;i<e;i++)
 				{
-					cout<<eCard[i][1];
-					gotoxy(2,y);y++;
-					if(i==e-2)
+					if(i>=1)
 					{
-						cout<<eCard[i+1][1];
-						break;
-					}
-				
-					if(eCard[i][0]!=eCard[i+1][0])
-					{
-					
-						switch(eCard[i+1][0])
+						if(eCard[i-1][0]!=eCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(eCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<eCard[i][1];
+					gotoxy(2,y);y++;
 				}
 				break;
 			case 1:
-				if(sCard[0][0]=='C')
+				switch(sCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(2,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(2,y);y++;
+
 				for(int i=0;i<s;i++)
 				{
-					cout<<sCard[i][1];
-					gotoxy(2,y);y++;
-					if(i==s-2)
+					if(i>=1)
 					{
-						cout<<sCard[i+1][1];
-						break;
-					}
-				
-					if(sCard[i][0]!=sCard[i+1][0])
-					{
-					
-						switch(sCard[i+1][0])
+						if(sCard[i-1][0]!=sCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(sCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<sCard[i][1];
+					gotoxy(2,y);y++;
 				}
 				break;
 			case 2:
-				if(wCard[0][0]=='C')
+				switch(wCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(2,y);y++;
-					setcolor(colorcode(15,2));
+					setcolor(colorcode(15,2));					
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));					
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));					
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));					
+					break;
 				}
+				gotoxy(2,y);y++;
+
 				for(int i=0;i<w;i++)
 				{
-					cout<<wCard[i][1];
-					gotoxy(2,y);y++;
-					if(i==w-2)
+					if(i>=1)
 					{
-						cout<<wCard[i+1][1];
-						break;
-					}
-				
-					if(wCard[i][0]!=wCard[i+1][0])
-					{
-					
-						switch(wCard[i+1][0])
+						if(wCard[i-1][0]!=wCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(wCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));								
+								cout<<"\3";
+								setcolor(colorcode(15,2));								
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));								
+								cout<<"\4";
+								setcolor(colorcode(15,2));								
+								break;
+							case 'S':								
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<wCard[i][1];
+					gotoxy(2,y);y++;
 				}
 				break;
 			case 3:
-				if(nCard[0][0]=='C')
+				switch(nCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(2,y);y++;
-					setcolor(colorcode(15,2));
+					setcolor(colorcode(15,2));				
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));					
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));					
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));					
+					break;
 				}
+				gotoxy(2,y);y++;
+
 				for(int i=0;i<n;i++)
 				{
-					cout<<nCard[i][1];
-					gotoxy(2,y);y++;
-					if(i==n-2)
+					if(i>=1)
 					{
-						cout<<nCard[i+1][1];
-						break;
-					}
-				
-					if(nCard[i][0]!=nCard[i+1][0])
-					{
-					
-						switch(nCard[i+1][0])
+						if(nCard[i-1][0]!=nCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(nCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));								
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));								
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(2,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<nCard[i][1];
+					gotoxy(2,y);y++;
 				}
 				break;
 			}
 		}
+
+		//右邊
 		if((player.declarer_position+3)%4==player.position)
 		{
+			for(int i=3;i<23;i++)
+			{
+				gotoxy(41,i);
+				cout<<" ";
+			}//clear
+
 			gotoxy(41,3);
+
 			switch(player.position)
 			{
 			case 2:
-				if(eCard[0][0]=='C')
+				switch(eCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(41,y);y++;
+
 				for(int i=0;i<e;i++)
 				{
-					cout<<eCard[i][1];
-					gotoxy(41,y);y++;
-					if(i==e-2)
+					if(i>=1)
 					{
-						cout<<eCard[i+1][1];
-						break;
-					}
-				
-					if(eCard[i][0]!=eCard[i+1][0])
-					{
-					
-						switch(eCard[i+1][0])
+						if(eCard[i-1][0]!=eCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(eCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<eCard[i][1];
+					gotoxy(41,y);y++;
 				}
 				break;
 			case 3:
-				if(sCard[0][0]=='C')
+				switch(sCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(41,y);y++;
+
 				for(int i=0;i<s;i++)
 				{
-					cout<<sCard[i][1];
-					gotoxy(41,y);y++;
-					if(i==s-2)
+					if(i>=1)
 					{
-						cout<<sCard[i+1][1];
-						break;
-					}
-				
-					if(sCard[i][0]!=sCard[i+1][0])
-					{
-					
-						switch(sCard[i+1][0])
+						if(sCard[i-1][0]!=sCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(sCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\5";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<sCard[i][1];
+					gotoxy(41,y);y++;
 				}
 				break;
 			case 0:
-				if(wCard[0][0]=='C')
+				switch(wCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(41,y);y++;
+
 				for(int i=0;i<w;i++)
 				{
-					cout<<wCard[i][1];
-					gotoxy(41,y);y++;
-					if(i==w-2)
+					if(i>=1)
 					{
-						cout<<wCard[i+1][1];
-						break;
-					}
-				
-					if(wCard[i][0]!=wCard[i+1][0])
-					{
-					
-						switch(wCard[i+1][0])
+						if(wCard[i-1][0]!=wCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(wCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<wCard[i][1];
+					gotoxy(41,y);y++;
 				}
 				break;
 			case 1:
-				if(nCard[0][0]=='C')
+				switch(nCard[0][0])
 				{
+				case 'C':
 					setcolor(colorcode(0,2));
 					cout<<"\5";
-					gotoxy(41,y);y++;
 					setcolor(colorcode(15,2));
+					break;
+				case 'H':
+					setcolor(colorcode(12,2));
+					cout<<"\3";
+					setcolor(colorcode(15,2));
+					break;
+				case 'S':
+					setcolor(colorcode(0,2));
+					cout<<"\6";
+					setcolor(colorcode(15,2));
+					break;
+				case 'D':
+					setcolor(colorcode(12,2));
+					cout<<"\4";
+					setcolor(colorcode(15,2));
+					break;
 				}
+				gotoxy(41,y);y++;
+
 				for(int i=0;i<n;i++)
 				{
-					cout<<nCard[i][1];
-					gotoxy(41,y);y++;
-					if(i==n-2)
+					if(i>=1)
 					{
-						cout<<nCard[i+1][1];
-						break;
-					}
-				
-					if(nCard[i][0]!=nCard[i+1][0])
-					{
-					
-						switch(nCard[i+1][0])
+						if(nCard[i-1][0]!=nCard[i][0])
 						{
-						case 'H':
-							setcolor(colorcode(12,2));
-							cout<<"\3";
+							switch(nCard[i][0])
+							{
+							case 'H':
+								setcolor(colorcode(12,2));
+								cout<<"\3";
+								setcolor(colorcode(15,2));
+								break;
+							case 'D':
+								setcolor(colorcode(12,2));
+								cout<<"\4";
+								setcolor(colorcode(15,2));
+								break;
+							case 'S':
+								setcolor(colorcode(0,2));
+								cout<<"\6";
+								setcolor(colorcode(15,2));
+								break;
+							}
 							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'D':
-							setcolor(colorcode(12,2));
-							cout<<"\4";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
-						case 'S':
-							setcolor(colorcode(0,2));
-							cout<<"\6";
-							gotoxy(41,y);y++;
-							setcolor(colorcode(15,2));
-							break;
 						}
 					}
+					cout<<nCard[i][1];
+					gotoxy(41,y);y++;
 				}
 				break;
 			}
 		}
 	}
+
+	//印莊家
+	if((player.declarer_position+2)%4==player.position)
+	{
+		gotoxy(6,1);
+		cout<<"                                                 ";
+		gotoxy(6,1);
+
+		switch((player.position+2)%4)
+		{
+		case 0:
+			switch(nCard[0][0])
+			{
+			case 'C':
+				setcolor(colorcode(0,2));
+				cout<<"\5";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			}
+
+			for(int i=0;i<n;i++)
+			{
+				if(i>=1)
+				{
+					if(nCard[i-1][0]!=nCard[i][0])
+					{
+						switch(nCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
+					}
+				}
+				cout<<nCard[i][1];
+			}
+			break;
+		case 1:
+			switch(eCard[0][0])
+			{
+			case 'C':
+				setcolor(colorcode(0,2));
+				cout<<"\5";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			}
+
+			for(int i=0;i<e;i++)
+			{
+				if(i>=1)
+				{
+					if(eCard[i-1][0]!=eCard[i][0])
+					{
+						switch(eCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
+					}
+				}
+				cout<<eCard[i][1];
+			}
+			break;
+		case 2:
+			switch(sCard[0][0])
+			{
+			case 'C':
+				setcolor(colorcode(0,2));
+				cout<<"\5";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			}
+
+			for(int i=0;i<s;i++)
+			{
+				if(i>=1)
+				{
+					if(sCard[i-1][0]!=sCard[i][0])
+					{
+						switch(sCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
+					}
+				}
+				cout<<sCard[i][1];
+			}
+			break;
+		case 3:
+			switch(wCard[0][0])
+			{
+			case 'C':
+				setcolor(colorcode(0,2));
+				cout<<"\5";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'H':
+				setcolor(colorcode(12,2));
+				cout<<"\3";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'S':
+				setcolor(colorcode(0,2));
+				cout<<"\6";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			case 'D':
+				setcolor(colorcode(12,2));
+				cout<<"\4";
+				setcolor(colorcode(15,2));
+				cout<<" ";
+				break;
+			}
+
+			for(int i=0;i<w;i++)
+			{
+				if(i>=1)
+				{
+					if(wCard[i-1][0]!=wCard[i][0])
+					{
+						switch(wCard[i][0])
+						{
+						case 'H':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\3";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'D':
+							setcolor(colorcode(12,2));
+							cout<<"  ";
+							cout<<"\4";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						case 'S':
+							cout<<"  ";
+							setcolor(colorcode(0,2));
+							cout<<"\6";
+							setcolor(colorcode(15,2));
+							cout<<" ";
+							break;
+						}
+					}
+				}
+				cout<<wCard[i][1];
+			}
+			break;
+		}
+	}
+
 	setcolor(colorcode(15,2));
 	gotoxy(0,23);
 }
@@ -784,16 +1241,19 @@ void Interface::playercard(Player & player)
 	{
 		eCard.push_back(player.Card[1][i]);
 	}
-	vector<string> wCard;//testing
+	vector<string> wCard;
 	for(unsigned int i=0;i<player.Card[3].size();i++)
 	{
 		wCard.push_back(player.Card[3][i]);
 	}
+
 	int s=sCard.size();
 	int n=nCard.size();
 	int e=eCard.size();
-	int w=wCard.size();//testing
+	int w=wCard.size();
 	
+	gotoxy(6,21);
+	cout<<"                                                ";
 	gotoxy(6,21);
 	
 	switch(player.position)
@@ -826,15 +1286,14 @@ void Interface::playercard(Player & player)
 				cout<<" ";
 				break;
 			}
-			for(int i=0;i<e;i++)
+
+			for(int i=0;i<n;i++)
 			{
-				cout<<nCard[i][1];
-				if(i==n-2)
+				if(i>=1)
 				{
-					if(nCard[i][0]!=nCard[i+1][0])
+					if(nCard[i-1][0]!=nCard[i][0])
 					{
-					
-						switch(nCard[i+1][0])
+						switch(nCard[i][0])
 						{
 						case 'H':
 							setcolor(colorcode(12,2));
@@ -859,40 +1318,9 @@ void Interface::playercard(Player & player)
 							break;
 						}
 					}
-					cout<<nCard[i+1][1];
-					break;
 				}
-				
-				if(nCard[i][0]!=nCard[i+1][0])
-				{
-					
-					switch(nCard[i+1][0])
-					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					}
-				}
+				cout<<nCard[i][1];
 			}
-
 			break;
 		case 1:
 			switch(eCard[0][0])
@@ -922,15 +1350,14 @@ void Interface::playercard(Player & player)
 				cout<<" ";
 				break;
 			}
+
 			for(int i=0;i<e;i++)
 			{
-				cout<<eCard[i][1];
-				if(i==e-2)
+				if(i>=1)
 				{
-					if(eCard[i][0]!=eCard[i+1][0])
+					if(eCard[i-1][0]!=eCard[i][0])
 					{
-					
-						switch(eCard[i+1][0])
+						switch(eCard[i][0])
 						{
 						case 'H':
 							setcolor(colorcode(12,2));
@@ -955,40 +1382,9 @@ void Interface::playercard(Player & player)
 							break;
 						}
 					}
-					cout<<eCard[i+1][1];
-					break;
 				}
-				
-				if(eCard[i][0]!=eCard[i+1][0])
-				{
-					
-					switch(eCard[i+1][0])
-					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					}
-				}
+				cout<<eCard[i][1];
 			}
-
 			break;
 		case 2:
 			switch(sCard[0][0])
@@ -1018,15 +1414,14 @@ void Interface::playercard(Player & player)
 				cout<<" ";
 				break;
 			}
+
 			for(int i=0;i<s;i++)
 			{
-				cout<<sCard[i][1];
-				if(i==s-2)
+				if(i>=1)
 				{
-					if(sCard[i][0]!=sCard[i+1][0])
+					if(sCard[i-1][0]!=sCard[i][0])
 					{
-					
-						switch(sCard[i+1][0])
+						switch(sCard[i][0])
 						{
 						case 'H':
 							setcolor(colorcode(12,2));
@@ -1051,38 +1446,8 @@ void Interface::playercard(Player & player)
 							break;
 						}
 					}
-					cout<<sCard[i+1][1];
-					break;
 				}
-				
-				if(sCard[i][0]!=sCard[i+1][0])
-				{
-					
-					switch(sCard[i+1][0])
-					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					}
-				}
+				cout<<sCard[i][1];
 			}
 			break;
 		case 3:
@@ -1113,15 +1478,14 @@ void Interface::playercard(Player & player)
 				cout<<" ";
 				break;
 			}
+
 			for(int i=0;i<w;i++)
 			{
-				cout<<wCard[i][1];
-				if(i==w-2)
+				if(i>=1)
 				{
-					if(wCard[i][0]!=wCard[i+1][0])
+					if(wCard[i-1][0]!=wCard[i][0])
 					{
-					
-						switch(wCard[i+1][0])
+						switch(wCard[i][0])
 						{
 						case 'H':
 							setcolor(colorcode(12,2));
@@ -1146,38 +1510,8 @@ void Interface::playercard(Player & player)
 							break;
 						}
 					}
-					cout<<wCard[i+1][1];
-					break;
 				}
-				
-				if(wCard[i][0]!=wCard[i+1][0])
-				{
-					
-					switch(wCard[i+1][0])
-					{
-					case 'H':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\3";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'D':
-						setcolor(colorcode(12,2));
-						cout<<"  ";
-						cout<<"\4";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					case 'S':
-						cout<<"  ";
-						setcolor(colorcode(0,2));
-						cout<<"\6";
-						setcolor(colorcode(15,2));
-						cout<<" ";
-						break;
-					}
-				}
+				cout<<wCard[i][1];
 			}
 			break;
 		}
