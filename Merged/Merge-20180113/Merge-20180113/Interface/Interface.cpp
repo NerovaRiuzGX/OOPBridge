@@ -133,7 +133,7 @@ string Interface::jointable()
 	if(gamechoose==13&&gamestart==80)
 	{
 		cout<<"\n\n\n\n\n\n\n\n\n                                        ENTER THE TABLE'S IP\n"<<endl;
-		gotoxy(45,12);
+		gotoxy(43,12);
 		cin>>connectIP;
 		gotoxy(37,15);
 		cout<<"NOW LOADING PLEASE WAIT......";
@@ -1541,69 +1541,61 @@ void Interface::trick(Player & player)
 
 void Interface::table(Player & player)
 {
-	gotoxy(0,3);
-		cout<<"     ■■■■■■■■■■■■■■■■■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■                              ■\n"
-			<<"     ■■■■■■■■■■■■■■■■■"
-			<<endl;
+	gotoxy(5,3);cout<<"■■■■■■■■■■■■■■■■■";
+	for(int i=4;i<19;i++)
+	{
+		gotoxy(5,i);cout<<"■";
+		gotoxy(37,i);cout<<"■";
+	}
+	gotoxy(5,19);cout<<"■■■■■■■■■■■■■■■■■";
+	
 		
-		//trick table
-		gotoxy(61,13);
-		setcolor(colorcode(0,15));
-		cout<<"  Trick  ";
-		setcolor(colorcode(0,7));
-		gotoxy(61,14);
-		cout<<"         ";
-		gotoxy(61,15);
-		cout<<"         ";
+	//trick table
+	gotoxy(61,13);
+	setcolor(colorcode(0,15));
+	cout<<"  Trick  ";
+	setcolor(colorcode(0,7));
+	gotoxy(61,14);
+	cout<<"         ";
+	gotoxy(61,15);
+	cout<<"         ";
 
-		setcolor(colorcode(15,2));
+	setcolor(colorcode(15,2));
 
-		//now turn
-		gotoxy(46,18); 
-		cout<<"Now turn : ";
-		switch(player.statement%4)
-		{
-		case 0:
-			cout<<"N    ";
-			break;
-		case 1:
-			cout<<"E    ";
-			break;
-		case 2:
-			cout<<"S    ";
-			break;
-		case 3:
-			cout<<"W    ";
-			break;
-		}
-		gotoxy(46,19);
-		cout<<"Please wait......                                ";
+	//now turn
 
-		gotoxy(21,19);
-		cout<<pos[player.position];
-		gotoxy(5,11);
-		cout<<pos[(player.position+1)%4];
-		gotoxy(21,3);
-		cout<<pos[(player.position+2)%4];
-		gotoxy(37,11);
-		cout<<pos[(player.position+3)%4];
+	/*gotoxy(46,18); 
+	cout<<"Now turn : ";
+	switch(player.statement%4)
+	{
+	case 0:
+		cout<<"N    ";
+		break;
+	case 1:
+		cout<<"E    ";
+		break;
+	case 2:
+		cout<<"S    ";
+		break;
+	case 3:
+		cout<<"W    ";
+		break;
+	}
+	gotoxy(46,19);
+	cout<<"Please wait......                                ";*/
+	
+	gotoxy(21,19);
+	cout<<pos[player.position];
+	gotoxy(5,11);
+	cout<<pos[(player.position+1)%4];
+	gotoxy(21,3);
+	cout<<pos[(player.position+2)%4];
+	gotoxy(37,11);
+	cout<<pos[(player.position+3)%4];
 
-		gotoxy(0,23);
+	nowturn(player);
+	
+	gotoxy(0,23);
 }
 
 void Interface::contract(Player & player)
@@ -1800,7 +1792,7 @@ string Interface::bidding()
 	gotoxy(46,18);
 	cout<<"It's your turn,";
 	gotoxy(46,19);
-	cout<<"enter your bidding:";
+	cout<<"enter your bidding : ";
 	cin>>bid;
 
 	gotoxy(46,18);
@@ -1825,7 +1817,7 @@ string Interface::playcard()
 	gotoxy(45,18); 
 	cout<<"It's your turn,";
 	gotoxy(45,19); 
-	cout<<"enter the card you play:";
+	cout<<"enter the card you play : ";
 	cin>>play;
 
 	transform(play.begin(),play.end(),play.begin(),::toupper);
@@ -2031,4 +2023,57 @@ void Interface::scoreboard(Player & player)
 	setcolor(colorcode(15,2));
 	
 	gotoxy(0,23);
+}
+
+void Interface::nowturn(Player & player)
+{
+	int c=0;
+	if(player.statement<14)
+	{
+		c=(player.statement-10)%4;
+	}
+	else
+	{
+		c=player.statement%4;
+	}
+
+	switch((c-player.position+4)%4)
+	{
+	case 0:
+		setcolor(colorcode(14,2));
+		gotoxy(5,19);cout<<"■■■■■■■■";
+		gotoxy(23,19);cout<<"■■■■■■■■";
+		setcolor(colorcode(15,2));
+		break;
+	case 1:
+		for(int i=3;i<20;i++)
+		{
+			setcolor(colorcode(14,2));
+			if(i==11)
+			{
+				i+=1;
+			}
+			gotoxy(5,i);cout<<"■";
+			setcolor(colorcode(15,2));
+		}
+		break;
+	case 2:
+		setcolor(colorcode(14,2));
+		gotoxy(5,3);cout<<"■■■■■■■■";
+		gotoxy(23,3);cout<<"■■■■■■■■";
+		setcolor(colorcode(15,2));
+		break;
+	case 3:
+		for(int i=3;i<20;i++)
+		{
+			setcolor(colorcode(14,2));
+			if(i==11)
+			{
+				i+=1;
+			}
+			gotoxy(37,i);cout<<"■";
+			setcolor(colorcode(15,2));
+		}
+		break;
+	}
 }

@@ -27,6 +27,7 @@ public:
 	void card(Player &);//有人打牌的時候 牌桌上印出牌
 	void suit(int,int,char ,char );//我自己function用的 不要理他
 	void scoreboard(Player &);//印出兩隊目前分數
+	void nowturn(Player &);//換到誰誰座位會亮亮
 	void gotoxy(int xpos, int ypos)
 	{
 		COORD scrn;
