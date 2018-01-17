@@ -1835,7 +1835,7 @@ void Interface::card(Player & player)
 {
 	int i=player.ns_trick+player.ew_trick;
 	//if(player.turn)
-	if(player.turn)
+	if(player.turn==1)
 	{
 		setcolor(colorcode(15,2));
 
