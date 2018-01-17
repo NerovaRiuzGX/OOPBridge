@@ -170,9 +170,7 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					//UI.scoreboard(player);
 					//UI.contract(player);
 					UI.trick(player);
-					if (player.turn!=0) {
-						UI.card(player);
-					}
+					UI.card(player);
 					UI.nowturn(player);
 					break;
 				case 3:
@@ -434,69 +432,71 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 					}*/
 					if(host.turn == 4)
 					{
-						int total_trick = host.ns_trick+host.ew_trick;
-						string turn_max = host.trick_log[total_trick][0]; 
-						int max_player=0;
+						if (Check(position)) {
+							int total_trick = host.ns_trick+host.ew_trick;
+							string turn_max = host.trick_log[total_trick][0]; 
+							int max_player=0;
 
-						/*char turn_contract_suit = 'C';
+							/*char turn_contract_suit = 'C';
 
-						switch(host.contract_suit)
-						{
-							case 1: turn_contract_suit='D'; break;
-							case 2: turn_contract_suit='H'; break;
-							case 3: turn_contract_suit='S'; break;
-						}*/
-
-						if(host.contract_suit == 4) //NT
-						{
-							for(int i=1; i<4; i++)
+							switch(host.contract_suit)
 							{
-								if( turn_max[0] == host.trick_log[total_trick][i][0] )
+								case 1: turn_contract_suit='D'; break;
+								case 2: turn_contract_suit='H'; break;
+								case 3: turn_contract_suit='S'; break;
+							}*/
+
+							if(host.contract_suit == 4) //NT
+							{
+								for(int i=1; i<4; i++)
 								{
-									//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-									if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
-										turn_max = host.trick_log[total_trick][i];
-										max_player=i;
+									if( turn_max[0] == host.trick_log[total_trick][i][0] )
+									{
+										//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+										if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+											turn_max = host.trick_log[total_trick][i];
+											max_player=i;
+										}
 									}
 								}
 							}
-						}
-						else //other contract_suit
-						{
-							for(int i=1; i<4; i++)
+							else //other contract_suit
 							{
-								if( turn_max[0] == host.trick_log[total_trick][i][0] )
+								for(int i=1; i<4; i++)
 								{
-									//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-									if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+									if( turn_max[0] == host.trick_log[total_trick][i][0] )
+									{
+										//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
+										if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+											turn_max = host.trick_log[total_trick][i];
+											max_player=i;
+										}
+									}
+									else if(host.trick_log[total_trick][i][0] == suit[host.contract_suit])
+									{
 										turn_max = host.trick_log[total_trick][i];
-										max_player=i;
+										max_player = i;
 									}
 								}
-								else if(host.trick_log[total_trick][i][0] == suit[host.contract_suit])
-								{
-									turn_max = host.trick_log[total_trick][i];
-									max_player = i;
-								}
 							}
-						}
-						//set win trick
-						switch( (host.statement + max_player)%4 )
-						{
-							case 0:
-							case 2:
-								host.ns_trick++;
-								break;
-							case 1:
-							case 3:
-								host.ew_trick++;
-								break;
-						}
-						//change statement
-						if(total_trick != 13)
-						{
-							host.turn = 0;
-							host.statement = 25 + (host.statement + max_player) %4;
+							//set win trick
+							switch( (host.statement + max_player)%4 )
+							{
+								case 0:
+								case 2:
+									host.ns_trick++;
+									break;
+								case 1:
+								case 3:
+									host.ew_trick++;
+									break;
+							}
+							//change statement
+							if(total_trick != 13)
+							{
+								host.turn = 0;
+								host.statement = 25 + (host.statement + max_player) %4;
+							}
 						}
 					}
 					break;
