@@ -1796,9 +1796,9 @@ string Interface::bidding()
 	cin>>bid;
 
 	gotoxy(46,18);
-	cout<<"                      ";
+	cout<<"                             ";
 	gotoxy(46,19);
-	cout<<"                      ";
+	cout<<"                             ";
 
 	gotoxy(0,23);
 
@@ -1823,9 +1823,9 @@ string Interface::playcard()
 	transform(play.begin(),play.end(),play.begin(),::toupper);
 	setcolor(colorcode(15,2));
 	gotoxy(45,18); 
-	cout<<"                          ";
+	cout<<"                                 ";
 	gotoxy(45,19); 
-	cout<<"                          ";
+	cout<<"                                 ";
 	
 	gotoxy(0,23);
 	return play;
@@ -1834,6 +1834,7 @@ string Interface::playcard()
 void Interface::card(Player & player)
 {
 	int i=player.ns_trick+player.ew_trick;
+	//if(player.turn)
 
 	switch((player.statement-player.position-player.turn+12)%4)
 	{
@@ -2076,4 +2077,5 @@ void Interface::nowturn(Player & player)
 		}
 		break;
 	}
+	gotoxy(0,23);
 }
