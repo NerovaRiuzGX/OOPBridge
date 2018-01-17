@@ -1839,6 +1839,25 @@ void Interface::card(Player & player)
 	switch((player.statement-player.position-player.turn+12)%4)
 	{
 	case 0:
+		if(player.trick_log[i][0]!="")
+		{
+			suit(21,14,player.trick_log[i][0][0],player.trick_log[i][0][1]);
+		}
+		if(player.trick_log[i][1]!="")
+		{
+			suit(13,10,player.trick_log[i][1][0],player.trick_log[i][1][1]);
+		}
+		if(player.trick_log[i][2]!="")
+		{
+			suit(20,6,player.trick_log[i][2][0],player.trick_log[i][2][1]);
+		}
+		if(player.trick_log[i][3]!="")
+		{
+			suit(28,10,player.trick_log[i][3][0],player.trick_log[i][3][1]);
+		}
+
+		break;
+	case 1:
 		setcolor(colorcode(15,2));
 
 		gotoxy(13,10);
@@ -1868,26 +1887,6 @@ void Interface::card(Player & player)
 		cout<<"   ";
 		gotoxy(21,16);
 		cout<<"   ";
-		
-		if(player.trick_log[i][0]!="")
-		{
-			suit(21,14,player.trick_log[i][0][0],player.trick_log[i][0][1]);
-		}
-		if(player.trick_log[i][1]!="")
-		{
-			suit(13,10,player.trick_log[i][1][0],player.trick_log[i][1][1]);
-		}
-		if(player.trick_log[i][2]!="")
-		{
-			suit(20,6,player.trick_log[i][2][0],player.trick_log[i][2][1]);
-		}
-		if(player.trick_log[i][3]!="")
-		{
-			suit(28,10,player.trick_log[i][3][0],player.trick_log[i][3][1]);
-		}
-
-		break;
-	case 1:
 		if(player.trick_log[i][0]!="")
 		{
 			suit(13,10,player.trick_log[i][0][0],player.trick_log[i][0][1]);
