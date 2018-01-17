@@ -14,6 +14,7 @@
 int connectCount = 0;
 int connectSock[4] = {};
 bool* connectCheck = new bool[MAX_USER_COUNT];
+bool all_refresh = false;
 
 //mutex lock
 pthread_mutex_t serverMutex, clientMutex;
@@ -644,5 +645,17 @@ bool Check (int position) { //check if everyone has received the latest package
 		}
 	}
 
-	return !found;
+	if (!found) {
+		if (!all_refresh) {
+			all_refresh = !all_refresh;
+			return false;
+		}
+		else {
+			all_refresh = !all_refresh;
+			return true;
+		}
+	}
+	else {
+		return false;
+	}
 }
