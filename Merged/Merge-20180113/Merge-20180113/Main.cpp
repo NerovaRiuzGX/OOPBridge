@@ -588,7 +588,10 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 	}
 	else if(player.statement/10==2)
 	{
-		if( player.position == player.statement-20 && player.statement-20 != dummy)
+		if (player.turn > 3) {
+		
+		}
+		else if( player.position == player.statement-20 && player.statement-20 != dummy)
 		{
 			if ( curr_state==player.statement-20 ) {
 				do {
