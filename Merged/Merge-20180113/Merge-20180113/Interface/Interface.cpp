@@ -2038,7 +2038,7 @@ void Interface::card(Player & player)
 	for (int i=0; i<player.turn; i++) {
 
 		suit = player.trick_log[total_trick][i][0];
-		num = player.trick_log[total_trick][i][0];
+		num = player.trick_log[total_trick][i][1];
 
 		switch (suit) {
 			case 'H': suit = '\3'; suit_color = 12; break;
