@@ -166,11 +166,12 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					break;
 			}
 
-			PlayerTask(curr_state);
 			print_state=player.statement;
 		} // end if
 
 		pthread_mutex_unlock(&clientMutex);
+
+		PlayerTask(curr_state);
 
 		//grab information every 500 ms
 		Sleep(500);
