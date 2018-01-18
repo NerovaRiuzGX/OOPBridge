@@ -193,8 +193,7 @@ void Interface::dummycard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();//testing
 
-<<<<<<< HEAD
-=======
+
 	gotoxy(6,1);cout<<"                                                   ";
 	gotoxy(6,21);cout<<"                                                   ";
 	for(int i=3;i<23;i++)
@@ -209,7 +208,7 @@ void Interface::dummycard(Player & player)
 	}//clear                                         ";
 	gotoxy(2,3);
 
->>>>>>> 5e44c9e91dfd6ab5b81386ca6a11bc4a43cd95e6
+
 	switch((player.declarer_position+2)%4)
 	{
 	case 0:
