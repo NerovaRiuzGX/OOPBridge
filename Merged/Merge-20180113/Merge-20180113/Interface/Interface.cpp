@@ -195,7 +195,6 @@ void Interface::dummycard(Player & player)
 
 
 	gotoxy(6,1);cout<<"                                                   ";
-	gotoxy(6,21);cout<<"                                                   ";
 	for(int i=3;i<23;i++)
 	{
 		gotoxy(41,i);
