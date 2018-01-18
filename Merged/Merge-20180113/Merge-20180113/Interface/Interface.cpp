@@ -1771,7 +1771,7 @@ void Interface::biddingtable(Player & player)
 	case 3:
 		count2=58;
 		break;
-	case 4:
+	case 0:
 		count2=66;
 		break;
 	}
