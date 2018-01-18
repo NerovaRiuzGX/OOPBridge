@@ -2026,11 +2026,11 @@ void Interface::card(Player & player)
 		setcolor(colorcode(15, 2));
 		for (int i=0; i<4; i++) {
 			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
-			cout << suit << "  ";
+			cout << "   ";
 			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
-			cout << " " << num << " ";
+			cout << "   ";
 			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
-			cout << "  " << suit;
+			cout << "   ";
 		}
 	}
 
