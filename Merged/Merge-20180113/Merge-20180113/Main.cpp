@@ -58,27 +58,22 @@ void * serverLoop (void * new_sock) { //this function handles what server thread
 
 	//receive-send loop
 	while ((data = server.receiveMessage(sock)) != "") {
-		
-		//test line
-		//cout << "Received data from Player " << position << endl;
 
 		FILE.write(data);
 
 		//alter Host data in this mutex lock
 		pthread_mutex_lock(&serverMutex); 
-		//cout << "Thread of Player " << position << " access Host" << endl;
+
 		FILE.pkgrcv(data, host);
 		hostTask(position);
 		data = FILE.pkgsnd(host);
+
 		pthread_mutex_unlock(&serverMutex);
 
 		server.sendMessage(data, sock);
 	}
 
 	closesocket(sock);
-	/*cout << endl << "===============" << endl;
-	cout << "User " << sock << " disconnect." << endl;
-	cout << "===============" << endl << endl;*/
 	connectCount--;
 
 	//thread has to be destroyed after done
@@ -95,14 +90,10 @@ void * createServer (void * serverPort) { //this function creates a server that 
 	int new_sock;
 	while ( (new_sock = server.acceptConn()) != -1 ) {
 
-		//cout << endl << "===============" << endl;
-
 		//check if the table is full
 		if (connectCount < MAX_USER_COUNT) {
-			//create a loop thread and pass a socket for it
 			connectSock[connectCount] = new_sock;
 			pthread_create(&thread, NULL, serverLoop, (void *)new_sock);
-			//cout << "User " << new_sock << " online." << endl;
 			connectCount++;
 		}
 		else { //close the connection if the table is full
@@ -110,18 +101,12 @@ void * createServer (void * serverPort) { //this function creates a server that 
 			cout << "Client connection denied." << endl;
 		}
 
-		/*cout << "Online users: " << connectCount << endl;
-		cout << "===============" << endl << endl;*/
-
 		//change statement when the table is full
 		if (connectCount==MAX_USER_COUNT && host.statement==0) {
 			pthread_mutex_lock(&serverMutex);  //alter Host data in this mutex lock
 			host.statement = 1;
-			//cout << "Server thread access Host" << endl;
 			pthread_mutex_unlock(&serverMutex);
 		}
-		
-
 	}
 
 	//mutex lock has to be destroyed
@@ -155,7 +140,6 @@ void * clientInterface (void *) { //this function handles how the interface shou
 				case 1:
 					system("cls");
 					UI.table(player);
-					//player.printTable();
 					UI.playercard(player);
 					UI.biddingtable(player);
 					UI.scoreboard(player);			
@@ -163,14 +147,13 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.nowturn(player); 
 					break;
 				case 2:
-					UI.table(player);	
-					//player.printTable();
+					UI.table(player);
 					UI.playercard(player);		
 					if (player.trick_log[0][0]!="") {
 						UI.dummycard(player);	 
 					}
 					UI.biddingtable(player);
-					//UI.scoreboard(player);
+					UI.scoreboard(player);
 					UI.contract(player);
 					UI.trick(player);
 					UI.card(player);
@@ -183,12 +166,10 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					break;
 			}
 
-			//interface for testing
-			//player.printTable();
-			print_state=player.statement; //print_state reset
-		}
-		
-		PlayerTask(curr_state);
+			PlayerTask(curr_state);
+			print_state=player.statement;
+		} // end if
+
 		pthread_mutex_unlock(&clientMutex);
 
 		//grab information every 500 ms
@@ -204,8 +185,6 @@ void createClient (string ip) { //this function creates a client and keep doing 
 
 	//client setup, connect to the certain ip and port
 	client->setup(ip, 10555);
-	/*cout << "===============" << endl;
-	cout << "Type \"@\" to close the client." << endl << endl;*/
 
 	//generates debug data
 	FileControl FILE ("Server-To-Client.bridge");
@@ -232,12 +211,8 @@ void createClient (string ip) { //this function creates a client and keep doing 
 			break;
 		}
 
-		//cout << client->receiveMessage(0) << endl;
-
 		data = client->receiveMessage(NULL);
 		FILE.write(data);
-
-		//cout << data << '\n';
 
 		//alter Host data in this mutex lock
 		pthread_mutex_lock(&clientMutex);
@@ -285,39 +260,24 @@ void main () {
 				break;
 
 			case 1: //join
-				/*fflush(stdin);
-				string ip;
-				cout << "Enter destination IP: ";
-				getline(cin, ip);*/
 				createClient(UI.jointable());
 				break;
 		}
 	}
-
-	//old test interface
-	//cout << "(1) I'm a server.\n(2) I'm a client." << endl << "Choose one: ";
-
-	/*switch (getchar()) {
-		case '1':
-			pthread_t serverThread;
-			pthread_create(&serverThread, NULL, createServer, (void *)10555);
-			Sleep(1000);
-			createClient("127.0.0.1");
-			break;
-
-		case '2':
-			fflush(stdin);
-			string ip;
-			cout << "Enter destination IP: ";
-			getline(cin, ip);
-			createClient(ip);
-			break;
-	}*/
-	
+	else {
+		UI.gametable(player);
+		system("pause");
+	}
 }
 
 void hostTask (int position) { //what Host should do whenever it receives a package
 	char suit[5] = {'C', 'D', 'H', 'S', 'N'};
+
+	//requirements for PLAY
+	int total_trick = host.ns_trick+host.ew_trick;
+	string turn_max = host.trick_log[total_trick][0]; 
+	int max_player=0;
+
 	switch (host.statement/10) {
 		case 0: //SET
 			switch (host.statement%10) {
@@ -358,16 +318,13 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 							string last_bid = *(find_if(host.auction_log.rbegin(), (host.auction_log.size()>10 ? host.auction_log.rbegin()+10 : host.auction_log.rend() ), [](string i){return (i!="XX" && i!="X" && i!="PS");}));
 							
 							//set contract_suit
-							if(last_bid[1] == 'C')
-								host.contract_suit = 0;
-							else if(last_bid[1] == 'D')
-								host.contract_suit = 1;
-							else if(last_bid[1] == 'H')
-								host.contract_suit = 2;
-							else if(last_bid[1] == 'S')
-								host.contract_suit = 3;
-							else
-								host.contract_suit = 4;
+							switch (last_bid[1]) {
+								case 'C': host.contract_suit = 0; break;
+								case 'D': host.contract_suit = 1; break;
+								case 'H': host.contract_suit = 2; break;
+								case 'S': host.contract_suit = 3; break;
+								default: host.contract_suit = 4; break;
+							}
 							
 							//set contract_trick
 							host.contract_trick = last_bid[0] - '0' + 6;
@@ -411,7 +368,6 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 									}
 								}
 							}
-
 						}
 					}
 					break;
@@ -429,80 +385,48 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 				case 1:
 				case 2:
 				case 3:
+					//initial checks
+					if (host.turn != 4) {break;}
+					if (!Check(position)) {break;}
 
-					/*if(host.ns_trick+host.ew_trick==13)
-					{
-						host.statement=29;
-						break;
-					}*/
-					if(host.turn == 4)
-					{
-						if (Check(position)) {
-							int total_trick = host.ns_trick+host.ew_trick;
-							string turn_max = host.trick_log[total_trick][0]; 
-							int max_player=0;
-
-							/*char turn_contract_suit = 'C';
-
-							switch(host.contract_suit)
-							{
-								case 1: turn_contract_suit='D'; break;
-								case 2: turn_contract_suit='H'; break;
-								case 3: turn_contract_suit='S'; break;
-							}*/
-
-							if(host.contract_suit == 4) //NT
-							{
-								for(int i=1; i<4; i++)
-								{
-									if( turn_max[0] == host.trick_log[total_trick][i][0] )
-									{
-										//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-										if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
-											turn_max = host.trick_log[total_trick][i];
-											max_player=i;
-										}
-									}
+					if (host.contract_suit == 4) { //for NT
+						for (int i=1; i<4; i++) {
+							if ( turn_max[0] == host.trick_log[total_trick][i][0] ) {
+								if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+									turn_max = host.trick_log[total_trick][i];
+									max_player = i;
 								}
-							}
-							else //other contract_suit
-							{
-								for(int i=1; i<4; i++)
-								{
-									if( turn_max[0] == host.trick_log[total_trick][i][0] )
-									{
-										//turn_max = host.CardToInt(turn_max) > host.CardToInt(host.trick_log[total_trick][i]) ? turn_max : host.trick_log[total_trick][i];
-										if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
-											turn_max = host.trick_log[total_trick][i];
-											max_player=i;
-										}
-									}
-									else if(host.trick_log[total_trick][i][0] == suit[host.contract_suit])
-									{
-										turn_max = host.trick_log[total_trick][i];
-										max_player = i;
-									}
-								}
-							}
-							//set win trick
-							switch( (host.statement + max_player)%4 )
-							{
-								case 0:
-								case 2:
-									host.ns_trick++;
-									break;
-								case 1:
-								case 3:
-									host.ew_trick++;
-									break;
-							}
-							//change statement
-							if(total_trick != 13)
-							{
-								host.turn = 0;
-								host.statement = 25 + (host.statement + max_player) %4;
 							}
 						}
+					}
+					else { //other contract_suit
+						for (int i=1; i<4; i++) {
+							if ( turn_max[0] == host.trick_log[total_trick][i][0] ) {
+								if (host.CardToInt(turn_max) < host.CardToInt(host.trick_log[total_trick][i])) {
+									turn_max = host.trick_log[total_trick][i];
+									max_player=i;
+								}
+							}
+							else if (host.trick_log[total_trick][i][0] == suit[host.contract_suit]) {
+								turn_max = host.trick_log[total_trick][i];
+								max_player = i;
+							}
+						}
+					}
+
+					//set win trick
+					switch ( (host.statement + max_player)%4 ) {
+						case 0:
+						case 2: host.ns_trick++; break;
+
+						case 1:
+						case 3: host.ew_trick++; break;
+					}
+
+					//change statement
+					if (total_trick != 13) {
+						host.turn = 0;
+						host.statement = 25 + (host.statement + max_player) %4;
 					}
 					break;
 				case 4:
@@ -535,13 +459,12 @@ void hostTask (int position) { //what Host should do whenever it receives a pack
 			}
 			break;
 		case 3: //RESULT
-			switch (host.statement%10){
+			switch (host.statement%10) {
 				case 0:
 					host.score();
 					host.statement++;
 					break;
 				case 1:
-					//host.reset(); reset in statement 4
 					host.statement++;
 					break;
 				case 2:
@@ -563,81 +486,77 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 {	
 	int dummy = (player.declarer_position+2)%4;
 	char pos[4] = {'N', 'E', 'S', 'W'};
-	if(player.statement/10==1)
-	{
-		if(player.statement-10==4)
-		{
-			//cout<<"Player "<<player.declarer_position<<"is declarer !!!"<<endl;
-			Sleep(2000);
+	if(player.statement/10==1) { //AUCTION
+		if(player.statement-10==4) {
+			player.decideBid="00";
 			curr_state = player.position;
 		}
-		else if ( player.position==player.statement-10 )
-		{
+		else if ( player.position==player.statement-10 ) {
 			if (curr_state==player.statement-10) {
 				do {
 					player.decideBid = UI.bidding();
 				} while (!player.bid(player.decideBid));
-				curr_state++;
-				//Sleep(200);
-			}
-		}
-		else
-		{
-			
-			//cout<<"Waiting for player to bid  "<<pos[player.statement-10]<<" !!";
-			player.decideBid="00";
-			curr_state = player.position;
-
-		}
-	}
-	else if(player.statement/10==2)
-	{
-		if (player.turn > 3) {
-		
-		}
-		else if( player.position == player.statement-20 && player.statement-20 != dummy)
-		{
-			if ( curr_state==player.statement-20 ) {
-				do {
-					player.decideCard = UI.playcard();
-				} while (!player.playCard(player.decideCard));
-				//player.playCard(); 
-				curr_state++;
-			}
-		}
-		else if( (player.statement-20 == dummy) && (player.position == player.declarer_position) )
-		{
-			if ( curr_state==player.statement-20 ) {
-				do {
-					player.decideCard = UI.playcard();
-				} while (!player.playCard(player.decideCard));
-				//player.playCard(); 
+				Sleep(500);
 				curr_state++;
 			}
 			else {
-				curr_state = (player.position+2)%4;
+				curr_state = player.position;
+				Sleep(1000);
 			}
 		}
-		else if (player.statement-20 == 9) {
-			//cout << "Waiting..." << endl;
+		else {
+			player.decideBid="00";
+			curr_state = player.position;
 		}
-		else if ( player.statement-20 >= 5 ) {
-			//cout << "Player " << pos[player.statement-25] << " wins the trick" << endl;
-			curr_state = player.statement-25;
-			Sleep(2000);
-		}
-		else 
-		{
-			//cout<<"Waiting for player"<<pos[player.statement-20]<<" to play card !!";
+	} //end of AUCTION
+	else if(player.statement/10==2) //PLAY
+	{
+		if (player.turn > 3 || player.statement == 29) {
 			player.decideCard="00";
 			curr_state = player.position;
 		}
-	}
-	else if(player.statement/10==3)
-	{
-		//cout<<"NS_Point : "<<player.ns_point<<endl
-			//<<"EW_Point : "<<player.ew_point<<endl;
-	}
+		else if ( player.position == player.statement-20 && player.statement-20 != dummy) {
+
+			//my turn, not dummy
+			if ( curr_state==player.statement-20 ) {
+				do {
+					player.decideCard = UI.playcard();
+				} while (!player.playCard(player.decideCard));
+				Sleep(500);
+				curr_state++;
+			}
+			else {
+				curr_state = player.position;
+				Sleep(1000);
+			}
+		}
+		else if ( (player.statement-20 == dummy) && (player.position == player.declarer_position) ) {
+
+			//dummy's turn, im declarer
+			if ( curr_state==player.statement-20 ) {
+				do {
+					player.decideCard = UI.playcard();
+				} while (!player.playCard(player.decideCard));
+				Sleep(500);
+				curr_state++;
+			}
+			else {
+				curr_state = (player.position+2%4);
+				Sleep(1000);
+			}
+		}
+		else if ( player.statement-20 >= 5 ) {
+			player.decideCard="00";
+			curr_state = player.statement-25;
+		}
+		else {
+			player.decideCard="00";
+			curr_state = player.position;
+		}
+	} // end of PLAY
+	else if (player.statement/10==3) { //RESULT
+
+	} // end of RESULT
 }
 
 bool Check (int position) { //check if everyone has received the latest package
@@ -647,20 +566,15 @@ bool Check (int position) { //check if everyone has received the latest package
 
 	for (int i=0; i<MAX_USER_COUNT; i++) {
 		if (!connectCheck[i]) {
-			found = !found;
-			break;
+			found = !found; break;
 		}
 	}
 
 	if (!found) {
-		if (!all_refresh) {
-			all_refresh = !all_refresh;
-			return false;
-		}
-		else {
-			all_refresh = !all_refresh;
-			return true;
-		}
+		all_refresh = !all_refresh;
+
+		if (all_refresh) {return false;}
+		else {return true;}
 	}
 	else {
 		return false;
