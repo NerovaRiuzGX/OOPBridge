@@ -1654,7 +1654,7 @@ void Interface::table(Player & player)
 	gotoxy(37,11);
 	cout<<pos[(player.position+3)%4];
 
-	nowturn(player);
+	//nowturn(player);
 	
 	gotoxy(0,23);
 }

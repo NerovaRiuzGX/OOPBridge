@@ -173,8 +173,10 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					//UI.scoreboard(player);
 					UI.contract(player);
 					UI.trick(player);
-					UI.card(player);		//DEBUG
-					UI.nowturn(player);
+					UI.card(player);
+					if (player.turn < 4) {
+						UI.nowturn(player);
+					}
 					break;
 				case 3:
 					UI.scoreboard(player);
