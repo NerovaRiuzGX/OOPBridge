@@ -193,7 +193,21 @@ void Interface::dummycard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();//testing
 
-	switch(player.position)
+	gotoxy(6,1);cout<<"                                                   ";
+	gotoxy(6,21);cout<<"                                                   ";
+	for(int i=3;i<23;i++)
+	{
+		gotoxy(41,i);
+		cout<<" ";
+	}//clear
+	for(int i=3;i<23;i++)
+	{
+		gotoxy(2,i);
+		cout<<" ";
+	}//clear                                         ";
+	gotoxy(2,3);
+
+	switch((player.declarer_position+2)%4)
 	{
 	case 0:
 		if(n==0){return;}
@@ -1266,6 +1280,9 @@ void Interface::playercard(Player & player)
 	int n=nCard.size();
 	int e=eCard.size();
 	int w=wCard.size();
+
+	gotoxy(6,21);cout<<"                                                   ";
+	gotoxy(0,23);
 	
 	switch(player.position)
 	{
