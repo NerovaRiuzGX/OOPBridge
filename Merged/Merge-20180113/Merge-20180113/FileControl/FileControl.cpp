@@ -84,7 +84,7 @@ void FileControl::pkgrcv (string pkg, Host & host) { //(on Host side) to receive
 				}
 				break;
 			case 17: //decideCard: string
-				if (host.statement/10==2) {
+				if (host.statement/10==2 && pos<4) {
 					if (pos == position && list[i].size()==3) {
 						if (list[i][2]!="00" && host.turn<4) {
 							//host.Card[pos].erase ( remove ( host.Card[pos].begin(), host.Card[pos].end(), list[i][2] ), host.Card[host.turn].end() );
@@ -100,7 +100,7 @@ void FileControl::pkgrcv (string pkg, Host & host) { //(on Host side) to receive
 						}
 					}
 					else if ((pos+2)%4 == position && position == host.declarer_position && list[i].size()==3) {
-						if (list[i][2]!="00" && host.turn<4) {
+						if (list[i][2]!="00" && host.turn<4 && pos<4) {
 							//host.Card[pos].erase ( remove ( host.Card[pos].begin(), host.Card[pos].end(), list[i][2] ), host.Card[host.turn].end() );
 							for (int j=0; j<host.Card[pos].size(); j++) {
 								if (list[i][2]==host.Card[pos][j]) {

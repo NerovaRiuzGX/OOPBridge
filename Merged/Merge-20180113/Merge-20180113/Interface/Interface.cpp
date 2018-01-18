@@ -193,7 +193,7 @@ void Interface::dummycard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();//testing
 
-	switch(player.position)
+	switch((player.declarer_position+2)%4)
 	{
 	case 0:
 		if(n==0){return;}
