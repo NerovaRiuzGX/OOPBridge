@@ -2,7 +2,6 @@
 using namespace std;
 
 string Interface::pos[4]={"Ｎ","Ｅ","Ｓ","Ｗ"};
-int Interface::cardcounter=0;
 
 Interface::Interface()
 {

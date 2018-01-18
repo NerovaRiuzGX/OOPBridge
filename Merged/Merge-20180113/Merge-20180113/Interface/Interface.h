@@ -54,7 +54,6 @@ private:
 	char gamestart;
 
 	static string pos[4];
-	static int cardcounter;
 };
 
 
