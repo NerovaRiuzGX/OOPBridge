@@ -174,7 +174,7 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.contract(player);
 					UI.trick(player);
 					UI.card(player);
-					if (player.turn < 4) {
+					if (player.turn<4 && player.statement<24) {
 						UI.nowturn(player);
 					}
 					break;

@@ -1894,7 +1894,7 @@ string Interface::playcard()
 
 void Interface::card(Player & player)
 {
-	int i=player.ns_trick+player.ew_trick;
+	/*int i=player.ns_trick+player.ew_trick;
 	//if(player.turn)
 	if(player.turn==1)
 	{
@@ -2004,7 +2004,61 @@ void Interface::card(Player & player)
 			suit(20,6,player.trick_log[i][3][0],player.trick_log[i][3][1]);
 		}
 		break;
+	}*/
+
+	/*gotoxy(13,10); //left	
+	gotoxy(28,10); //right
+	gotoxy(20,6); //up
+	gotoxy(21,14); //down*/
+
+	//0 = DOWN
+	char suit_convert[4] = {};
+	int printx[4] = {21, 13, 20, 28};
+	int printy[4] = {14, 10, 6, 10};
+	int suit_color;
+	char suit;
+	char num;
+
+	int total_trick = player.ns_trick + player.ew_trick;
+	int start_pos = (player.statement - player.position - player.turn) % 4;
+
+	if (player.turn == 1) {
+		setcolor(colorcode(15, 2));
+		for (int i=0; i<4; i++) {
+			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+			cout << suit << "  ";
+			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+			cout << " " << num << " ";
+			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+			cout << "  " << suit;
+		}
 	}
+
+
+	for (int i=0; i<turn; i++) {
+
+		suit = player.trick_log[total_trick][i][0];
+		num = player.trick_log[total_trick][i][0];
+
+		switch (suit) {
+			case 'H': suit = '\3'; suit_color = 12; break;
+			case 'D': suit = '\4'; suit_color = 12; break;
+			case 'C': suit = '\5'; suit_color = 0; break;
+			case 'S': suit = '\6'; suit_color = 0; break;
+		}
+
+		setcolor(colorcode(suit_color, 15));
+		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+		cout << suit << "  ";
+		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+		cout << " " << num << " ";
+		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+		cout << "  " << suit;
+	}
+
+	//reset
+	setcolor(colorcode(15,2));
+	gotoxy(0,23);
 }
 
 void Interface::suit(int x,int y,char s,char p)
