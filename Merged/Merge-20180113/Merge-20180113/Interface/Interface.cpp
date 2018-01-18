@@ -1283,8 +1283,9 @@ void Interface::playercard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();
 
-	gotoxy(6,21);cout<<"                                                   ";
-	gotoxy(0,23);
+	gotoxy(6,21);
+	cout<<"                                                ";
+	gotoxy(6,21);
 	
 	switch(player.position)
 	{
@@ -1301,10 +1302,6 @@ void Interface::playercard(Player & player)
 		if(w==0){return;}
 		break;
 	}
-
-	gotoxy(6,21);
-	cout<<"                                                ";
-	gotoxy(6,21);
 	
 	switch(player.position)
 		{
