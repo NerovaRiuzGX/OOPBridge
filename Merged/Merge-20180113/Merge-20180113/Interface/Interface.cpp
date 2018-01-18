@@ -14,7 +14,7 @@ Interface::Interface()
 
 int Interface::gamemodeoption()
 {
-	//PlaySound(TEXT("C:\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
+	PlaySound(TEXT(".\\BGM\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
 	system("mode con: cols=100 lines=25");
 	system("color 2f");
 	cout<<"\n\n\n\n\n\n"             
