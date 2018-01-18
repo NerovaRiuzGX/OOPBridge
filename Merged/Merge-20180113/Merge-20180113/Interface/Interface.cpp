@@ -989,6 +989,22 @@ void Interface::dummycard(Player & player)
 		cout<<"                                                 ";
 		gotoxy(6,1);
 
+		switch(player.declarer_position)
+		{
+		case 0:
+			if(n==0){return;}
+			break;
+		case 1:
+			if(e==0){return;}
+			break;
+		case 2:
+			if(s==0){return;}
+			break;
+		case 3:
+			if(w==0){return;}
+			break;
+		}
+
 		switch((player.position+2)%4)
 		{
 		case 0:
