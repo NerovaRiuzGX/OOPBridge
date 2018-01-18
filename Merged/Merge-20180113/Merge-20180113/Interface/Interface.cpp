@@ -2035,7 +2035,7 @@ void Interface::card(Player & player)
 	}
 
 
-	for (int i=0; i<turn; i++) {
+	for (int i=0; i<player.turn; i++) {
 
 		suit = player.trick_log[total_trick][i][0];
 		num = player.trick_log[total_trick][i][0];
