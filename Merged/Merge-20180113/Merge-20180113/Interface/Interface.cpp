@@ -2027,9 +2027,9 @@ void Interface::card(Player & player)
 		for (int i=0; i<4; i++) {
 			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
 			cout << "   ";
-			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]+1);
 			cout << "   ";
-			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+			gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]+2);
 			cout << "   ";
 		}
 	}
@@ -2050,9 +2050,9 @@ void Interface::card(Player & player)
 		setcolor(colorcode(suit_color, 15));
 		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
 		cout << suit << "  ";
-		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]+1);
 		cout << " " << num << " ";
-		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]);
+		gotoxy(printx[(start_pos+i)%4], printy[(start_pos+i)%4]+2);
 		cout << "  " << suit;
 	}
 
