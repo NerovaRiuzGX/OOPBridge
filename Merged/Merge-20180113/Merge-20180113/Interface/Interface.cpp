@@ -14,7 +14,7 @@ Interface::Interface()
 
 int Interface::gamemodeoption()
 {
-	//PlaySound(TEXT("C:\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
+	PlaySound(TEXT(".\\BGM\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
 	system("mode con: cols=100 lines=25");
 	system("color 2f");
 	cout<<"\n\n\n\n\n\n"             
@@ -193,6 +193,23 @@ void Interface::dummycard(Player & player)
 	int e=eCard.size();
 	int w=wCard.size();//testing
 
+<<<<<<< HEAD
+=======
+	gotoxy(6,1);cout<<"                                                   ";
+	gotoxy(6,21);cout<<"                                                   ";
+	for(int i=3;i<23;i++)
+	{
+		gotoxy(41,i);
+		cout<<" ";
+	}//clear
+	for(int i=3;i<23;i++)
+	{
+		gotoxy(2,i);
+		cout<<" ";
+	}//clear                                         ";
+	gotoxy(2,3);
+
+>>>>>>> 5e44c9e91dfd6ab5b81386ca6a11bc4a43cd95e6
 	switch((player.declarer_position+2)%4)
 	{
 	case 0:
@@ -1266,6 +1283,9 @@ void Interface::playercard(Player & player)
 	int n=nCard.size();
 	int e=eCard.size();
 	int w=wCard.size();
+
+	gotoxy(6,21);cout<<"                                                   ";
+	gotoxy(0,23);
 	
 	switch(player.position)
 	{
