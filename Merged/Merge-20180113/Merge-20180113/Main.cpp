@@ -489,9 +489,11 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		}
 		else if ( player.position==player.statement-10 ) {
 			if (curr_state==player.statement-10) {
+				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideBid = UI.bidding();
 				} while (!player.bid(player.decideBid));
+				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
@@ -515,9 +517,11 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 
 			//my turn, not dummy
 			if ( curr_state==player.statement-20 ) {
+				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
 				} while (!player.playCard(player.decideCard));
+				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
@@ -530,9 +534,11 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 
 			//dummy's turn, im declarer
 			if ( curr_state==player.statement-20 ) {
+				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
 				} while (!player.playCard(player.decideCard));
+				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
