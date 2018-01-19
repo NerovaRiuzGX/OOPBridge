@@ -15,14 +15,9 @@ Player::Player()
 
 bool Player::bid (string bid)
 {
-	//string bid;
 	string Maxbid="00", Maxcall="00";
 	int Maxcall_pos=0;
-	/*auction_log;//假設喊牌資訊
-	auction_log.push_back("PS");
-	auction_log.push_back("PS");
-	auction_log.push_back("PS");
-	auction_log.push_back("2S");*/
+
 	for(int i=auction_log.size()-1;i>=0;i--)
 	{
 		if(auction_log[i]!="PS" && auction_log[i]!="X" && auction_log[i]!="XX")
@@ -40,65 +35,26 @@ bool Player::bid (string bid)
 		}
 	}
 
-	//while(true)
-	//{	
-		//fflush(stdin);
-		//cout<<"Max bidding :"<<Maxbid<<endl;
-		//cout<<"Please Enter your bid( Pass(PS) , Dbl(X) , Rdbl(XX) )"<<endl
-		//	<<"                       Spades(S) ,Hearts(H) ,Diamonds(D) ,Clubs(C),NoTrump(NT)"<<endl;
-		//getline(cin,bid);
-		transform(bid.begin(),bid.end(),bid.begin(),::toupper);
+	
+	transform(bid.begin(),bid.end(),bid.begin(),::toupper);
 		
 		
-		if (bid=="PS") {
-			return true;
-		}
-		else if (bid=="X" || bid=="XX") {
-			if (Maxcall_pos%2==1) {
-				if (Maxbid=="00") {
-					return false;
-				}
-				else if (Maxcall!="X" && bid=="XX") {
-					return false;
-				}
-				else if (Maxcall=="X" && bid=="X") {
-					return false;
-				}
-				else if (Maxcall=="XX") {
-					return false;
-				}
-				else {
-					return true;
-				}
-			}
-			else {
+	if (bid=="PS") {
+		return true;
+	}
+	else if (bid=="X" || bid=="XX") {
+		if (Maxcall_pos%2==1) {
+			if (Maxbid=="00") {
 				return false;
 			}
-		}
-		else if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
-			if (Maxbid[0]>bid[0]) {
+			else if (Maxcall!="X" && bid=="XX") {
 				return false;
 			}
-			else if (Maxbid[0]==bid[0]) {
-				bool pass = true;
-				switch (bid[1]) {
-					case 'C':
-						pass = false; break;
-					case 'D':
-						if (!(Maxbid[1]=='C')) {pass = false;} break;
-					case 'H':
-						if (!(Maxbid[1]=='C' || Maxbid[1]=='D')) {pass = false;} break;
-					case 'S':
-						if (Maxbid[1]=='S' || Maxbid[1]=='N') {pass = false;} break;
-					case 'N':
-						if (Maxbid[1]=='N') {pass = false;} break;
-				}
-				if (pass) {
-					return true;
-				}
-				else {
-					return false;
-				}
+			else if (Maxcall=="X" && bid=="X") {
+				return false;
+			}
+			else if (Maxcall=="XX") {
+				return false;
 			}
 			else {
 				return true;
@@ -107,54 +63,39 @@ bool Player::bid (string bid)
 		else {
 			return false;
 		}
-
-
-		/*if( bid=="PS" || Maxbid=="00")	//判斷喊牌是否符合規則 
-		{
-				cout<<bid<<endl;
-				break;
+	}
+	else if( bid[0]<'8' && (bid[1]=='C' || bid[1]=='D' || bid[1]=='H' || bid[1]=='S' || (bid[1]=='N' && bid[2]=='T'))) {
+		if (Maxbid[0]>bid[0]) {
+			return false;
 		}
-		if( bid=="X" && Maxbid!="00")	//判斷喊牌是否符合規則 
-		{
-				cout<<bid<<endl;
-				break;
+		else if (Maxbid[0]==bid[0]) {
+			bool pass = true;
+			switch (bid[1]) {
+				case 'C':
+					pass = false; break;
+				case 'D':
+					if (!(Maxbid[1]=='C')) {pass = false;} break;
+				case 'H':
+					if (!(Maxbid[1]=='C' || Maxbid[1]=='D')) {pass = false;} break;
+				case 'S':
+					if (Maxbid[1]=='S' || Maxbid[1]=='N') {pass = false;} break;
+				case 'N':
+					if (Maxbid[1]=='N') {pass = false;} break;
+			}
+			if (pass) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		if( bid=="XX" && ( auction_log[ auction_log.size()-1 ]=="X" || auction_log[ auction_log.size()-3 ]=="X"))	//判斷喊牌是否符合規則 
-		{
-				cout<<bid<<endl;
-				break;
+		else {
+			return true;
 		}
-		if(bid[0]<'8' && bid[0]>Maxbid[0])
-		{
-			cout<<bid<<endl;
-			break;
-		}
-		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='C' &&( bid[1]=='S' || bid[1]=='H' || bid[1]=='D' ||(bid[1]=='N' && bid[2]=='T')) )
-		{
-			cout<<bid<<endl;
-			break;
-		}
-		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='D' &&(bid[1]=='H' || bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T')) )
-		{
-			cout<<bid<<endl;
-			break;
-		}
-		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='H' && ( bid[1]=='S' ||(bid[1]=='N' && bid[2]=='T') ))
-		{
-			cout<<bid<<endl;
-			break;
-		}
-		if(bid[0]<'8' && bid[0]==Maxbid[0] && Maxbid[1]=='S' && bid[1]=='N' && bid[2]=='T')
-		{
-			cout<<bid<<endl;
-			break;
-		}
-		else
-		{
-			cout<<bid<<endl<<"You have an error bid  !!!"<<endl;
-		}*/
-	//}
-	//decideBid=bid;
+	}
+	else {
+		return false;
+	}
 }
 
 void Player::printTable()
@@ -167,10 +108,9 @@ void Player::printTable()
 		}
 		cout<<auction_log[i]<<" ";
 	}
-	//position=0;			//等等註解調
-	//declarer_position=1;
+	
 	char Pos[4]={'N','E','S','W'};
-	//cout<<position<<endl;
+	
 	cout<<endl<<" ------------"<<Pos[(position+2)%4]<<"------------- "<<endl;
 	cout<<"|                          |"<<endl;
 	cout<<"|                          |"<<endl;
@@ -214,51 +154,20 @@ void Player::printTable()
 
 bool Player::playCard (string playcard)
 {
-	//cin.clear();
-	/*for(int i=0;i<13;i++)
-	{
-		for(int j=0;j<4;j++)
-		{
-			trick_log[i][j]="00";
-		}
-	}
-	ns_trick=1;
-	ew_trick=11;
-	trick_log[12][0]="00";*/
 	if(trick_log[ns_trick+ew_trick][0]!="")
 	{
-		//cout<<"Front Play :"<<trick_log[ns_trick+ew_trick][0]<<endl;
 		Suits=trick_log[ns_trick+ew_trick][0][0];
 	}
-	//else cout<<"You are the first"<<endl;
+
 	vector<string>::iterator it;	
-	//while (true)
-	//{
-		//cout<<"Please enter a card: ";
-		//getline(cin,playcard);
-		transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
-		it=find(Card[statement%10].begin(),Card[statement%10].end(),playcard);			//判斷 myCard 裡面有沒有 playCard
-		if( it!=Card[statement%10].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) )	{ return true; }	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
-		/*else if(playcard=="CLAIM")
-		{
-			cout<<"How many tricks : ";
-			int i=1;
-			for(i=1;i<=( 13-ns_trick-ew_trick ) ;i++)	cout<<i<<" ";
-			cout<<endl;
-			cin>>decideClaim;
-			claim();
-			//break;
-		}*/
 
-		return false;
-		//cout<<"Error!!!  You can't play this card."<<endl;
-	//}
-	//decideCard = playcard;
-}
-
-void Player::claim()
-{
+	transform(playcard.begin(),playcard.end(),playcard.begin(),::toupper);
+	it=find(Card[statement%10].begin(),Card[statement%10].end(),playcard);	//判斷 myCard 裡面有沒有 playCard
+	if( it!=Card[statement%10].end() &&( trick_log[ns_trick+ew_trick][0]=="" || playcard[0]==Suits || MySuits(Suits)==false) ) {
+		return true;
+	}	//判斷可不可以出這張牌。 1.有這張牌 2.花色對 or 手牌中沒有這個花色 or 第一個出牌
 	
+	return false;
 }
 
 bool Player::MySuits(char suits)	//判斷自己有沒有這個花色 有則回傳 true ，否則回傳 false
@@ -274,7 +183,8 @@ bool Player::MySuits(char suits)	//判斷自己有沒有這個花色 有則回傳 true ，否則回
 		}
 	}
 	if(check==0)				//找不到相同花色
-		{
-			return false;
-		}
+	{
+		return false;
+	}
+	return true;
 }

@@ -30,6 +30,7 @@ public:
 
 	void guide();
 	void bid_guide();
+	void error();
 
 	void gotoxy(int xpos, int ypos)
 	{

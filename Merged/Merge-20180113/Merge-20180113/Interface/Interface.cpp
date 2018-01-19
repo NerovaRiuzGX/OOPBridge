@@ -241,7 +241,7 @@ void Interface::playercard (Player & player) //remake
 
 	gotoxy(6, 21);	cout << "                                  ";
 	gotoxy(6, 21);
-	for (int i=0; i<player.Card[pos].size(); i++) {
+	for (unsigned int i=0; i<player.Card[pos].size(); i++) {
 
 		//check if the suit is changed
 		if (curr_suit!=player.Card[pos][i][0]) {
@@ -403,8 +403,9 @@ string Interface::bidding()
 	cin >> bid;
 	transform(bid.begin(),bid.end(),bid.begin(),::toupper);
 
-	gotoxy(46,18);	cout<<"                             ";
-	gotoxy(46,19);	cout<<"                             ";
+	gotoxy(46, 18);	cout << "                                 ";
+	gotoxy(46, 19);	cout << "                                 ";
+	gotoxy(46, 20);	cout << "                                 ";
 
 	gotoxy(0,23);
 	return bid;
@@ -416,14 +417,15 @@ string Interface::playcard()
 	string play;
 	cin.clear();
 
-	gotoxy(45,18);	cout<<"It's your turn,";
-	gotoxy(45,19);	cout<<"Enter the card you play: ";
+	gotoxy(46,18);	cout<<"It's your turn,";
+	gotoxy(46,19);	cout<<"Enter the card you play: ";
 
 	cin>>play;
 	transform(play.begin(),play.end(),play.begin(),::toupper);
 
-	gotoxy(45,18);	cout<<"                                 ";
-	gotoxy(45,19);	cout<<"                                 ";
+	gotoxy(46, 18);	cout << "                                 ";
+	gotoxy(46, 19);	cout << "                                 ";
+	gotoxy(46, 20);	cout << "                                 ";
 	
 	gotoxy(0,23);
 	return play;
@@ -504,9 +506,11 @@ void Interface::scoreboard (Player & player)
 
 void Interface::nowturn (Player & player) //remake
 {
+	int total_trick = player.ns_trick + player.ew_trick;
 	int curr_turn = player.statement%10;
 
 	if (curr_turn >=4) {}
+	else if (player.trick_log[total_trick][3]!="") {}
 	else {
 		curr_turn = (curr_turn - player.position + 4) %4;
 		setcolor(colorcode(14,2));
@@ -560,6 +564,14 @@ void Interface::bid_guide() {
 	gotoxy(72, 10);	cout << "  X = Dbl  ";
 	gotoxy(72, 11);	cout << "  XX=Rdbl  ";
 
+	//reset
+	setcolor(colorcode(15,2));
+	gotoxy(0,23);
+}
+
+void Interface::error() {
+	gotoxy(46, 20);	cout << "Error. Your input is invalid.";
+	
 	//reset
 	setcolor(colorcode(15,2));
 	gotoxy(0,23);
