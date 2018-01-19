@@ -163,6 +163,8 @@ void Interface::gametable(Player & player)
 }
 
 void Interface::dummycard (Player & player) { //remake
+	if (player.trick_log[0][0]=="") {return;}
+
 	int relative_declarer = (player.declarer_position - player.position + 4) % 4;
 	int pos = player.position;
 	char curr_suit = '0';
