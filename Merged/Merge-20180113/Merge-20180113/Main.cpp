@@ -498,6 +498,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideBid = UI.bidding();
+					if (!player.bid(player.decideBid)) {
+						UI.error();
+					}
 				} while (!player.bid(player.decideBid));
 				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
@@ -526,6 +529,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
+					if (!player.playCard(player.decideCard)) {
+						UI.error();
+					}
 				} while (!player.playCard(player.decideCard));
 				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
@@ -543,6 +549,9 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
+					if (!player.playCard(player.decideCard)) {
+						UI.error();
+					}
 				} while (!player.playCard(player.decideCard));
 				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
