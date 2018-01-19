@@ -508,7 +508,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 					pthread_mutex_unlock(&clientMutex);
 				}
 				Sleep(500);
-				curr_state++;
+				curr_state = (curr_state+1)%4;
 			}
 			else {
 				curr_state = player.position;
@@ -544,7 +544,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 					pthread_mutex_unlock(&clientMutex);
 				}
 				Sleep(500);
-				curr_state++;
+				curr_state = (curr_state+1)%4;
 			}
 			else {
 				curr_state = player.position;
@@ -568,7 +568,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 					pthread_mutex_unlock(&clientMutex);
 				}
 				Sleep(500);
-				curr_state++;
+				curr_state = (curr_state+1)%4;
 			}
 			else {
 				curr_state = ((player.position+2)%4);
