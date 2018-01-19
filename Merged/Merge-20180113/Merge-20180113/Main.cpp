@@ -170,9 +170,9 @@ void * clientInterface (void *) { //this function handles how the interface shou
 			print_state=player.statement;
 		} // end if
 
-		pthread_mutex_unlock(&clientMutex);
-
 		PlayerTask(curr_state);
+
+		pthread_mutex_unlock(&clientMutex);
 
 		//grab information every 500 ms
 		Sleep(500);
@@ -495,14 +495,12 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 		}
 		else if ( player.position==player.statement-10 ) {
 			if (curr_state==player.statement-10) {
-				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideBid = UI.bidding();
 					if (!player.bid(player.decideBid)) {
 						UI.error();
 					}
 				} while (!player.bid(player.decideBid));
-				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
@@ -526,14 +524,12 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 
 			//my turn, not dummy
 			if ( curr_state==player.statement-20 ) {
-				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
 					if (!player.playCard(player.decideCard)) {
 						UI.error();
 					}
 				} while (!player.playCard(player.decideCard));
-				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
@@ -546,14 +542,12 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 
 			//dummy's turn, im declarer
 			if ( curr_state==player.statement-20 ) {
-				pthread_mutex_lock(&clientMutex);
 				do {
 					player.decideCard = UI.playcard();
 					if (!player.playCard(player.decideCard)) {
 						UI.error();
 					}
 				} while (!player.playCard(player.decideCard));
-				pthread_mutex_unlock(&clientMutex);
 				Sleep(500);
 				curr_state++;
 			}
