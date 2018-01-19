@@ -235,6 +235,7 @@ void Interface::playercard(Player & player) //remake
 	int pos = player.position;
 	int curr_suit = '0';
 
+	gotoxy(6, 21);	cout << "                                  ";
 	gotoxy(6, 21);
 	for (int i=0; i<player.Card[pos].size(); i++) {
 
