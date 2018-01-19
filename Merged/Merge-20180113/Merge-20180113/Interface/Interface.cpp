@@ -13,7 +13,7 @@ Interface::Interface()
 
 int Interface::gamemodeoption()
 {
-	PlaySound(TEXT(".\\BGM\\bridge4.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
+	PlaySound(TEXT(".\\BGM\\background.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
 	system("mode con: cols=100 lines=25");
 	system("color 2f");
 	cout<<"\n\n\n\n\n\n"             
@@ -108,7 +108,7 @@ int Interface::multiplayeroption()
 	setcolor(colorcode(15,2));
 }
 
-void Interface::createtable(TCPServer & server)
+void Interface::createtable (TCPServer & server)
 {
 	system("cls");
 	if(gamechoose==13&&gamestart==72)
@@ -146,7 +146,7 @@ string Interface::jointable()
 	return connectIP;
 }
 
-void Interface::gametable(Player & player)
+void Interface::gametable (Player & player)
 {
 	system("cls");
 	setcolor(colorcode(15,2));
@@ -180,7 +180,7 @@ void Interface::dummycard (Player & player) { //remake
 	}
 
 	switch (relative_declarer) {
-		case 0: //print your teammates' card when you're either declarer or dummy
+		case 0: //print your teammate's card when you're either declarer or dummy
 		case 2:
 			pos = (pos+2)%4;
 			gotoxy(6, 1);
@@ -234,7 +234,7 @@ void Interface::dummycard (Player & player) { //remake
 	gotoxy(0, 23);
 }
 
-void Interface::playercard(Player & player) //remake
+void Interface::playercard (Player & player) //remake
 {
 	int pos = player.position;
 	int curr_suit = '0';
@@ -264,7 +264,7 @@ void Interface::playercard(Player & player) //remake
 	gotoxy(0,23);
 }
 
-void Interface::trick(Player & player)
+void Interface::trick (Player & player)
 {
 	setcolor(colorcode(0,15));
 	gotoxy(61,13);	cout << "  Trick  ";
@@ -280,7 +280,7 @@ void Interface::trick(Player & player)
 	gotoxy(0,23);
 }
 
-void Interface::table(Player & player)
+void Interface::table (Player & player)
 {
 	gotoxy(5,3);cout<<"■■■■■■■■■■■■■■■■■";
 	gotoxy(5,19);cout<<"■■■■■■■■■■■■■■■■■";
@@ -300,7 +300,7 @@ void Interface::table(Player & player)
 	gotoxy(0,23);
 }
 
-void Interface::contract(Player & player)
+void Interface::contract (Player & player)
 {
 	setcolor(colorcode(0,15));
 	gotoxy(72,8);	cout<<" Contract. ";
@@ -335,7 +335,7 @@ void Interface::contract(Player & player)
 	gotoxy(0,23);
 }
 
-void Interface::biddingtable(Player & player) //remake
+void Interface::biddingtable (Player & player) //remake
 {
 	setcolor(colorcode(15,2));
 
@@ -429,7 +429,7 @@ string Interface::playcard()
 	return play;
 }
 
-void Interface::card(Player & player) //remake
+void Interface::card (Player & player) //remake
 {
 	char suit_convert[4] = {};
 	int printx[4] = {21, 13, 20, 28};
@@ -479,7 +479,7 @@ void Interface::card(Player & player) //remake
 	gotoxy(0,23);
 }
 
-void Interface::scoreboard(Player & player)
+void Interface::scoreboard (Player & player)
 {
 	setcolor(colorcode(0,15));
 	gotoxy(72,3);	cout << "   Round   ";
@@ -502,7 +502,7 @@ void Interface::scoreboard(Player & player)
 	gotoxy(0,23);
 }
 
-void Interface::nowturn(Player & player) //remake
+void Interface::nowturn (Player & player) //remake
 {
 	int curr_turn = player.statement%10;
 
@@ -532,7 +532,7 @@ void Interface::nowturn(Player & player) //remake
 	gotoxy(0,23);
 }
 
-void Interface::guide () {
+void Interface::guide() {
 	setcolor(colorcode(0, 15));
 	gotoxy(72, 13);	cout << "   Guide   ";
 	setcolor(colorcode(0, 7));
@@ -551,7 +551,7 @@ void Interface::guide () {
 	gotoxy(0,23);
 }
 
-void Interface::bid_guide () {
+void Interface::bid_guide() {
 
 	setcolor(colorcode(0, 15));
 	gotoxy(72, 8);	cout << "  Bidding  ";

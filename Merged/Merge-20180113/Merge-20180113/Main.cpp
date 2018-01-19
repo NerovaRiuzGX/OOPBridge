@@ -160,6 +160,9 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.guide();
 					break;
 				case 3:
+					UI.table(player);
+					UI.playercard(player);
+					UI.dummycard(player);
 					UI.scoreboard(player);
 					break;
 			}
