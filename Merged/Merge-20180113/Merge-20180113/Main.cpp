@@ -542,7 +542,7 @@ void PlayerTask(int & curr_state) //what Players should react when they receive 
 				curr_state++;
 			}
 			else {
-				curr_state = (player.position+2%4);
+				curr_state = ((player.position+2)%4);
 				Sleep(1000);
 			}
 		}
