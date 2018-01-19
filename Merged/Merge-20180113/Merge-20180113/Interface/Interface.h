@@ -27,6 +27,10 @@ public:
 	void card(Player &);//有人打牌的時候 牌桌上印出牌
 	void scoreboard(Player &);//印出兩隊目前分數
 	void nowturn(Player &);//換到誰誰座位會亮亮
+
+	void guide();
+	void bid_guide();
+
 	void gotoxy(int xpos, int ypos)
 	{
 		COORD scrn;

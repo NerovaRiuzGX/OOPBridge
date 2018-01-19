@@ -158,6 +158,8 @@ void Interface::gametable(Player & player)
 	contract(player);
 	playercard(player);
 	dummycard(player);
+	guide();
+	bid_guide();
 	
 	gotoxy(0,23);
 }
@@ -524,6 +526,39 @@ void Interface::nowturn(Player & player) //remake
 				break;
 		} //end of switch (curr_turn)
 	}
+
+	//reset
+	setcolor(colorcode(15,2));
+	gotoxy(0,23);
+}
+
+void Interface::guide () {
+	setcolor(colorcode(0, 15));
+	gotoxy(72, 13);	cout << "   Guide   ";
+	setcolor(colorcode(0, 7));
+	gotoxy(72, 14);	cout << "  C=\5 S=\6  ";
+	gotoxy(72, 15);	cout << "  D=";
+
+	setcolor(colorcode(12, 7));
+	cout << '\4';
+	setcolor(colorcode(0, 7));
+	cout << " H=";
+	setcolor(colorcode(12, 7));
+	cout << "\3  ";
+
+	//reset
+	setcolor(colorcode(15,2));
+	gotoxy(0,23);
+}
+
+void Interface::bid_guide () {
+
+	setcolor(colorcode(0, 15));
+	gotoxy(72, 8);	cout << "  Bidding  ";
+	setcolor(colorcode(0, 7));
+	gotoxy(72, 9);	cout << "  PS=PASS  ";
+	gotoxy(72, 10);	cout << "  X = Dbl  ";
+	gotoxy(72, 11);	cout << "  XX=Rdbl  ";
 
 	//reset
 	setcolor(colorcode(15,2));

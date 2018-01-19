@@ -144,6 +144,8 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.biddingtable(player);
 					UI.scoreboard(player);			
 					UI.nowturn(player); 
+					UI.guide();
+					UI.bid_guide();
 					break;
 				case 2:
 					UI.table(player);
@@ -155,6 +157,7 @@ void * clientInterface (void *) { //this function handles how the interface shou
 					UI.trick(player);
 					UI.card(player);
 					UI.nowturn(player);
+					UI.guide();
 					break;
 				case 3:
 					UI.scoreboard(player);
