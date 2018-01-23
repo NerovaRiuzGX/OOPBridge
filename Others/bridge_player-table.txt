@@ -1,0 +1,38 @@
+Round: 1
+Vulneralbe: *
+Contract: 7N/xx
+
+NS point: +300
+EW point: -300
+                       Option:
+   N   E   S   W       U -> Undo     M -> Claim
+1  ps  2C  ps  4N
+2  ps  5S  ps  5N
+3  ps  6H  ps  7N
+4  x   ps  ps  xx
+5  ps  ps  ps
+6  
+7  
+NS win trick: 13
+EW win trick: 13
+                 c  d               h  s
+                 C  D 23456789TJQKA H  S
+                ------------N-------------
+cC             |                          | cC
+23456789TJQKA  |                          | 
+               |                          |
+dD             |            d5            | dD
+               |                          | 
+               |                          |
+hH             W      c4         s6       E hH
+               |                          | 
+               |                          |
+sS             |            h7            | sS
+               |                          | 23456789TJQKA
+               |                          |
+               |                          |
+                ------------S-------------
+                 c     d     h     s
+                 C 234 D 567 H 89T S JQKA  
+bid:7N
+send:C2
